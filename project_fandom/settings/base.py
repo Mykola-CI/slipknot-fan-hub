@@ -7,6 +7,7 @@ Used as a base file for further modularisation of local.py and production.py
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import dj_database_url
 
 
 load_dotenv()  # This loads the environment variables from my .env file
@@ -22,11 +23,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG") == "True"  # Convert string to boolean
 
-# ALLOWED_HOSTS = ["*"]
-
-
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -72,11 +69,15 @@ WSGI_APPLICATION = "project_fandom.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
 }
 
 
