@@ -86,6 +86,9 @@ htmlcov/
 *.env
 secrets.json
 
+# Local settings
+local.py
+
 # Ignore all log files and temporary files
 *.log
 *.tmp
