@@ -7,6 +7,8 @@ Used as a base file for further modularisation of local.py and production.py
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import sys
+from django.contrib.messages import constants as messages
 import dj_database_url
 
 
@@ -14,7 +16,7 @@ load_dotenv()  # This loads the environment variables from my .env file
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 # Quick-start development settings - unsuitable for production
@@ -23,6 +25,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG") == "True"  # Convert string to boolean
+CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 
 # Application definition
 INSTALLED_APPS = [
@@ -32,6 +35,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "cloudinary_storage",
+    "cloudinary",
     "core",
     "user_profile",
 ]
