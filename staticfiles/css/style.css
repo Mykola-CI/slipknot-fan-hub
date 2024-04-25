@@ -1,13 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: darkslategray;
     color: antiquewhite;
 }
 
 .container {
-    margin: 0 auto;
+    margin: 50px auto;
     width: 50%;
     padding: 10px;
-    border: 2px solid black;
+    border: 2px solid red;
     border-radius: 10px;
     background-color:black;
     text-align: center;
