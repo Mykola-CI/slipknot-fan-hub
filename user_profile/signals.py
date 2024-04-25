@@ -7,8 +7,9 @@ from .models import UserProfile
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
-        UserProfile.objects.create(user=instance)
-    else:
-        # Check if the user has a related UserProfile instance before saving
+        UserProfile.objects.create(user=instance)  # triggers when user created
+
+    else:  # triggers when a user updates User model data
+        # Check if the user has a related UserProfile instance to avoid error
         if hasattr(instance, 'profile'):
             instance.profile.save()

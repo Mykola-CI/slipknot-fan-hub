@@ -5,12 +5,18 @@ from cloudinary.models import CloudinaryField
 
 
 class UserProfile(models.Model):
+    """
+    User Profile model that extends built-in User to add
+    about_me, avatar and date of birth fields: one-to-one
+    """
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         related_name='profile'
     )
     about_myself = models.TextField(_("about myself"), blank=True)
+
+    # Store avatars in the update UserAdmin model Cloudinary cloud
     avatar = CloudinaryField(
         'image',
         folder='slipknot-fan-avatars',
