@@ -18,3 +18,19 @@ body {
     background-color:black;
     text-align: center;
 }   
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 30px;
+    font-size: 150%;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+}
+
+.nav-item {
+    padding: 10px; 
+}

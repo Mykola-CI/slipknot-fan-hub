@@ -26,6 +26,7 @@ class UserAdmin(BaseUserAdmin):
                      'profile__about_myself')
 
     def get_about_myself(self, obj):
+        # Check if User Profile is available
         if hasattr(obj, 'profile'):
             return obj.profile.about_myself
         return _("No profile available")

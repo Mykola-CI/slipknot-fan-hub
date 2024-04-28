@@ -1,10 +1,10 @@
 <header>
     <nav class="navbar fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Slipknot Blog</a>
+        <div class="nav-container">
+            <h2>Slipknot Blog</h2>
             <div class="navbar-nav">
-                <a href="#" class="nav-item nav-link">Sign Up</a>
-                <a href="#" class="nav-item nav-link">Login</a>
+                <p class="nav-item">Hello, {{ user.username }}!</p>
+                <a href="{% url 'account_logout' %}" class="nav-item nav-link">Sign Out</a>
             </div>
         </div>
     </nav>

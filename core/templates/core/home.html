@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbar %}
+{% if not user.is_authenticated %}
+{% include 'core/navbar-signup.html' %}
+{% else %}
+{% include 'core/navbar-signed.html' %}
+{% endif %}
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Home Page</h1>
+    <p>Create different styles and texts</p>
+</div>
+
+{% endblock %}
