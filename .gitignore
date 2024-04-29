@@ -88,9 +88,11 @@ secrets.json
 
 # Local settings
 local.py
+send_test_email.py
 
 # Ignore all log files and temporary files
 *.log
 *.tmp
 *.bak
 tmp/
+
