@@ -4,8 +4,15 @@
     box-sizing: border-box;
 }
 
+html {
+    background: url(../images/wallpaper_fan_hub.png) no-repeat left center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 body {
-    background-color: darkslategray;
     color: antiquewhite;
 }
 

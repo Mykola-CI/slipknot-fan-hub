@@ -1,0 +1,22 @@
+html {
+    background: url(../../images/hero_banner_slipknot.png) no-repeat left top fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+    padding: 150px 10px 10px 100px;
+    color: antiquewhite;
+    font-size: 130%;
+    line-height: 150%;
+}
+
+li {
+    color: red;
+}
+
+a {
+    color: red;
+}
