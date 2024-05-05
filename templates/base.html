@@ -6,13 +6,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Slipknot Fan Hub{% endblock %}</title>
+    <title>{% block title %}Slipknot Fan Hub{% endblock %}</title>   
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block extra_head %}{% endblock extra_head %}
 </head>
 <body>
-    {% block navbar %}This is a placeholder for navbar{% endblock %}
+    <header class="nav-container">
+        <h1>Slipknot FanHub</h1>
+        {% block navbar %}
+        This is a placeholder for navbar
+        {% endblock %}
+    </header>
+    
     {% block main_content %}Main content{% endblock %}
+    {% block bottom %}Scripts and other bottom things{% endblock %}
     
 </body>
 </html>

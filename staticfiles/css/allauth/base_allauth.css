@@ -7,7 +7,7 @@ html {
 }
 
 body {
-    padding: 150px 10px 10px 100px;
+    padding: 150px 10px 10px clamp(20px, 9vw, 200px);
     color: antiquewhite;
     font-size: 130%;
     line-height: 150%;
@@ -19,4 +19,8 @@ li {
 
 a {
     color: red;
+}
+
+p {
+    max-width: 60ch;
 }
