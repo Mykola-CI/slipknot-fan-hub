@@ -4,15 +4,6 @@ from django.contrib.auth.forms import PasswordChangeForm
 from .models import UserProfile
 
 
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ['about_myself', 'date_of_birth']
-        widgets = {
-            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
-        }
-
-
 class UserEmailForm(forms.ModelForm):
     class Meta:
         model = User
@@ -28,3 +19,28 @@ class UserNameForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name']
+
+
+class UserDOBForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['date_of_birth']
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+
+class UserAboutForm(forms.ModelForm):
+    about_myself = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 5,
+            'cols': 'auto',
+            'class': 'input-padding'
+            }),
+        label='Add a few words, express yourself...',
+        required=False
+    )
+
+    class Meta:
+        model = UserProfile
+        fields = ['about_myself']

@@ -2,10 +2,11 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .forms import (
-    UserProfileForm,
     UserEmailForm,
     UserPasswordForm,
-    UserNameForm
+    UserNameForm,
+    UserDOBForm,
+    UserAboutForm
 )
 from .models import UserProfile
 
@@ -18,14 +19,16 @@ def profile(request):
     if (request.method == 'GET' and
             request.headers.get('x-requested-with') == 'XMLHttpRequest'):
         form_type = request.GET.get('form_type', '')
-        if form_type == 'profile':
-            form = UserProfileForm(instance=user_profile)
-        elif form_type == 'email':
+        if form_type == 'email':
             form = UserEmailForm(instance=request.user)
         elif form_type == 'password':
             form = UserPasswordForm(request.user)
         elif form_type == 'name':
             form = UserNameForm(instance=request.user)
+        elif form_type == 'dob':
+            form = UserDOBForm(instance=user_profile)
+        elif form_type == 'about':
+            form = UserAboutForm(instance=user_profile)
         return HttpResponse(form.as_p())
 
     # Handling AJAX requests for form submission
@@ -35,21 +38,23 @@ def profile(request):
         form_type = request.POST.get('form_type')
         print("Form type received:", form_type)
 
-        if form_type == 'profile':
-            form = UserProfileForm(
-                request.POST, request.FILES, instance=user_profile)
-        elif form_type == 'email':
+        if form_type == 'email':
             form = UserEmailForm(request.POST, instance=request.user)
         elif form_type == 'password':
             form = UserPasswordForm(request.user, request.POST)
         elif form_type == 'name':
             form = UserNameForm(request.POST, instance=request.user)
+        elif form_type == 'dob':
+            form = UserDOBForm(request.POST, instance=user_profile)
+        elif form_type == 'about':
+            form = UserAboutForm(request.POST, instance=user_profile)
 
         if form and form.is_valid():
             form.save()
             return JsonResponse({'status': 'success'})
         elif form:
-            return JsonResponse({'status': 'error', 'errors': form.errors.as_json()})
+            return JsonResponse(
+                {'status': 'error', 'errors': form.errors.as_json()})
         else:
             return JsonResponse(
                 {'status': 'error', 'errors': form.errors.as_json()})
@@ -57,9 +62,10 @@ def profile(request):
     # Context for initial page load
     context = {
         'user_profile': user_profile,
-        'profile_form': UserProfileForm(instance=user_profile),
         'email_form': UserEmailForm(instance=request.user),
         'password_form': UserPasswordForm(request.user),
         'name_form': UserNameForm(instance=request.user),
+        'dob_form': UserDOBForm(instance=user_profile),
+        'about_form': UserAboutForm(instance=user_profile),
     }
     return render(request, 'user_profile/profile.html', context)

@@ -12,6 +12,11 @@ html {
     background-size: cover;
 }
 
+/* Utility classes */
+.input-padding {
+    padding: 10px;
+}
+
 body {
     color: antiquewhite;
 }
@@ -80,10 +85,39 @@ a {
 
 .modal-content {
     background-color: black;
-    margin: 15% auto;
+    margin: 40% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 4px solid #888;
     width: 80%;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+#form-fields label {
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 5px;
+}
+
+#modal-form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+}
+
+
+#form-fields p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#form-fields input {
+    margin-inline: auto;
 }
 
 .close {

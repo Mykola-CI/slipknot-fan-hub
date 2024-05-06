@@ -22,15 +22,9 @@
 <div class="container">
     <h1>User Profile</h1>
     <div class="profile-section">
-        <h3>About Me</h3>
-        <p>{{ user_profile.about_myself }}</p>
-        <button class="edit-btn" data-form="profile">Edit</button>
-    </div>
-
-    <div class="profile-section">
         <h3>Email</h3>
         <p>{{ request.user.email }}</p>
-        <button class="edit-btn" data-form="email">Edit</button>
+        <button class="edit-btn" data-form="email">Add or Update</button>
     </div>
 
     <div class="profile-section">
@@ -42,7 +36,19 @@
     <div class="profile-section">
         <h3>Name</h3>
         <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
-        <button class="edit-btn" data-form="name">Edit</button>
+        <button class="edit-btn" data-form="name">Add or Update</button>
+    </div>
+
+    <div class="profile-section">
+        <h3>Date of Birth</h3>
+        <p>{{ user_profile.date_of_birth }}</p>
+        <button class="edit-btn" data-form="dob">Add or Update</button>
+    </div>
+
+    <div class="profile-section">
+        <h3>About Myself</h3>
+        <p>{{ user_profile.about_myself }}</p>
+        <button class="edit-btn" data-form="about">Add or Update</button>
     </div>
 </div>
 
@@ -53,14 +59,16 @@
         <form id="modal-form" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div id="form-fields">
-                {% if form_type == 'profile' %}
-                {{ profile_form.as_p }}
+                {% if form_type == 'about' %}
+                {{ about_form.as_p }}
                 {% elif form_type == 'email' %}
                 {{ email_form.as_p }}
                 {% elif form_type == 'password' %}
                 {{ password_form.as_p }}
                 {% elif form_type == 'name' %}
                 {{ name_form.as_p }}
+                {% elif form_type == 'dob' %}
+                {{ dob_form.as_p }}
                 {% endif %}
             </div>
             <button type="submit">Save</button>
