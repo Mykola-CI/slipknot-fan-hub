@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary %}
 
 {% block title %}Slipknot Fan Profile{% endblock %}
 {% block extra_head %}
@@ -20,7 +21,18 @@
 {% block main_content %}
 
 <div class="container">
-    <h1>User Profile</h1>
+
+    <div class="profile-section">
+        <div class="avatar-profile-page">
+        {% if user_profile.avatar %}    
+            {% cloudinary user_profile.avatar %}
+        {% else %}
+            <img src="{% static 'images/nobody.jpg' %}" alt="Avatar">
+        {% endif %}
+        </div>
+        <button class="edit-btn" data-form="avatar">Add or Update</button>
+    </div>
+
     <div class="profile-section">
         <h3>Email</h3>
         <p>{{ request.user.email }}</p>
@@ -69,6 +81,8 @@
                 {{ name_form.as_p }}
                 {% elif form_type == 'dob' %}
                 {{ dob_form.as_p }}
+                {% elif form_type == 'avatar' %}
+                {{ avatar_form.as_p }}
                 {% endif %}
             </div>
             <button type="submit">Save</button>
@@ -76,22 +90,12 @@
     </div>
 </div>
 
-
-<!-- Unauthenticated User Modal -->
-<!-- <div id="unauthenticated-modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Please log in to edit your profile.</p>
-    </div>
-</div> -->
-
-
 {% endblock main_content %}
 
 {% block bottom %}
-<!-- Get current url for the rest of code to move outside -->
+<!-- Store the current url to a variable, the rest of code to move outside -->
 <script type="text/javascript">
     var profileUrl = '{% url "profile" %}';
 </script>
-<script src="../../../static/js/user-profile.js"></script>
+<script src="{% static 'js/user-profile.js' %}"></script>
 {% endblock %}

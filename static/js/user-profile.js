@@ -29,10 +29,10 @@ $(document).ready(function () {
         // Append CSRF token to FormData
         var csrftoken = $('[name=csrfmiddlewaretoken]').val(); // Get the CSRF token from a hidden input
         formData.append('csrfmiddlewaretoken', csrftoken);
-    
+
+        // Append form type to FormData
         var formType = $('#modal-form').data('form_type');
-        formData.append('form_type', formType);  
-        console.log(formType)
+        formData.append('form_type', formType);
 
         $.ajax({
             url: profileUrl,

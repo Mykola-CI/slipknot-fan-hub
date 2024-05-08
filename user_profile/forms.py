@@ -1,7 +1,9 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from .models import UserProfile
+from cloudinary.forms import CloudinaryFileField
 
 
 class UserEmailForm(forms.ModelForm):
@@ -44,3 +46,27 @@ class UserAboutForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['about_myself']
+
+
+class UploadAvatarForm(ModelForm):
+    avatar = CloudinaryFileField()
+
+    class Meta:
+        model = UserProfile
+        fields = ['avatar']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['avatar'].options = {
+            'folder': 'fan-avatar-thumbs',
+            'format': 'png',
+            'transformation': {
+                'width': 300,
+                'height': 300,
+                'crop': 'thumb',
+                'gravity': 'face',
+                'radius': 'max',
+                'zoom': 0.70,
+                'background': 'transparent'
+            }
+        }

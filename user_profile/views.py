@@ -6,7 +6,8 @@ from .forms import (
     UserPasswordForm,
     UserNameForm,
     UserDOBForm,
-    UserAboutForm
+    UserAboutForm,
+    UploadAvatarForm
 )
 from .models import UserProfile
 
@@ -29,14 +30,14 @@ def profile(request):
             form = UserDOBForm(instance=user_profile)
         elif form_type == 'about':
             form = UserAboutForm(instance=user_profile)
+        elif form_type == 'avatar':
+            form = UploadAvatarForm(instance=user_profile)
         return HttpResponse(form.as_p())
 
     # Handling AJAX requests for form submission
     if (request.method == 'POST' and
             request.headers.get('x-requested-with') == 'XMLHttpRequest'):
-        form = None
         form_type = request.POST.get('form_type')
-        print("Form type received:", form_type)
 
         if form_type == 'email':
             form = UserEmailForm(request.POST, instance=request.user)
@@ -48,8 +49,11 @@ def profile(request):
             form = UserDOBForm(request.POST, instance=user_profile)
         elif form_type == 'about':
             form = UserAboutForm(request.POST, instance=user_profile)
+        elif form_type == 'avatar':
+            form = UploadAvatarForm(
+                request.POST, request.FILES, instance=user_profile)
 
-        if form and form.is_valid():
+        if form.is_valid():
             form.save()
             return JsonResponse({'status': 'success'})
         elif form:
@@ -67,5 +71,27 @@ def profile(request):
         'name_form': UserNameForm(instance=request.user),
         'dob_form': UserDOBForm(instance=user_profile),
         'about_form': UserAboutForm(instance=user_profile),
+        'avatar_form': UploadAvatarForm(instance=user_profile),
     }
     return render(request, 'user_profile/profile.html', context)
+
+
+# @login_required
+# def upload_avatar(request):
+#     user_profile = UserProfile.objects.get(user=request.user)
+
+#     if request.method == 'POST':
+#         form_avatar = UploadAvatarForm(
+#             request.POST, instance=user_profile)
+#         if form_avatar.is_valid():
+#             form_avatar.save()
+#             return JsonResponse({'avatar_url': user_profile.avatar.url})
+#     else:
+#         form_avatar = UploadAvatarForm()
+#         # return HttpResponse(form_avatar.as_p())
+
+#     return render(
+#         request,
+#         'user_profile/upload_avatar.html',
+#         {'form_avatar': form_avatar}
+#     )
