@@ -25,8 +25,40 @@ html {
     align-items: center;
 }
 
+.grid-header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
 body {
     color: antiquewhite;
+}
+
+header > p {
+    grid-column: 3 / 4;
+    font-size: 150%;
+}
+
+#logo-block {
+    display: flex;
+}
+
+#logo-block > p {
+    font-size: 100%;
+    align-self: flex-end;
+    text-decoration: overline;
+}
+
+
+#logo-picture {
+    max-width: 250px;
+}
+
+#logo-picture img {
+    width: 100%;
 }
 
 .container {
@@ -42,24 +74,30 @@ body {
 
 .home-menu {
     margin: 50px auto;
-    max-width: 300px;
+    max-width: 500px;
     width: 80vw;
     padding: 20px;
     border: 2px solid red;
     border-radius: 10px;
     text-align: center;
+    font-size: 150%;
     background-color: rgb(47, 46, 46);
 }
 
-.nav-container {
+/* .nav-container {
     margin: 30px 30px;
     font-size: 150%;
-}
+} */
 
 .navbar {
+    grid-column: 4 / span 2;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     width: 100%;
+    padding-inline-end: 100px;
+    font-size: 200%;
+    gap: 100px;
+    text-shadow: 3px 1px 0px rgba(0, 0, 0, 1);
 }
 
 a {
@@ -67,9 +105,9 @@ a {
     color: red;
 }
 
-.nav-item {
+/* .nav-item {
     padding: 10px; 
-}
+} */
 
 .profile-section {
     margin-bottom: 20px;
@@ -77,8 +115,11 @@ a {
 }
 
 .avatar-profile-page {
-    max-width: 300px;
+    max-width: 200px;
     margin-inline: auto;
+    box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+    -webkit-box-shadow: -2px 5px 21px 18px rgba(64, 38, 38, 0.78);
+    -moz-box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
 }
 
 .avatar-profile-page > img {
