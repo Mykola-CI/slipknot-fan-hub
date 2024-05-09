@@ -12,8 +12,15 @@
     {% block extra_head %}{% endblock extra_head %}
 </head>
 <body>
-    <header class="nav-container">
-        <h1>Slipknot FanHub</h1>
+    <header class="grid-header">
+        <div id="logo-block">
+            <div id="logo-picture">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/slipknot-logo-transparent.png' %}" alt="Slipknot Fan Hub">
+                </a>
+            </div>
+            <p>FanHub</p>
+        </div>
         {% block navbar %}
         This is a placeholder for navbar
         {% endblock %}

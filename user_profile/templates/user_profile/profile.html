@@ -20,16 +20,18 @@
 
 {% block main_content %}
 
+<div class="avatar-profile-page">
+    {% if user_profile.avatar %}    
+        {% cloudinary user_profile.avatar %}
+    {% else %}
+        <img src="{% static 'images/nobody.jpg' %}" alt="Avatar">
+    {% endif %}
+</div>
+
 <div class="container grid">
 
     <div class="profile-section">
-        <div class="avatar-profile-page">
-        {% if user_profile.avatar %}    
-            {% cloudinary user_profile.avatar %}
-        {% else %}
-            <img src="{% static 'images/nobody.jpg' %}" alt="Avatar">
-        {% endif %}
-        </div>
+        <h3>Add or Change Avatar</h3>
         <button class="edit-btn" data-form="avatar">Add or Update</button>
     </div>
 
