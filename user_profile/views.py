@@ -74,24 +74,3 @@ def profile(request):
         'avatar_form': UploadAvatarForm(instance=user_profile),
     }
     return render(request, 'user_profile/profile.html', context)
-
-
-# @login_required
-# def upload_avatar(request):
-#     user_profile = UserProfile.objects.get(user=request.user)
-
-#     if request.method == 'POST':
-#         form_avatar = UploadAvatarForm(
-#             request.POST, instance=user_profile)
-#         if form_avatar.is_valid():
-#             form_avatar.save()
-#             return JsonResponse({'avatar_url': user_profile.avatar.url})
-#     else:
-#         form_avatar = UploadAvatarForm()
-#         # return HttpResponse(form_avatar.as_p())
-
-#     return render(
-#         request,
-#         'user_profile/upload_avatar.html',
-#         {'form_avatar': form_avatar}
-#     )

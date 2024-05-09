@@ -17,6 +17,14 @@ html {
     padding: 10px;
 }
 
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+
 body {
     color: antiquewhite;
 }
@@ -28,12 +36,9 @@ body {
     border: 2px solid red;
     border-radius: 10px;
     text-align: center;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    justify-items: center;
-    align-items: center;
-}   
+}  
+
+
 
 .home-menu {
     margin: 50px auto;
