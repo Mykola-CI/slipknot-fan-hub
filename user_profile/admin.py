@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from .models import UserProfile
 from django.utils.translation import gettext_lazy as _
+from .models import Playlist, PlaylistItem
 
 
 class UserProfileInline(admin.StackedInline):
@@ -42,3 +43,33 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+
+
+class PlaylistItemAdmin(admin.ModelAdmin):
+    list_display = (
+        'song_title', 'artist', 'album', 'playlist', 'performance_year')
+    list_filter = ('artist', 'album', 'playlist')
+    search_fields = ('song_title', 'artist')
+    raw_id_fields = ('playlist',)
+
+
+admin.site.register(PlaylistItem, PlaylistItemAdmin)
+
+
+class PlaylistItemInline(admin.StackedInline):
+    model = PlaylistItem
+    extra = 1  # The number of extra forms in the inline formset.
+
+
+class PlaylistAdmin(admin.ModelAdmin):
+    list_display = ('title', 'author', 'created_on', 'status')
+    list_filter = ('status', 'created_on')
+    search_fields = ('title', 'description')
+    prepopulated_fields = {'slug': ('title',)}
+    raw_id_fields = ('author',)
+    date_hierarchy = 'created_on'
+    ordering = ('status', 'created_on')
+    inlines = [PlaylistItemInline]
+
+
+admin.site.register(Playlist, PlaylistAdmin)
