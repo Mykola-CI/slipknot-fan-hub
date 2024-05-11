@@ -9,12 +9,13 @@ from .forms import (
     UserAboutForm,
     UploadAvatarForm
 )
-from .models import UserProfile
+from .models import UserProfile, Playlist, PlaylistItem
 
 
 @login_required
 def profile(request):
     user_profile = UserProfile.objects.get(user=request.user)
+    playlists = Playlist.objects.filter(author=request.user)
 
     # Handling AJAX requests for loading forms
     if (request.method == 'GET' and
@@ -66,6 +67,7 @@ def profile(request):
     # Context for initial page load
     context = {
         'user_profile': user_profile,
+        'playlists': playlists,
         'email_form': UserEmailForm(instance=request.user),
         'password_form': UserPasswordForm(request.user),
         'name_form': UserNameForm(instance=request.user),
@@ -74,3 +76,13 @@ def profile(request):
         'avatar_form': UploadAvatarForm(instance=user_profile),
     }
     return render(request, 'user_profile/profile.html', context)
+
+
+# class PlaylistView(TemplateView):
+#     template_name = 'user_profile/playlist.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['playlists'] = Playlist.objects.filter(
+#             author=self.request.user).order_by('-created_on')
+#         return context

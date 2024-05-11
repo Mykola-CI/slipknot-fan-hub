@@ -1,0 +1,12 @@
+<section id="playlists" class="profile-section">
+    <h2>Manage Your Playlists, <span id="username">{{ user.username }}</span>!</h2>
+    <ul>
+        {% for playlist in playlists %}
+            <li>
+                <a href="#">{{ playlist }}</a>
+            </li>
+        {% empty %}
+            <li>No playlists found.</li>
+        {% endfor %}
+    </ul>
+</section>

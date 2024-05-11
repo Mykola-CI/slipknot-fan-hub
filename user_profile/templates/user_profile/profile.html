@@ -32,38 +32,40 @@
 
     <div class="profile-section">
         <h3> Avatar</h3>
-        <button class="edit-btn" data-form="avatar">Add or Update</button>
+        <button class="edit-btn" data-form="avatar">Update</button>
     </div>
 
     <div class="profile-section">
         <h3>Email</h3>
         <p>{{ request.user.email }}</p>
-        <button class="edit-btn" data-form="email">Add or Update</button>
+        <button class="edit-btn" data-form="email">Update</button>
     </div>
 
     <div class="profile-section">
         <h3>Password</h3>
         <p>********</p>
-        <button class="edit-btn" data-form="password">Change Password</button>
+        <button class="edit-btn" data-form="password">Change</button>
     </div>
 
     <div class="profile-section">
         <h3>Name</h3>
         <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
-        <button class="edit-btn" data-form="name">Add or Update</button>
+        <button class="edit-btn" data-form="name">Update</button>
     </div>
 
     <div class="profile-section">
         <h3>Date of Birth</h3>
         <p>{{ user_profile.date_of_birth }}</p>
-        <button class="edit-btn" data-form="dob">Add or Update</button>
+        <button class="edit-btn" data-form="dob">Update</button>
     </div>
 
-    <div class="profile-section">
+    <div id="about-myself" class="profile-section">
         <h3>About Myself</h3>
         <p>{{ user_profile.about_myself }}</p>
-        <button class="edit-btn" data-form="about">Add or Update</button>
+        <button class="edit-btn" data-form="about">Update</button>
     </div>
+
+    {% include 'user_profile/playlist.html' %}
 </div>
 
 <!-- Modal -->
