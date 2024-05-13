@@ -74,10 +74,14 @@ class UploadAvatarForm(forms.ModelForm):
 class PlaylistForm(forms.ModelForm):
     featured_image = CloudinaryFileField(
         options={
-            'crop': 'limit',
-            'width': 600,
-            'height': 600,
-        }
+            'folder': 'fanhub/playlist_images',
+            'transformation': {
+                'crop': 'limit',
+                'width': 600,
+                'height': 600
+            }
+        },
+        required=False
     )
 
     class Meta:
@@ -93,6 +97,25 @@ class PlaylistForm(forms.ModelForm):
 
 
 class PlaylistItemForm(forms.ModelForm):
+    song_video = CloudinaryFileField(
+        options={
+            'folder': 'fanhub/song_videos'
+        },
+        required=False
+    )
+    song_audio = CloudinaryFileField(
+        options={
+                'folder': 'fanhub/song_audios'
+        },
+        required=False
+    )
+    song_tabs = CloudinaryFileField(
+        options={
+                'folder': 'fanhub/song_tabs'
+        },
+        required=False
+    )
+
     class Meta:
         model = PlaylistItem
         fields = [

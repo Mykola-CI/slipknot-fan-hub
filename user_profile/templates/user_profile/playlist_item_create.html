@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary %}
+
+
+{% block title %}FanHub Song Form{% endblock %}
 
 {% block main_content %}
 {% if messages %}
@@ -11,5 +15,7 @@
 {% endif %}
 
 <h4>Playlist Id: {{ playlist_id }}</h4>
+
+
 
 {% endblock %}

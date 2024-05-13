@@ -5,7 +5,7 @@
 {% block title %}FanHub Playlist Form{% endblock %}
 
 {% block main_content %}
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Create Playlist</button>
