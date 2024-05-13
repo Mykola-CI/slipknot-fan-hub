@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import profile, PlaylistCreateView, PlaylistItemCreateView
+from .views import profile, PlaylistCreateView, PlaylistCreatedView
 
 urlpatterns = [
     path('', profile, name='profile'),
@@ -8,7 +8,7 @@ urlpatterns = [
         PlaylistCreateView.as_view(),
         name='playlist_create'),
     path(
-        'playlists/<int:playlist_id>/items/create/',
-        PlaylistItemCreateView.as_view(),
-        name='playlist_item_create'),
+        'playlists/<int:playlist_id>/create/created/',
+        PlaylistCreatedView.as_view(),
+        name='playlist_created'),
 ]

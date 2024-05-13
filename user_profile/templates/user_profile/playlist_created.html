@@ -14,8 +14,15 @@
 </ul>
 {% endif %}
 
-<h4>Playlist Id: {{ playlist_id }}</h4>
-
+<h4>Playlist Title: {{ playlist.title }}</h4>
+<div class="playlist-banner">
+    {% if playlist.featured_image %}    
+        {% cloudinary playlist.featured_image %}
+    {% else %}
+        <p>No Image Uploaded</p>
+        <p>If you decide to post this playlist without an image we will provide your post with a nice one</p>    
+    {% endif %}
+</div>
 
 
 {% endblock %}

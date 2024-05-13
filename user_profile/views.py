@@ -99,10 +99,16 @@ class PlaylistCreateView(CreateView):
     def get_success_url(self):
         # Redirect to the Playlist item create page for the new playlist
         return reverse(
-            'playlist_item_create',
+            'playlist_created',
             kwargs={'playlist_id': self.object.id}
         )
 
 
-class PlaylistItemCreateView(TemplateView):
-    template_name = 'user_profile/playlist_item_create.html'
+class PlaylistCreatedView(TemplateView):
+    template_name = 'user_profile/playlist_created.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        playlist_id = self.kwargs.get('playlist_id')
+        context['playlist'] = Playlist.objects.get(id=playlist_id)
+        return context
