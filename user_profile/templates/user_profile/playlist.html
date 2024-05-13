@@ -2,11 +2,14 @@
     <h2>Manage Your Playlists, <span id="username">{{ user.username }}</span>!</h2>
     <ul>
         {% for playlist in playlists %}
-            <li>
-                <a href="#">{{ playlist }}</a>
-            </li>
+        <li>
+            <a href="#">{{ playlist.title }}</a>
+        </li>
         {% empty %}
-            <li>No playlists found.</li>
+        <li>No playlists found.</li>
         {% endfor %}
+        <li>
+            <a href="{% url 'playlist_create' %}"><strong>Create New Playlist</strong></a>
+        </li>
     </ul>
 </section>

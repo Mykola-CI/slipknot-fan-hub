@@ -22,12 +22,18 @@
             <p>FanHub</p>
         </div>
         {% block navbar %}
-        This is a placeholder for navbar
+
+        {% if not user.is_authenticated %}
+        {% include 'core/navbar-signup.html' %}
+        {% else %}
+        {% include 'core/navbar-signed.html' %}
+        {% endif %}
+        
         {% endblock %}
     </header>
     
-    {% block main_content %}Main content{% endblock %}
-    {% block bottom %}Scripts and other bottom things{% endblock %}
+    {% block main_content %}{% endblock %}
+    {% block bottom %}{% endblock %}
     
 </body>
 </html>

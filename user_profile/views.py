@@ -1,13 +1,18 @@
 from django.shortcuts import render, HttpResponse
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.contrib import messages
+from django.views.generic import TemplateView, CreateView, UpdateView, ListView
 from .forms import (
     UserEmailForm,
     UserPasswordForm,
     UserNameForm,
     UserDOBForm,
     UserAboutForm,
-    UploadAvatarForm
+    UploadAvatarForm,
+    PlaylistForm,
+    PlaylistItemForm
 )
 from .models import UserProfile, Playlist, PlaylistItem
 
@@ -78,11 +83,26 @@ def profile(request):
     return render(request, 'user_profile/profile.html', context)
 
 
-# class PlaylistView(TemplateView):
-#     template_name = 'user_profile/playlist.html'
+class PlaylistCreateView(CreateView):
+    model = Playlist
+    form_class = PlaylistForm
+    template_name = 'user_profile/playlist_form.html'
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['playlists'] = Playlist.objects.filter(
-#             author=self.request.user).order_by('-created_on')
-#         return context
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        response = super().form_valid(form)
+        messages.success(
+            self.request,
+            f"You have successfully created {form.instance.title} playlist")
+        return response
+
+    def get_success_url(self):
+        # Redirect to the Playlist item create page for the new playlist
+        return reverse(
+            'playlist_item_create',
+            kwargs={'playlist_id': self.object.id}
+        )
+
+
+class PlaylistItemCreateView(TemplateView):
+    template_name = 'user_profile/playlist_item_create.html'

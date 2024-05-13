@@ -1,8 +1,7 @@
 from django import forms
-from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
-from .models import UserProfile
+from .models import UserProfile, Playlist, PlaylistItem
 from cloudinary.forms import CloudinaryFileField
 
 
@@ -48,7 +47,7 @@ class UserAboutForm(forms.ModelForm):
         fields = ['about_myself']
 
 
-class UploadAvatarForm(ModelForm):
+class UploadAvatarForm(forms.ModelForm):
     avatar = CloudinaryFileField()
 
     class Meta:
@@ -70,3 +69,41 @@ class UploadAvatarForm(ModelForm):
                 'background': 'transparent'
             }
         }
+
+
+class PlaylistForm(forms.ModelForm):
+    featured_image = CloudinaryFileField(
+        options={
+            'crop': 'limit',
+            'width': 600,
+            'height': 600,
+        }
+    )
+
+    class Meta:
+        model = Playlist
+        fields = [
+            'title',
+            'slug',
+            'featured_image',
+            'description',
+            'reference_url',
+            'status'
+        ]
+
+
+class PlaylistItemForm(forms.ModelForm):
+    class Meta:
+        model = PlaylistItem
+        fields = [
+            'song_title',
+            'artist',
+            'album',
+            'song_url',
+            'song_video',
+            'song_audio',
+            'song_tabs',
+            'song_comments',
+            'performance_year',
+            'performance_type'
+        ]

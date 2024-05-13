@@ -10,14 +10,6 @@
     crossorigin="anonymous"></script>
 {% endblock extra_head %}
 
-{% block navbar %}
-{% if not user.is_authenticated %}
-{% include 'core/navbar-signup.html' %}
-{% else %}
-{% include 'core/navbar-signed.html' %}
-{% endif %}
-{% endblock %}
-
 {% block main_content %}
 
 <div class="avatar-profile-page">
