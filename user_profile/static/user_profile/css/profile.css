@@ -1,0 +1,113 @@
+/* profile.html specific styles */
+#about-myself {
+    grid-column: span 2;
+}
+
+.profile-section {
+    padding: 20px 20px 20px 50px;
+    max-width: 50ch;
+    text-align: left;
+    justify-self: start;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-section > h3 {
+    font-size: 130%;
+    color: red;
+    text-shadow: 3px 1px 0px rgba(0, 0, 0, 1);
+}
+
+#playlists {
+    grid-column: span 2;
+}
+
+#playlists ul {
+    background-color: rgb(58, 61, 63);
+    padding-left: 20px;
+}
+
+#playlists ul li:last-child {
+    text-decoration: overline;
+    color: red;
+    padding-top: 10px; 
+}
+
+.avatar-profile-page {
+    max-width: 150px;
+    margin-inline: auto;
+    box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+    -webkit-box-shadow: -2px 5px 21px 18px rgba(64, 38, 38, 0.78);
+    -moz-box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+}
+
+.avatar-profile-page > img {
+    width: 100%;
+}
+
+.edit-btn {
+    margin-block-start: auto;
+    height: 40px;
+    border-radius: 20px;
+    align-self: flex-start;
+    padding: 10px;
+    width: 120px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: transparent;
+}
+
+.modal-content {
+    background-color: black;
+    margin: 40% auto;
+    padding: 20px;
+    border: 4px solid #888;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+    -webkit-box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+    -moz-box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+}
+
+#form-fields label {
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 5px;
+}
+
+#modal-form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+}
+
+#form-fields p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#form-fields input {
+    margin-inline: auto;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
