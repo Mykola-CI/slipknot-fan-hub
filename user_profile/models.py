@@ -46,7 +46,6 @@ class Playlist(models.Model):
     featured_image = CloudinaryField(
         'image',
         folder='fanhub/playlist_images',
-        default='placeholder',
         blank=True)
     description = models.TextField()
     reference_url = models.URLField(blank=True)
