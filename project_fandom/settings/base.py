@@ -7,8 +7,6 @@ Used as a base file for further modularisation of local.py and production.py
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-# import sys
-# from django.contrib.messages import constants as messages
 import dj_database_url
 
 
@@ -91,6 +89,8 @@ TEMPLATES = [
         },
     },
 ]
+
+handler403 = 'user_profile.views.my_custom_permission_denied_view'
 
 WSGI_APPLICATION = "project_fandom.wsgi.application"
 

@@ -14,15 +14,32 @@
 </ul>
 {% endif %}
 
-<h4>Playlist Title: {{ playlist.title }}</h4>
-<div class="playlist-banner">
-    {% if playlist.featured_image %}    
-        {% cloudinary playlist.featured_image %}
-    {% else %}
-        <p>No Image Uploaded</p>
-        <p>If you decide to post this playlist without an image we will provide your post with a nice one</p>    
-    {% endif %}
-</div>
-
+<section class="playlist-profile">
+    <div class="playlist-title">
+        <h4>Playlist Title:</h4>
+        <p><strong>{{ playlist.title }}</strong></p>
+    </div>
+    <div class="playlist-banner">
+        <h4>Playlist Image:</h4> 
+        {% if playlist.featured_image %}  
+            {% cloudinary playlist.featured_image %}
+        {% else %}
+            <p>No Image Uploaded</p>
+            <p>If you decide to post this playlist without an image we will provide your post with a nice one</p>    
+        {% endif %}
+    </div>
+    <div class="playlist-description">
+        <h4>Playlist Description:</h4>
+        <p>{{ playlist.description }}</p>
+    </div>
+    <div class="playlist-url">
+        <h4>Playlist Reference:</h4> 
+        {% if playlist.reference_url %}  
+        <a href="{{ playlist.reference_url }}" target="_blank" rel="noopener noreferrer">{{ playlist.reference_url }}</a>
+        {% else %}
+            <p>No URL Uploaded</p>    
+        {% endif %}
+    </div>
+</section>
 
 {% endblock %}

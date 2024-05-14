@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from .models import UserProfile
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from .models import Playlist, PlaylistItem
 
@@ -62,7 +63,14 @@ class PlaylistItemInline(admin.StackedInline):
 
 
 class PlaylistAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'created_on', 'status')
+    list_display = (
+        'id',
+        'title',
+        'author',
+        'created_on',
+        'status',
+        'display_featured_image'
+    )
     list_filter = ('status', 'created_on')
     search_fields = ('title', 'description')
     prepopulated_fields = {'slug': ('title',)}
@@ -70,6 +78,15 @@ class PlaylistAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_on'
     ordering = ('status', 'created_on')
     inlines = [PlaylistItemInline]
+
+    def display_featured_image(self, obj):
+        if obj.featured_image:
+            return format_html(
+                '<a href="{0}">View Image</a>',
+                obj.featured_image.url
+            )
+        return "No image"
+    display_featured_image.short_description = 'Featured Image'
 
 
 admin.site.register(Playlist, PlaylistAdmin)

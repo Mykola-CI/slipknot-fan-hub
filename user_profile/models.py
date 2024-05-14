@@ -56,6 +56,9 @@ class Playlist(models.Model):
     class Meta:
         ordering = ["-created_on"]
 
+    def is_author(self, user):
+        return self.author == user
+
     def __str__(self):
         return f"{self.title} | created by {self.author}"
 

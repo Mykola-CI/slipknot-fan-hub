@@ -1,9 +1,12 @@
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, HttpResponse
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.contrib import messages
-from django.views.generic import TemplateView, CreateView, UpdateView, ListView
+from django.views.generic import TemplateView, CreateView
 from .forms import (
     UserEmailForm,
     UserPasswordForm,
@@ -11,10 +14,9 @@ from .forms import (
     UserDOBForm,
     UserAboutForm,
     UploadAvatarForm,
-    PlaylistForm,
-    PlaylistItemForm
+    PlaylistForm
 )
-from .models import UserProfile, Playlist, PlaylistItem
+from .models import UserProfile, Playlist
 
 
 @login_required
@@ -83,7 +85,7 @@ def profile(request):
     return render(request, 'user_profile/profile.html', context)
 
 
-class PlaylistCreateView(CreateView):
+class PlaylistCreateView(LoginRequiredMixin, CreateView):
     model = Playlist
     form_class = PlaylistForm
     template_name = 'user_profile/playlist_form.html'
@@ -104,7 +106,7 @@ class PlaylistCreateView(CreateView):
         )
 
 
-class PlaylistCreatedView(TemplateView):
+class PlaylistCreatedView(LoginRequiredMixin, TemplateView):
     template_name = 'user_profile/playlist_created.html'
 
     def get_context_data(self, **kwargs):
@@ -112,3 +114,21 @@ class PlaylistCreatedView(TemplateView):
         playlist_id = self.kwargs.get('playlist_id')
         context['playlist'] = Playlist.objects.get(id=playlist_id)
         return context
+
+    # Check if the user is the author of the playlist (override 'get' method)
+    def get(self, request, *args, **kwargs):
+        playlist_id = kwargs['playlist_id']
+        playlist = get_object_or_404(Playlist, pk=playlist_id)
+
+        if not playlist.is_author(request.user):
+            raise PermissionDenied(
+                "You are not authorised to access this page"
+            )
+
+        return super().get(request, *args, **kwargs)
+
+
+# Handle 403 Forbidden error in separate page
+def my_custom_permission_denied_view(request, exception):
+    context = {'exception': str(exception)}
+    return render(request, 'user_profile/403.html', context, status=403)

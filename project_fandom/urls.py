@@ -17,6 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from user_profile.views import my_custom_permission_denied_view
 
 urlpatterns = [
     path("", include("core.urls"), name="core-urls"),
@@ -24,3 +25,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
 ]
+
+handler403 = my_custom_permission_denied_view
