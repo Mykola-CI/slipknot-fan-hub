@@ -58,7 +58,7 @@ class Playlist(models.Model):
 
     def is_author(self, user):
         return self.author == user
-    
+
     def save(self, *args, **kwargs):
         if not self.slug:  # Check if the slug is already set
             self.slug = slugify(self.title)  # Generate a slug from the title

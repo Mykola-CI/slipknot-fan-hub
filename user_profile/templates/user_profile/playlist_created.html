@@ -9,7 +9,7 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
 {% endif %}
@@ -39,6 +39,13 @@
         {% else %}
             <p>No URL Uploaded</p>    
         {% endif %}
+    </div>
+</section>
+<section class="manage-songs">
+    <a href="#">Add Songs and other stuff to your Playlist</a>
+    <br>
+    <div class="navigation">
+        <a href="{% url 'profile' %}">Back to Your Profile Page</a>
     </div>
 </section>
 

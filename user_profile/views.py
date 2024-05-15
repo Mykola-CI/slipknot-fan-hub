@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.contrib import messages
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, UpdateView
 from .forms import (
     UserEmailForm,
     UserPasswordForm,
@@ -118,6 +118,41 @@ class PlaylistCreatedView(LoginRequiredMixin, TemplateView):
     # Check if the user is the author of the playlist (override 'get' method)
     def get(self, request, *args, **kwargs):
         playlist_id = kwargs['playlist_id']
+        playlist = get_object_or_404(Playlist, pk=playlist_id)
+
+        if not playlist.is_author(request.user):
+            raise PermissionDenied(
+                "You are not authorised to access this page"
+            )
+
+        return super().get(request, *args, **kwargs)
+
+
+class PlaylistUpdateView(LoginRequiredMixin, UpdateView):
+    model = Playlist
+    form_class = PlaylistForm
+    template_name = 'user_profile/playlist_update_form.html'
+    # slug_field = 'slug'
+    # slug_url_kwarg = 'slug'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        response = super().form_valid(form)
+        messages.success(
+            self.request,
+            f"You have successfully created '{form.instance.title}' playlist")
+        return response
+
+    def get_success_url(self):
+        return reverse(
+            'playlist_updated',
+            kwargs={'playlist_id': self.object.id}
+        )
+
+    # Check if the user is the author of the playlist (override 'get' method)
+    # Here 'pk' is passed as a keyword argument to the URL
+    def get(self, request, *args, **kwargs):
+        playlist_id = kwargs['pk']
         playlist = get_object_or_404(Playlist, pk=playlist_id)
 
         if not playlist.is_author(request.user):
