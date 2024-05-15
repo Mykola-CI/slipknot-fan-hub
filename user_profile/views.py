@@ -14,7 +14,7 @@ from .forms import (
     UploadAvatarForm,
     PlaylistForm
 )
-from .models import UserProfile, Playlist
+from .models import UserProfile, Playlist, PlaylistItem
 from .utils import handle_form_valid, get_success_url, AuthorRequiredMixin
 
 
@@ -113,18 +113,6 @@ class PlaylistCreatedView(
         context['playlist'] = Playlist.objects.get(id=playlist_id)
         return context
 
-    # Check if the user is the author of the playlist (override 'get' method)
-    def get(self, request, *args, **kwargs):
-        playlist_id = kwargs['pk']
-        playlist = get_object_or_404(Playlist, pk=playlist_id)
-
-        if not playlist.is_author(request.user):
-            raise PermissionDenied(
-                "You are not authorised to access this page"
-            )
-
-        return super().get(request, *args, **kwargs)
-
 
 class PlaylistUpdateView(
         LoginRequiredMixin,
@@ -135,6 +123,14 @@ class PlaylistUpdateView(
     form_class = PlaylistForm
     template_name = 'user_profile/playlist_update_form.html'
 
+    # Get the playlist items context for the playlist_update_form.html template
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['playlist_items'] = PlaylistItem.objects.filter(
+            playlist=self.object
+        )
+        return context
+
     # Set the author of the playlist to the current user and validates the form
     def form_valid(self, form):
         # call the handle_form_valid function from utils.py
@@ -144,19 +140,6 @@ class PlaylistUpdateView(
     def get_success_url(self):
         # call the get_success_url function from utils.py
         return get_success_url(self, 'playlist_updated')
-
-    # Check if the user is the author of the playlist (override 'get' method)
-    # Here 'pk' is passed as a keyword argument to the URL
-    def get(self, request, *args, **kwargs):
-        playlist_id = kwargs['pk']
-        playlist = get_object_or_404(Playlist, pk=playlist_id)
-
-        if not playlist.is_author(request.user):
-            raise PermissionDenied(
-                "You are not authorised to access this page"
-            )
-
-        return super().get(request, *args, **kwargs)
 
 
 # Handle 403 Forbidden error in separate page

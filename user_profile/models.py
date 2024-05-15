@@ -108,4 +108,7 @@ class PlaylistItem(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.song_title} by {self.artist} in {self.playlist.title}"
+        return (
+            f"'{self.song_title}' by {self.artist} | "
+            f"in '{self.playlist.title}'"
+        )

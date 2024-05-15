@@ -5,13 +5,35 @@
 {% block title %}FanHub Playlist Form{% endblock %}
 
 {% block main_content %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Edit Playlist</button>
-</form>
-
-<div class="navigation">
-    <a href="{% url 'profile' %}">Back to Your Profile Page</a>
+<div class="flex-container">
+    <section class="form-edit">
+        <h2>Edit Playlist</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <button type="submit">Edit Playlist</button>
+        </form>
+        <br>
+        <div class="navigation">
+            <a href="{% url 'profile' %}">Back to Your Profile Page</a>
+        </div>
+    </section>
+    <section class="list-items">
+        <h2>Playlist Items</h2>
+        <p>Click to Edit Your Playlist Items:</p>
+        <ul>
+            {% for item in playlist_items %}
+                <li>
+                    <a href="#">{{ item }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <br>
+        <p>OR</p>
+        <a href="#">Add New Item</a>
+    </section>
 </div>
+
+
 {% endblock %}

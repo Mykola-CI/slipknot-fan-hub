@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from .models import Playlist
 
 
+# Handle the form_valid method for views
 def handle_form_valid(view, form):
     form.instance.author = view.request.user
     response = super(view.__class__, view).form_valid(form)
@@ -15,6 +16,7 @@ def handle_form_valid(view, form):
     return response
 
 
+# Get the success URL for views
 def get_success_url(view, reverse_path):
     return reverse(
         reverse_path,
@@ -23,6 +25,9 @@ def get_success_url(view, reverse_path):
 
 
 class AuthorRequiredMixin:
+    """
+    Mixin to check if the user is the author of the playlist
+    """
     def dispatch(self, request, *args, **kwargs):
         playlist_id = kwargs.get('pk')
         if not playlist_id:
