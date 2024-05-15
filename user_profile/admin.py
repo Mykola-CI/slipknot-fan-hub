@@ -65,7 +65,7 @@ class PlaylistItemInline(admin.StackedInline):
 class PlaylistAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'title',
+        'slug',
         'author',
         'created_on',
         'status',
@@ -79,6 +79,7 @@ class PlaylistAdmin(admin.ModelAdmin):
     ordering = ('status', 'created_on')
     inlines = [PlaylistItemInline]
 
+    # Custom method to display the clickable link in the admin
     def display_featured_image(self, obj):
         if obj.featured_image:
             return format_html(

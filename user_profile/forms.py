@@ -88,7 +88,6 @@ class PlaylistForm(forms.ModelForm):
         model = Playlist
         fields = [
             'title',
-            'slug',
             'featured_image',
             'description',
             'reference_url',

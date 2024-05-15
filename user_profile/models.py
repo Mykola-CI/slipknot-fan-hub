@@ -39,7 +39,7 @@ class Playlist(models.Model):
     Stores user playlist general info and umbrella image
     """
     title = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="playlists"
     )
@@ -58,6 +58,17 @@ class Playlist(models.Model):
 
     def is_author(self, user):
         return self.author == user
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:  # Check if the slug is already set
+            self.slug = slugify(self.title)  # Generate a slug from the title
+            # Ensure the slug is unique
+            original_slug = self.slug
+            num = 1
+            while Playlist.objects.filter(slug=self.slug).exists():
+                self.slug = f'{original_slug}-{num}'
+                num += 1
+        super(Playlist, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.title} | created by {self.author}"

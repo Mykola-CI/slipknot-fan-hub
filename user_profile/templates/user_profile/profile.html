@@ -31,6 +31,32 @@
 </ul>
 {% endif %}
 
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="modal-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="form-fields">
+                {% if form_type == 'about' %}
+                {{ about_form.as_p }}
+                {% elif form_type == 'email' %}
+                {{ email_form.as_p }}
+                {% elif form_type == 'password' %}
+                {{ password_form.as_p }}
+                {% elif form_type == 'name' %}
+                {{ name_form.as_p }}
+                {% elif form_type == 'dob' %}
+                {{ dob_form.as_p }}
+                {% elif form_type == 'avatar' %}
+                {{ avatar_form.as_p }}
+                {% endif %}
+            </div>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</div>
+
 <div class="container grid">
 
     <div class="profile-section">
@@ -69,32 +95,6 @@
     </div>
 
     {% include 'user_profile/playlist.html' %}
-</div>
-
-<!-- Modal -->
-<div id="modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <form id="modal-form" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div id="form-fields">
-                {% if form_type == 'about' %}
-                {{ about_form.as_p }}
-                {% elif form_type == 'email' %}
-                {{ email_form.as_p }}
-                {% elif form_type == 'password' %}
-                {{ password_form.as_p }}
-                {% elif form_type == 'name' %}
-                {{ name_form.as_p }}
-                {% elif form_type == 'dob' %}
-                {{ dob_form.as_p }}
-                {% elif form_type == 'avatar' %}
-                {{ avatar_form.as_p }}
-                {% endif %}
-            </div>
-            <button type="submit">Save</button>
-        </form>
-    </div>
 </div>
 
 {% endblock main_content %}
