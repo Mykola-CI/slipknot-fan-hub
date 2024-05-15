@@ -1,11 +1,9 @@
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, HttpResponse
-from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
-from django.contrib import messages
 from django.views.generic import TemplateView, CreateView, UpdateView
 from .forms import (
     UserEmailForm,
@@ -17,6 +15,7 @@ from .forms import (
     PlaylistForm
 )
 from .models import UserProfile, Playlist
+from .utils import handle_form_valid, get_success_url, AuthorRequiredMixin
 
 
 @login_required
@@ -90,34 +89,33 @@ class PlaylistCreateView(LoginRequiredMixin, CreateView):
     form_class = PlaylistForm
     template_name = 'user_profile/playlist_form.html'
 
+    # Set the author of the playlist to the current user and validates the form
     def form_valid(self, form):
-        form.instance.author = self.request.user
-        response = super().form_valid(form)
-        messages.success(
-            self.request,
-            f"You have successfully created {form.instance.title} playlist")
-        return response
+        # call the handle_form_valid function from utils.py
+        return handle_form_valid(self, form)
 
+    # Redirect to the playlist_created page for the new playlist
     def get_success_url(self):
-        # Redirect to the Playlist item create page for the new playlist
-        return reverse(
-            'playlist_created',
-            kwargs={'playlist_id': self.object.id}
-        )
+        # call the get_success_url function from utils.py
+        return get_success_url(self, 'playlist_created')
 
 
-class PlaylistCreatedView(LoginRequiredMixin, TemplateView):
+class PlaylistCreatedView(
+        LoginRequiredMixin,
+        AuthorRequiredMixin,
+        TemplateView):
+
     template_name = 'user_profile/playlist_created.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        playlist_id = self.kwargs.get('playlist_id')
+        playlist_id = self.kwargs.get('pk')
         context['playlist'] = Playlist.objects.get(id=playlist_id)
         return context
 
     # Check if the user is the author of the playlist (override 'get' method)
     def get(self, request, *args, **kwargs):
-        playlist_id = kwargs['playlist_id']
+        playlist_id = kwargs['pk']
         playlist = get_object_or_404(Playlist, pk=playlist_id)
 
         if not playlist.is_author(request.user):
@@ -128,26 +126,24 @@ class PlaylistCreatedView(LoginRequiredMixin, TemplateView):
         return super().get(request, *args, **kwargs)
 
 
-class PlaylistUpdateView(LoginRequiredMixin, UpdateView):
+class PlaylistUpdateView(
+        LoginRequiredMixin,
+        UpdateView,
+        AuthorRequiredMixin):
+
     model = Playlist
     form_class = PlaylistForm
     template_name = 'user_profile/playlist_update_form.html'
-    # slug_field = 'slug'
-    # slug_url_kwarg = 'slug'
 
+    # Set the author of the playlist to the current user and validates the form
     def form_valid(self, form):
-        form.instance.author = self.request.user
-        response = super().form_valid(form)
-        messages.success(
-            self.request,
-            f"You have successfully created '{form.instance.title}' playlist")
-        return response
+        # call the handle_form_valid function from utils.py
+        return handle_form_valid(self, form)
 
+    # Redirect to the playlist_updated page for the updated playlist
     def get_success_url(self):
-        return reverse(
-            'playlist_updated',
-            kwargs={'playlist_id': self.object.id}
-        )
+        # call the get_success_url function from utils.py
+        return get_success_url(self, 'playlist_updated')
 
     # Check if the user is the author of the playlist (override 'get' method)
     # Here 'pk' is passed as a keyword argument to the URL

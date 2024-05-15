@@ -13,7 +13,7 @@ urlpatterns = [
         PlaylistCreateView.as_view(),
         name='playlist_create'),
     path(
-        'playlists/<int:playlist_id>/create/created/',
+        'playlists/<int:pk>/create/created/',
         PlaylistCreatedView.as_view(),
         name='playlist_created'),
     path(
@@ -21,7 +21,7 @@ urlpatterns = [
         PlaylistUpdateView.as_view(),
         name='playlist_update'),
     path(
-        'playlists/<int:playlist_id>/update/updated/',
+        'playlists/<int:pk>/update/updated/',
         PlaylistCreatedView.as_view(),
         name='playlist_updated'),
 ]
