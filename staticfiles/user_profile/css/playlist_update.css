@@ -1,0 +1,17 @@
+label {
+    display: block;
+}
+
+.form-edit,
+.list-items {
+    text-align: left;
+}
+
+.form-edit > *,
+.list-items > * {
+    padding: 20px;
+}
+
+form > p {
+    padding-top: 10px;
+}

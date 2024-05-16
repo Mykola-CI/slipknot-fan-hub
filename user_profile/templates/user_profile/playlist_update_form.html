@@ -3,9 +3,13 @@
 {% load cloudinary %}
 
 {% block title %}FanHub Playlist Form{% endblock %}
+{% block extra_head %}
+<!-- Custom CSS for user_profile application profile.html -->
+<link rel="stylesheet" href="{% static 'user_profile/css/playlist_update.css' %}" />
+{% endblock extra_head %}
 
 {% block main_content %}
-<div class="flex-container">
+<div class="container flex">
     <section class="form-edit">
         <h2>Edit Playlist</h2>
         <form method="post" enctype="multipart/form-data">
@@ -22,6 +26,7 @@
     <section class="list-items">
         <h2>Playlist Items</h2>
         <p>Click to Edit Your Playlist Items:</p>
+        {% if playlist_items %}
         <ul>
             {% for item in playlist_items %}
                 <li>
@@ -29,6 +34,9 @@
                 </li>
             {% endfor %}
         </ul>
+        {% else %}
+            <p>No Playlist Items Yet</p>
+        {% endif %}
         <br>
         <p>OR</p>
         <a href="#">Add New Item</a>

@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import (
-    profile,
+from .views.profile import profile
+from .views.playlists import (
     PlaylistCreateView,
     PlaylistCreatedView,
     PlaylistUpdateView
