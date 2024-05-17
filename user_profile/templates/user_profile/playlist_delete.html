@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Playlist Delete{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <h3>Are you sure you want to delete the Playlist "{{ playlist.title }}"?</h3>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirm">
+    <div>
+        <a href="{% url 'playlist_created' playlist.id %}" class="navigation-links">Back to the Playlist View</a>
+    </div>
+    <div class="navigation">
+        <a href="{% url 'profile' %}">Back to Your Profile Page</a>
+    </div>
+</div>
+{% endblock %}

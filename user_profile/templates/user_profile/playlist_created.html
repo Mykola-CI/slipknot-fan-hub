@@ -20,19 +20,24 @@
 {% endif %}
 
 <div class="container flex">
+    <section class="featured-image">
+        <h4>Playlist Image:</h4> 
+        <div class="image-container">
+        {% if playlist.featured_image %}
+            {% cloudinary playlist.featured_image %} 
+        {% else %}
+            <img src="{% static 'images/hero_banner_slipknot.png' %}" alt="default featured image">
+        </div>
+        <div class="caption">
+            <p>No Custom Image Was Uploaded!</p>
+            <p>If you decide to share this playlist this nice default banner will be attached.</p>
+        </div>
+        {% endif %}
+    </section>
     <section class="form-edit">
         <div class="playlist-title">
             <h4>Playlist Title:</h4>
             <p><strong>{{ playlist.title }}</strong></p>
-        </div>
-        <div class="playlist-banner">
-            <h4>Playlist Image:</h4> 
-            {% if playlist.featured_image %}  
-                {% cloudinary playlist.featured_image %}
-            {% else %}
-                <p>No Image Uploaded</p>
-                <p>If you decide to post this playlist without an image we will provide your post with a nice one</p>    
-            {% endif %}
         </div>
         <div class="playlist-description">
             <h4>Playlist Description:</h4>
@@ -46,10 +51,21 @@
                 <p>No URL Uploaded</p>    
             {% endif %}
         </div>
+        <div>
+            <a href="{% url 'playlist_update' playlist.id %}" class="navigation-links">Edit Playlist Details and Image</a>
+        </div>
+        <div>
+            <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-links">Delete Playlist</a>
+        </div>
+        <div>
+            <a href="{% url 'profile' %}" class="navigation-links">Back to Your Profile Page</a>
+        </div>
     </section>
     <section class="list-items">
         <h2>Playlist Items</h2>
-        <a href="#">Add Items to Your Playlist</a>
+        <div>
+            <a href="#" class="navigation-links">Add Items to Your Playlist</a>
+        </div>
         <br>
         <p>OR</p>
         <br>
@@ -65,8 +81,7 @@
         {% else %}
             <p>No Playlist Items Yet</p>
         {% endif %}
-        <br>
-        <a href="{% url 'profile' %}">Back to Your Profile Page</a>
+
     </section>
 </div>
 

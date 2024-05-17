@@ -3,7 +3,8 @@ from .views.profile import profile
 from .views.playlists import (
     PlaylistCreateView,
     PlaylistCreatedView,
-    PlaylistUpdateView
+    PlaylistUpdateView,
+    PlaylistDeleteView
 )
 
 urlpatterns = [
@@ -24,4 +25,8 @@ urlpatterns = [
         'playlists/<int:pk>/update/updated/',
         PlaylistCreatedView.as_view(),
         name='playlist_updated'),
+    path(
+        'playlists/<int:pk>/delete/',
+        PlaylistDeleteView.as_view(),
+        name='playlist_delete'),
 ]

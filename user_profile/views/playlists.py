@@ -1,6 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, CreateView, UpdateView
-from ..forms import (PlaylistForm)
+from django.views.generic import (
+    TemplateView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
+from ..forms.playlist_forms import (PlaylistForm)
 from ..models import Playlist, PlaylistItem
 from ..utils import handle_form_valid, get_success_url, AuthorRequiredMixin
 
@@ -70,3 +75,17 @@ class PlaylistUpdateView(
     def get_success_url(self):
         # call the get_success_url function from utils.py
         return get_success_url(self, 'playlist_updated')
+
+
+class PlaylistDeleteView(
+        LoginRequiredMixin,
+        AuthorRequiredMixin,
+        DeleteView
+        ):
+
+    model = Playlist
+    template_name = 'user_profile/playlist_delete.html'
+    success_url = '/profile/'
+
+    def get_queryset(self):
+        return Playlist.objects.filter(author=self.request.user)

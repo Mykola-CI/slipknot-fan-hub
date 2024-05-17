@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from ..forms import (
+from ..forms.user_forms import (
     UserEmailForm,
     UserPasswordForm,
     UserNameForm,

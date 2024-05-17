@@ -19,9 +19,6 @@
             <button type="submit">Edit Playlist</button>
         </form>
         <br>
-        <div class="navigation">
-            <a href="{% url 'profile' %}">Back to Your Profile Page</a>
-        </div>
     </section>
     <section class="list-items">
         <h2>Playlist Items</h2>
@@ -40,6 +37,15 @@
         <br>
         <p>OR</p>
         <a href="#">Add New Item</a>
+    </section>
+    <section class="navigation">
+        <div>
+            <a href="{% url 'playlist_created' playlist.id %}" class="navigation-links">Back to the Playlist View</a>
+        </div>
+        <div>
+            <a href="{% url 'profile' %}" class="navigation-links">Back to Your Profile Page</a>
+        </div>
+        
     </section>
 </div>
 

@@ -107,6 +107,7 @@ header > p {
 a {
     text-decoration: none;
     color: red;
+    display: inline-block;
 }
 
 a:hover {

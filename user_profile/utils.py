@@ -5,18 +5,19 @@ from django.shortcuts import get_object_or_404
 from .models import Playlist
 
 
-# Handle the form_valid method for views
+# Custom override of the form_valid method to ensure the author field remains
+# consistent and accurate each time when saving the form + success message
 def handle_form_valid(view, form):
     form.instance.author = view.request.user
     response = super(view.__class__, view).form_valid(form)
     messages.success(
         view.request,
-        "You have successfully saved the changes"
+        "You have successfully saved the changes",
     )
     return response
 
 
-# Get the success URL for views
+# Custom override of success_url to pass playlist ID
 def get_success_url(view, reverse_path):
     return reverse(
         reverse_path,
