@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "cloudinary",
     "core",
     "user_profile",
+    "ckeditor",
 ]
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

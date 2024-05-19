@@ -1,23 +1,4 @@
-label {
-    display: block;
-}
 
-.form-edit,
-.list-items,
-.navigation,
-.featured-image {
-    text-align: left;
-}
-
-.form-edit > *,
-.list-items > *,
-.navigation > * {
-    padding: 20px;
-}
-
-form > p {
-    padding-top: 10px;
-}
 
 .image-container {
     width: 300px;
@@ -32,12 +13,87 @@ form > p {
     box-shadow: 0px 0px 13px 12px #000000;
 }
 
-.navigation {
-    font-size: large;
+.container--inner {
+    max-width: 500px;
+    margin: auto;
 }
 
-.navigation-links {
+.navigation,
+.form-edit {
+    font-size: large;
+    padding: 20px;
+}
+
+/* Styling forms */
+.form-edit {
+    background-color: black;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 13px 3px #000000; 
+    box-shadow: 0px 0px 13px 3px #000000;
+    text-align: left;
+
+    .form-control {
+        padding: 10px;
+        display: flex;
+        flex-direction: column; 
+        gap: 20px;   
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+        padding: 10px;
+        border-radius: 7px;
+        font-size: medium;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+    }
+
+    button {
+        background-color: rgb(46, 53, 59);
+        color: white;
+        border: none;
+        cursor: pointer;
+        align-self: center;
+        font-size: large;
+    }
+
+    .field-block > p {
+        margin-bottom: 5px;
+    }
+
+    #id_featured_image {
+        font-size: medium;
+        padding: 0;
+    }
+
+}
+
+.playlist-card {
     background-color: rgb(46, 53, 59);
+    padding: 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 13px 3px #000000; 
+    box-shadow: 0px 0px 13px 3px #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+    div {
+        text-align: left;
+        max-width: 50ch;
+    }
+}
+
+
+
+.navigation-links {
+    display: inline-block;
+    background-color: rgb(29, 33, 36);
     padding: 10px;
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 13px 3px #000000; 
@@ -45,5 +101,6 @@ form > p {
 }
 
 .caption {
-    width: 50ch;
+    max-width: 50ch;
 }
+

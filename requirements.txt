@@ -7,7 +7,9 @@ dj-database-url==2.1.0
 dj3-cloudinary-storage==0.0.6
 Django==5.0.4
 django-allauth==0.62.1
+django-ckeditor==6.7.1
 django-gmailapi-backend==0.3.2
+django-js-asset==2.2.0
 google-api-core==2.19.0
 google-api-python-client==2.127.0
 google-auth==2.29.0

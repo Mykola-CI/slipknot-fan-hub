@@ -3,17 +3,23 @@
 
 {% block title %}Playlist Delete{% endblock %}
 
+{% block extra_head %}
+<!-- Custom CSS for user_profile application profile.html -->
+<link rel="stylesheet" href="{% static 'user_profile/css/playlist_update.css' %}" />
+{% endblock extra_head %}
+
 {% block main_content %}
 <div class="container">
     <h3>Are you sure you want to delete the Playlist "{{ playlist.title }}"?</h3>
     <form method="post">
         {% csrf_token %}
         <input type="submit" value="Confirm">
-    <div>
+    </form>
+    <div class="navigation">
         <a href="{% url 'playlist_created' playlist.id %}" class="navigation-links">Back to the Playlist View</a>
     </div>
     <div class="navigation">
-        <a href="{% url 'profile' %}">Back to Your Profile Page</a>
+        <a href="{% url 'profile' %}" class="navigation-links">Back to Your Profile Page</a>
     </div>
 </div>
 {% endblock %}

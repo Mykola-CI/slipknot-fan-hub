@@ -34,10 +34,10 @@
         </div>
         {% endif %}
     </section>
-    <section class="form-edit">
+    <section class="playlist-card">
         <div class="playlist-title">
             <h4>Playlist Title:</h4>
-            <p><strong>{{ playlist.title }}</strong></p>
+            <p>{{ playlist.title }}</p>
         </div>
         <div class="playlist-description">
             <h4>Playlist Description:</h4>
@@ -51,15 +51,17 @@
                 <p>No URL Uploaded</p>    
             {% endif %}
         </div>
-        <div>
-            <a href="{% url 'playlist_update' playlist.id %}" class="navigation-links">Edit Playlist Details and Image</a>
-        </div>
-        <div>
-            <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-links">Delete Playlist</a>
-        </div>
-        <div>
-            <a href="{% url 'profile' %}" class="navigation-links">Back to Your Profile Page</a>
-        </div>
+    </section>
+    <section class="navigation flex-column-left">
+            <div>
+                <a href="{% url 'playlist_update' playlist.id %}" class="navigation-links">Edit Playlist Details and Image</a>
+            </div>
+            <div>
+                <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-links">Delete Playlist</a>
+            </div>
+            <div>
+                <a href="{% url 'profile' %}" class="navigation-links">Back to Your Profile Page</a>
+            </div>
     </section>
     <section class="list-items">
         <h2>Playlist Items</h2>

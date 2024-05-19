@@ -4,14 +4,31 @@
 
 {% block title %}FanHub Playlist Form{% endblock %}
 
-{% block main_content %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create Playlist</button>
-</form>
+{% block extra_head %}
+<!-- Custom CSS for user_profile application profile.html -->
+<link rel="stylesheet" href="{% static 'user_profile/css/playlist_update.css' %}" />
+{% endblock extra_head %}
 
-<div class="navigation">
-    <a href="{% url 'profile' %}">Back to Your Profile Page</a>
+{% block main_content %}
+
+<div class="container">
+    <div class="container--inner">
+        <section class="form-edit">
+            <form method="post" enctype="multipart/form-data" class="form-control">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="field-block">
+                    <p>{{ field.errors }}</p>
+                    <p>{{ field.label_tag }}</p> 
+                    {{ field }}
+                </div>
+                {% endfor %}
+                <button type="submit" class="button btn-edit">Create Playlist</button>
+            </form>
+        </section>
+        <section class="navigation">
+            <a href="{% url 'profile' %}" class="navigation-links">Back to Your Profile Page</a>
+        </section>
+    </div>
 </div>
 {% endblock %}

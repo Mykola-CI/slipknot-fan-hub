@@ -12,16 +12,20 @@ html {
     background-size: cover;
 }
 
-/* Utility classes */
-.input-padding {
-    padding: 10px;
-}
-
 .flex {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     justify-items: center;
+    gap: 20px;
+}
+
+.flex-column-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
 }
 
 .grid {
@@ -48,7 +52,7 @@ body {
 
 header > p {
     grid-column: 3 / 4;
-    font-size: 150%;
+    font-size: 125%;
 }
 
 #logo-block {
@@ -64,7 +68,7 @@ header > p {
 
 
 #logo-picture {
-    max-width: 200px;
+    max-width: 100px;
 }
 
 #logo-picture img {
@@ -97,7 +101,7 @@ header > p {
     display: flex;
     justify-content: end;
     width: 100%;
-    font-size: 150%;
+    font-size: 125%;
     gap: 50px;
     text-shadow: 3px 1px 0px rgba(0, 0, 0, 1);
     text-decoration: overline;
