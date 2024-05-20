@@ -12,12 +12,10 @@ urlpatterns = [
     path("profile/", include("user_profile.urls"), name="profile-urls"),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
+    path('summernote/', include('django_summernote.urls')),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(
         settings.STATIC_URL, document_root=settings.STATIC_ROOT
     )
-    urlpatterns += static(
-        '/static/ckeditor/', document_root=settings.STATIC_ROOT + '/ckeditor/'
-        )

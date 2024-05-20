@@ -5,12 +5,17 @@ from .models import UserProfile
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from .models import Playlist, PlaylistItem
+from django_summernote.admin import (
+    SummernoteModelAdmin,
+    SummernoteInlineModelAdmin
+)
 
 
-class UserProfileInline(admin.StackedInline):
+class UserProfileInline(SummernoteInlineModelAdmin, admin.StackedInline):
     model = UserProfile
     can_delete = False
     verbose_name_plural = 'profile'
+    summernote_fields = ('about_myself',)
 
 
 class UserAdmin(BaseUserAdmin):
@@ -46,23 +51,25 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
 
-class PlaylistItemAdmin(admin.ModelAdmin):
+class PlaylistItemInline(SummernoteInlineModelAdmin, admin.StackedInline):
+    model = PlaylistItem
+    extra = 1  # The number of extra forms in the inline formset.
+    summernote_fields = ('description',)
+
+
+class PlaylistItemAdmin(SummernoteModelAdmin):
     list_display = (
         'song_title', 'artist', 'album', 'playlist', 'performance_year')
     list_filter = ('artist', 'album', 'playlist')
     search_fields = ('song_title', 'artist')
     raw_id_fields = ('playlist',)
+    summernote_fields = ('description',)
 
 
 admin.site.register(PlaylistItem, PlaylistItemAdmin)
 
 
-class PlaylistItemInline(admin.StackedInline):
-    model = PlaylistItem
-    extra = 1  # The number of extra forms in the inline formset.
-
-
-class PlaylistAdmin(admin.ModelAdmin):
+class PlaylistAdmin(SummernoteModelAdmin):
     list_display = (
         'id',
         'slug',
@@ -75,6 +82,7 @@ class PlaylistAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
     prepopulated_fields = {'slug': ('title',)}
     raw_id_fields = ('author',)
+    summernote_fields = ('description',)
     date_hierarchy = 'created_on'
     ordering = ('status', 'created_on')
     inlines = [PlaylistItemInline]

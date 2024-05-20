@@ -16,6 +16,7 @@
         <section class="form-edit">
             <form method="post" enctype="multipart/form-data" class="form-control">
                 {% csrf_token %}
+                {{ form.media }}
                 {% for field in form %}
                 <div class="field-block">
                     <p>{{ field.errors }}</p>

@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     "cloudinary_storage",
     "cloudinary",
+    'django_summernote',
     "core",
     "user_profile",
-    "ckeditor",
 ]
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -99,9 +99,10 @@ DATABASES = {
     'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
 }
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.herokuapp.com"
+]
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -118,9 +119,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
 

@@ -39,6 +39,7 @@
             {% csrf_token %}
             <div id="form-fields">
                 {% if form_type == 'about' %}
+                {{ about_form.media }}
                 {{ about_form.as_p }}
                 {% elif form_type == 'email' %}
                 {{ email_form.as_p }}
@@ -90,7 +91,7 @@
 
     <div id="about-myself" class="profile-section">
         <h3>About Myself</h3>
-        <p>{{ user_profile.about_myself }}</p>
+        <p>{{ user_profile.about_myself | safe }}</p>
         <button class="edit-btn" data-form="about">Update</button>
     </div>
 

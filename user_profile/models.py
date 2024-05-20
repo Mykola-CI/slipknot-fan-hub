@@ -47,7 +47,7 @@ class Playlist(models.Model):
         'image',
         folder='fanhub/playlist_images',
         blank=True)
-    description = models.TextField()
+    description = models.TextField(max_length=500, blank=True)
     reference_url = models.URLField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -71,7 +71,7 @@ class Playlist(models.Model):
         super(Playlist, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.title} | created by {self.author}"
+        return f"{self.title} | status: {self.get_status_display()}"
 
 
 class PlaylistItem(models.Model):
@@ -100,7 +100,7 @@ class PlaylistItem(models.Model):
         resource_type='raw',
         folder='fanhub/song_tabs',
         blank=True)
-    song_comments = models.TextField(blank=True)
+    song_comments = models.TextField(max_length=250, blank=True)
     performance_year = models.IntegerField(
         verbose_name="Year of Performance", blank=True, null=True)
     performance_type = models.IntegerField(choices=TYPE, default=0)

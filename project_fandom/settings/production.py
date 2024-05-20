@@ -8,4 +8,3 @@ SITE_ID = 2
 # For better compression and Cache management
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
