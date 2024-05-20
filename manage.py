@@ -8,12 +8,15 @@ from project_fandom.settings import base
 def main():
     """Run administrative tasks."""
 
-    if base.DEBUG:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE",
-                              "project_fandom.settings.local")
-    else:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE",
-                              "project_fandom.settings.production")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE",
+                          "project_fandom.settings.production")
+
+    # if base.DEBUG:
+    #     os.environ.setdefault("DJANGO_SETTINGS_MODULE",
+    #                           "project_fandom.settings.local")
+    # else:
+    #     os.environ.setdefault("DJANGO_SETTINGS_MODULE",
+    #                           "project_fandom.settings.production")
 
     try:
         from django.core.management import execute_from_command_line

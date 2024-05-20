@@ -5,6 +5,5 @@ ALLOWED_HOSTS = ['.herokuapp.com']
 
 SITE_ID = 2
 
-# For better compression and Cache management
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+# # For better compression and Cache management
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
