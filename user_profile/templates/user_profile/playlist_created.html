@@ -6,7 +6,7 @@
 {% block title %}FanHub Playlist Manager{% endblock %}
 
 {% block extra_head %}
-<!-- Custom CSS for user_profile application profile.html -->
+<!-- Custom CSS for user_profile application -->
 <link rel="stylesheet" href="{% static 'user_profile/css/playlist_update.css' %}" />
 {% endblock extra_head %}
 
@@ -69,7 +69,7 @@
     <section class="list-items">
         <h2>Playlist Items</h2>
         <div>
-            <a href="#" class="navigation-links">Add Items to Your Playlist</a>
+            <a href="{% url 'add_playlist_item' playlist_id=playlist.id %}" class="navigation-links">Add Items to Your Playlist</a>
         </div>
         <br>
         <p>OR</p>

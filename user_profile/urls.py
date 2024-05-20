@@ -6,6 +6,7 @@ from .views.playlists import (
     PlaylistUpdateView,
     PlaylistDeleteView
 )
+from .views.playlist_items import PlaylistItemCreateView
 
 urlpatterns = [
     path('', profile, name='profile'),
@@ -29,4 +30,8 @@ urlpatterns = [
         'playlists/<int:pk>/delete/',
         PlaylistDeleteView.as_view(),
         name='playlist_delete'),
+    path(
+        'playlists/<int:playlist_id>/item/add/',
+        PlaylistItemCreateView.as_view(),
+        name='add_playlist_item'),
 ]

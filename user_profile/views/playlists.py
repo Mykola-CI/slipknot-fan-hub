@@ -5,7 +5,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from ..forms.playlist_forms import (PlaylistForm)
+from ..forms.playlist_forms import PlaylistForm
 from ..models import Playlist, PlaylistItem
 from ..utils import handle_form_valid, get_success_url, AuthorRequiredMixin
 

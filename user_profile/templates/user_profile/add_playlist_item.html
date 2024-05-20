@@ -2,7 +2,7 @@
 {% load static %}
 {% load cloudinary %}
 
-{% block title %}FanHub Playlist Form{% endblock %}
+{% block title %}FanHub Song Form{% endblock %}
 
 {% block extra_head %}
 <!-- Custom CSS for user_profile application profile.html -->
@@ -12,6 +12,7 @@
 {% block main_content %}
 
 <div class="container">
+    <h2>Add Item to the playlist <span class="playlist-title">{{ playlist.title }}</span></h2>
     <div class="container--inner">
         <section class="form-edit">
             <form method="post" enctype="multipart/form-data" class="form-control">
@@ -23,7 +24,7 @@
                     {{ field }}
                 </div>
                 {% endfor %}
-                <button type="submit" class="button btn-edit">Create Playlist</button>
+                <button type="submit" class="button btn-edit">Add Your Item</button>
             </form>
         </section>
         <section class="navigation">

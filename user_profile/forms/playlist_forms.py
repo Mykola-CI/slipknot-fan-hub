@@ -16,7 +16,6 @@ class PlaylistForm(forms.ModelForm):
         },
         required=False
     )
-    # description = SummernoteTextField()
 
     class Meta:
         model = Playlist
