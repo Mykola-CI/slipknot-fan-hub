@@ -3,7 +3,7 @@
     <ul>
         {% for playlist in playlists %}
         <li>
-            <a href="{% url 'playlist_created' playlist.id %}">{{ playlist.title }}</a>
+            <a href="{% url 'playlist_created' playlist.id %}">{{ playlist }}</a>
         </li>
         {% empty %}
         <li>No playlists found.</li>

@@ -57,7 +57,10 @@
                 <a href="{% url 'playlist_update' playlist.id %}" class="navigation-links">Edit Playlist Details and Image</a>
             </div>
             <div>
-                <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-links">Delete Playlist</a>
+                <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-links del-btn">Delete Playlist</a>
+            </div>
+            <div>
+                <a href="{% url 'playlist_create' %}" class="navigation-links"><strong>Create New Playlist</strong></a>
             </div>
             <div>
                 <a href="{% url 'profile' %}" class="navigation-links">Back to Your Profile Page</a>
