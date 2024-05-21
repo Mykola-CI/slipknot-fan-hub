@@ -54,35 +54,33 @@
     </section>
     <section class="navigation flex-column-left">
             <div>
-                <a href="{% url 'playlist_update' playlist.id %}" class="navigation-links">Edit Playlist Details and Image</a>
+                <a href="{% url 'playlist_update' playlist.id %}" class="navigation-btn">Edit Playlist Details and Image</a>
             </div>
             <div>
-                <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-links del-btn">Delete Playlist</a>
+                <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-btn del-btn">Delete Playlist</a>
             </div>
             <div>
-                <a href="{% url 'playlist_create' %}" class="navigation-links"><strong>Create New Playlist</strong></a>
+                <a href="{% url 'playlist_create' %}" class="navigation-btn"><strong>Create New Playlist</strong></a>
             </div>
             <div>
-                <a href="{% url 'profile' %}" class="navigation-links">Back to Your Profile Page</a>
+                <a href="{% url 'profile' %}" class="navigation-btn">Back to Your Profile Page</a>
             </div>
     </section>
-    <section class="list-items">
+    <section class="playlist-card">
         <h2>Playlist Items</h2>
         <div>
-            <a href="{% url 'add_playlist_item' playlist_id=playlist.id %}" class="navigation-links">Add Items to Your Playlist</a>
+            <a href="{% url 'add_playlist_item' playlist_id=playlist.id %}" class="navigation-btn"><span id="treble-sign-html">&#x1D11E;</span>&nbsp;&nbsp;&nbsp;Add Items to Your Playlist</a>
         </div>
-        <br>
         <p>OR</p>
-        <br>
-        <p>Click to Edit Your Playlist Items:</p>
+        <p>Click to Edit or Delete Your Playlist Items:</p>
         {% if playlist_items %}
-        <ul>
-            {% for item in playlist_items %}
-                <li>
-                    <a href="#">{{ item }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+            <ul>
+                {% for item in playlist_items %}
+                    <li>
+                        <a href="{% url 'playlist_item_update' playlist_id=playlist.id pk=item.id %}">{{ item }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
         {% else %}
             <p>No Playlist Items Yet</p>
         {% endif %}

@@ -34,19 +34,22 @@ class PlaylistForm(forms.ModelForm):
 class PlaylistItemForm(forms.ModelForm):
     song_video = CloudinaryFileField(
         options={
+            'resource_type': 'video',
             'folder': 'fanhub/song_videos'
         },
         required=False
     )
     song_audio = CloudinaryFileField(
         options={
-                'folder': 'fanhub/song_audios'
+            'resource_type': 'raw',
+            'folder': 'fanhub/song_audios'
         },
         required=False
     )
     song_tabs = CloudinaryFileField(
         options={
-                'folder': 'fanhub/song_tabs'
+            'resource_type': 'raw',
+            'folder': 'fanhub/song_tabs'
         },
         required=False
     )

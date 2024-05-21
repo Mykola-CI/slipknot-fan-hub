@@ -1,4 +1,13 @@
+@counter-style treble-clef {
+    system: cyclic;
+    symbols: "\1D11E"; /* Unicode for the treble clef symbol */
+    suffix: "  "; /* Add a space after the symbol */
+}
 
+#treble-sign-html {
+    font-size: 1.7em;
+    color: white
+}
 
 .image-container {
     width: 300px;
@@ -83,17 +92,27 @@
     flex-direction: column;
     align-items: start;
     gap: 20px;
-    div {
+    div,
+    ul {
         text-align: left;
-        max-width: 50ch;
+        max-width: 80ch;
+        list-style-position: inside;
     }
+    ul li {
+        list-style-type: treble-clef;
+        padding-bottom: 10px;
+    }
+    ul li::marker {
+        font-size: 1.7em;
+    }
+
 }
 
 .navigation {
     div {
         align-self: stretch;
     }
-    div > a {
+    /* div > a {
         width: 100%;
         display: inline-block;
         background-color: rgb(29, 33, 36);
@@ -102,25 +121,32 @@
         border-radius: 5px;
         -webkit-box-shadow: 0px 0px 13px 3px #000000; 
         box-shadow: 0px 0px 13px 3px #000000;
-    }
-    .del-btn {
-        background-color: rgb(255, 0, 0);
-        color: white;
-    }
-    .del-btn:hover {
-        background-color: black;
+    } */
 }
 
-/* .navigation-links {
+.navigation-btn {
+    width: 100%;
     display: inline-block;
     background-color: rgb(29, 33, 36);
     padding: 10px;
+    border: 1px solid black;
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 13px 3px #000000; 
     box-shadow: 0px 0px 13px 3px #000000;
-} */
+}
+
+.del-btn {
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+.del-btn:hover {
+    background-color: black;
+}
 
 .caption {
     max-width: 50ch;
 }
 
+.playlist-title {
+    color: red;
+}

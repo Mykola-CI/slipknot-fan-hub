@@ -2,7 +2,7 @@
 {% load static %}
 {% load cloudinary %}
 
-{% block title %}FanHub Add Song{% endblock %}
+{% block title %}FanHub Item Update{% endblock %}
 
 {% block extra_head %}
 <!-- Custom CSS for user_profile application profile.html -->
@@ -12,7 +12,7 @@
 {% block main_content %}
 
 <div class="container">
-    <h2>Add Item to the playlist "<span class="playlist-title">{{ playlist.title }}</span>"</h2>
+    <h2>Update Item in <span class="playlist-title">"{{ playlist.title }}"</span>"</h2>
     <div class="container--inner">
         <section class="form-edit">
             <form method="post" enctype="multipart/form-data" class="form-control">
@@ -24,10 +24,13 @@
                     {{ field }}
                 </div>
                 {% endfor %}
-                <button type="submit" class="button btn-edit">Add Your Item</button>
+                <button type="submit" class="button btn-edit">Save Changes</button>
             </form>
         </section>
         <section class="navigation flex-column-left">
+            <div>
+                <a href="{% url 'delete_playlist_item' playlist_id=playlist.id pk=item.id %}" class="navigation-btn del-btn">Delete Item</a>
+            </div>
             <div>
                 <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn">Back to the Playlist View</a>
             </div>
