@@ -9,44 +9,45 @@
 {% endblock extra_head %}
 
 {% block main_content %}
-<div class="container flex">
+<div class="container grid">
     <section class="form-edit">
         <h2>Edit Playlist</h2>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" class="form-control">
             {% csrf_token %}
-            {{ form.media }}
-            {{ form.as_p }}
-            <br>
-            <button type="submit">Save Changes</button>
+            {% for field in form %}
+            <div class="field-block">
+                <p>{{ field.errors }}</p>
+                <p>{{ field.label_tag }}</p> 
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="button btn-edit">Create Playlist</button>
         </form>
-        <br>
     </section>
-    <section class="list-items">
+    <section class="playlist-card">
         <h2>Playlist Items</h2>
-        <p>Click to Edit Your Playlist Items:</p>
+        <div><a href="{% url 'add_playlist_item' playlist_id=playlist.id %}" class="navigation-btn">Add New Item</a></div>
+        <p>OR</p>
+        <p>Click to Edit or Delete Your Playlist Items:</p>
         {% if playlist_items %}
         <ul>
             {% for item in playlist_items %}
                 <li>
-                    <a href="#">{{ item }}</a>
+                    <a href="{% url 'playlist_item_update' playlist_id=playlist.id pk=item.id %}">{{ item }}</a>
                 </li>
             {% endfor %}
         </ul>
         {% else %}
             <p>No Playlist Items Yet</p>
         {% endif %}
-        <br>
-        <p>OR</p>
-        <a href="#">Add New Item</a>
     </section>
     <section class="navigation flex-column-left">
         <div>
-            <a href="{% url 'playlist_created' playlist.id %}" class="navigation-links">Back to the Playlist View</a>
+            <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn">Back to the Playlist View</a>
         </div>
         <div>
-            <a href="{% url 'profile' %}" class="navigation-links">Back to Your Profile Page</a>
-        </div>
-        
+            <a href="{% url 'profile' %}" class="navigation-btn">Back to Your Profile Page</a>
+        </div>    
     </section>
 </div>
 

@@ -1,4 +1,4 @@
-<section id="playlists" class="profile-section">
+<section id="playlists" class="playlist-card">
     <h3>Manage Your Playlists, <span id="username">{{ user.username }}</span>!</h3>
     <ul>
         {% for playlist in playlists %}
@@ -8,8 +8,8 @@
         {% empty %}
         <li>No playlists found.</li>
         {% endfor %}
-        <li>
-            <a href="{% url 'playlist_create' %}"><strong>Create New Playlist</strong></a>
-        </li>
     </ul>
+    <div>
+        <a href="{% url 'playlist_create' %}" class="navigation-btn"><strong>Create New Playlist</strong></a>
+    </div>
 </section>
