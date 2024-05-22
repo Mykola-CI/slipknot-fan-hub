@@ -7,12 +7,12 @@ from .models import Playlist, PlaylistItem
 
 # Custom override of the form_valid method to ensure the author field remains
 # consistent and accurate each time when saving the form + success message
-def handle_form_valid(view, form):
+def handle_form_valid(view, form, message):
     form.instance.author = view.request.user
     response = super(view.__class__, view).form_valid(form)
     messages.success(
         view.request,
-        "You have successfully saved the changes",
+        message,
     )
     return response
 
@@ -23,25 +23,6 @@ def get_success_url(view, reverse_path):
         reverse_path,
         kwargs={'pk': view.object.id}
     )
-
-
-# class AuthorRequiredMixin:
-#     """
-#     Mixin to check if the user is the author of the playlist
-#     """
-#     def dispatch(self, request, *args, **kwargs):
-#         playlist_id = kwargs.get('pk')
-#         if not playlist_id:
-#             raise PermissionDenied("Playlist ID not provided")
-
-#         playlist = get_object_or_404(Playlist, pk=playlist_id)
-
-#         if not playlist.is_author(request.user):
-#             raise PermissionDenied(
-#                 "You are not authorised to access this page"
-#             )
-
-#         return super().dispatch(request, *args, **kwargs)
 
 
 class AuthorRequiredMixin:

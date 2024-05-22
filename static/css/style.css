@@ -75,6 +75,14 @@ header > p {
     width: 100%;
 }
 
+.messages {
+    color: white;
+    font-size: large;
+    text-align: center;
+    background-color: black;
+    padding: 10px;
+}
+
 .container {
     margin: 20px auto;
     width: 90vw;

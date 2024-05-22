@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import (
-    TemplateView,
     CreateView,
     UpdateView,
     DeleteView
@@ -22,10 +21,10 @@ class PlaylistItemCreateView(LoginRequiredMixin, CreateView):
         # Set the playlist attribute from the URL
         form.instance.playlist = Playlist.objects.get(
             pk=self.kwargs['playlist_id'])
-        response = super(self.__class__, self).form_valid(form)
+        response = super().form_valid(form)
         messages.success(
             self.request,
-            "You have successfully added song to your playlist",
+            "You have successfully added song to your playlist!",
         )
         return response
 
@@ -52,6 +51,10 @@ class PlaylistItemUpdateView(
 
     def form_valid(self, form):
         self.object = form.save()
+        messages.success(
+            self.request,
+            "You have successfully saved changes to your playlist item!",
+        )
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -78,6 +81,8 @@ class PlaylistItemDeleteView(
     template_name = 'user_profile/delete_playlist_item.html'
 
     def get_success_url(self):
+        messages.success(
+            self.request, "You have successfully deleted the playlist item.")
         # Redirect to the 'playlist_created' page for the specific playlist
         return reverse_lazy(
             'playlist_created', kwargs={'pk': self.object.playlist.pk}

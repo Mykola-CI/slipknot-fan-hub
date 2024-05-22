@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.views.generic import (
     TemplateView,
     CreateView,
@@ -18,7 +19,8 @@ class PlaylistCreateView(LoginRequiredMixin, CreateView):
     # Set the author of the playlist to the current user and validates the form
     def form_valid(self, form):
         # call the handle_form_valid function from utils.py
-        return handle_form_valid(self, form)
+        return handle_form_valid(
+            self, form, "You have successfully created a new playlist")
 
     # Redirect to the playlist_created page for the new playlist
     def get_success_url(self):
@@ -69,12 +71,17 @@ class PlaylistUpdateView(
     # Set the author of the playlist to the current user and validates the form
     def form_valid(self, form):
         # call the handle_form_valid function from utils.py
-        return handle_form_valid(self, form)
+        return handle_form_valid(
+            self, form, "You have successfully saved the changes")
 
     # Redirect to the playlist_updated page for the updated playlist
     def get_success_url(self):
         # call the get_success_url function from utils.py
         return get_success_url(self, 'playlist_updated')
+
+
+def add_success_message(request):
+    messages.success(request, "You have successfully deleted the playlist!")
 
 
 class PlaylistDeleteView(
@@ -89,3 +96,8 @@ class PlaylistDeleteView(
 
     def get_queryset(self):
         return Playlist.objects.filter(author=self.request.user)
+
+    def get_success_url(self):
+        # Call the function to add the success message
+        add_success_message(self.request)
+        return self.success_url
