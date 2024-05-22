@@ -20,7 +20,7 @@ class PlaylistCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         # call the handle_form_valid function from utils.py
         return handle_form_valid(
-            self, form, "You have successfully created a new playlist")
+            self, form, "You have successfully created a new playlist!")
 
     # Redirect to the playlist_created page for the new playlist
     def get_success_url(self):
@@ -72,7 +72,7 @@ class PlaylistUpdateView(
     def form_valid(self, form):
         # call the handle_form_valid function from utils.py
         return handle_form_valid(
-            self, form, "You have successfully saved the changes")
+            self, form, "You have successfully saved the changes!")
 
     # Redirect to the playlist_updated page for the updated playlist
     def get_success_url(self):

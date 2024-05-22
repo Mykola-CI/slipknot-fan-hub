@@ -48,6 +48,9 @@ html {
 
 body {
     color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
 }
 
 header > p {
@@ -92,10 +95,7 @@ header > p {
     text-align: center;
 }  
 
-.home-menu {
-    margin: 50px auto;
-    max-width: 500px;
-    width: 80vw;
+.core-menu {
     padding: 20px;
     border: 2px solid red;
     border-radius: 10px;

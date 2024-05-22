@@ -1,3 +1,18 @@
 from django.contrib import admin
+from .models import PlaylistPost, Comment
 
-# Register your models here.
+
+class PlaylistPostAdmin(admin.ModelAdmin):
+    list_display = ('playlist', 'created_on', 'updated_on')
+    search_fields = ('playlist', 'created_on')
+    list_filter = ('created_on', 'updated_on')
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('post', 'author', 'created_on', 'approved')
+    list_filter = ('created_on', 'approved')
+    search_fields = ('post', 'author')
+
+
+admin.site.register(PlaylistPost, PlaylistPostAdmin)
+admin.site.register(Comment, CommentAdmin)

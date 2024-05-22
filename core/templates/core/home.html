@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'core/css/core_styles.css' %}" />
+{% endblock extra_head %}
+
 {% block main_content %}
-<div class="container">
-    <h1>Home Page</h1>
-    <p>Create different styles and texts</p>
-</div>
-<div class="home-menu">
-    <a href="{% url 'profile' %}" class="nav-item nav-link">Edit Profile And Manage Your Playlists</a>
+
+<div id="container-main">
+    <section class="core-menu">
+        <a href="{% url 'profile' %}" class="nav-item nav-link">Edit Profile And Manage Your Playlists</a>
+    </section>
+    <section class="core-hero">
+        <h1>Home Page</h1>
+        <p>Create different styles and texts</p>
+    </section>
+    
 </div>
 
 {% endblock %}
