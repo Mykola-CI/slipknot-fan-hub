@@ -35,8 +35,8 @@ INSTALLED_APPS = [
     "django_summernote",
     "cloudinary_storage",
     "cloudinary",
-    "core",
-    "user_profile",
+    'core.apps.CoreConfig',
+    'user_profile.apps.UserProfileConfig',
 ]
 
 SUMMERNOTE_CONFIG = {
