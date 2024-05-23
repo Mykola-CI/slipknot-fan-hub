@@ -1,14 +1,13 @@
-from django.views import generic
+from django.shortcuts import render
 from .models import PlaylistPost
+from user_profile.models import Playlist, UserProfile
 
 
-class HomeView(generic.ListView):
-    template_name = 'core/home.html'
-    queryset = PlaylistPost.objects.all().order_by('-created_on')
-    paginate_by = 6
-
-    # Making available the user object to the template
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
+def home_view(request):
+    playlist_posts = PlaylistPost.objects.all().order_by('-created_on')
+    playlists = Playlist.objects.filter(playlist_post__isnull=False)
+    context = {
+        'playlist_posts': playlist_posts,
+        'playlists': playlists,
+    }
+    return render(request, 'core/home.html', context)

@@ -7,18 +7,20 @@
 
 {% block main_content %}
 
-<div id="container-main">
-    <section class="core-menu">
+<div class="core-main grid-blog">
+    <aside class="core-menu">
         <a href="{% url 'profile' %}" class="nav-item nav-link">Edit Profile And Manage Your Playlists</a>
-    </section>
+    </aside>
     <section class="core-hero">
         <h1>Home Page</h1>
         <p>Create different styles and texts</p>
     </section>
     <section class="fanhub-blog">
-        <h2 class"hidden">Content</h2>
-        <p>Here you can add your content</p>
-    
+        <h2 class="hidden">Content</h2>
+        {% for post in playlist_posts %}
+        <p>Playlist: {{ post.playlist.title }} | posted on: {{ post.created_on }}</p>
+        {% endfor %}
+    </section> 
 </div>
 
 {% endblock %}

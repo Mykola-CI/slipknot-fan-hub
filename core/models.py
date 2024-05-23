@@ -9,7 +9,7 @@ class PlaylistPost(models.Model):
     """
 
     playlist = models.OneToOneField(
-        Playlist, on_delete=models.CASCADE, related_name="playlists"
+        Playlist, on_delete=models.CASCADE, related_name="playlist_post"
     )
     likes = models.ManyToManyField(
         User, related_name="playlist_likes", blank=True)
