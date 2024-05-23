@@ -4,7 +4,8 @@ from .views.playlists import (
     PlaylistCreateView,
     PlaylistCreatedView,
     PlaylistUpdateView,
-    PlaylistDeleteView
+    PlaylistDeleteView,
+    toggle_playlist_status
 )
 from .views.playlist_items import (
     PlaylistItemCreateView,
@@ -46,4 +47,8 @@ urlpatterns = [
         'playlists/<int:playlist_id>/item/<int:pk>/delete/',
         PlaylistItemDeleteView.as_view(),
         name='delete_playlist_item'),
+    path(
+        'toggle_playlist_status/<int:pk>/',
+        toggle_playlist_status,
+        name='toggle_playlist_status'),
 ]

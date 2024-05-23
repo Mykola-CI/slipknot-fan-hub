@@ -13,6 +13,7 @@ def store_previous_status(sender, instance, **kwargs):
         previous_status[instance.pk] = (
             Playlist.objects.get(pk=instance.pk).status)
 
+
 @receiver(post_save, sender=Playlist)
 def create_or_update_or_delete_playlist_post(
         sender, instance, created, **kwargs):
@@ -23,7 +24,7 @@ def create_or_update_or_delete_playlist_post(
         prev_status = previous_status.get(instance.pk)
         if prev_status is not None:
             # From "Published" to "Draft"
-            if prev_status == 1 and instance.status == 0:  
+            if prev_status == 1 and instance.status == 0:
                 PlaylistPost.objects.filter(playlist=instance).delete()
             # From "Draft" to "Published"
             elif prev_status == 0 and instance.status == 1:

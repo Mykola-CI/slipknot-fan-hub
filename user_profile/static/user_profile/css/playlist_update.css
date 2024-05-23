@@ -106,6 +106,9 @@
     ul li::marker {
         font-size: 1.7em;
     }
+    h3 {
+        color: red;
+    }
 }
 
 .navigation {
@@ -117,7 +120,6 @@
 .navigation-btn {
     width: 100%;
     display: inline-block;
-    background-color: rgb(29, 33, 36);
     padding: 10px 20px;
     border: 1px solid black;
     border-radius: 5px;
@@ -125,12 +127,16 @@
     box-shadow: 0px 0px 13px 3px #000000;
 }
 
-.del-btn {
-    background-color: rgb(255, 0, 0);
+.navigation-btn:hover {
+    background-color: black;
+}
+
+.share-btn {
+    background-color: rgb(0, 255, 0);
     color: white;
 }
-.del-btn:hover,
-.navigation-btn:hover {
+
+.share-btn:hover {
     background-color: black;
 }
 
@@ -139,6 +145,3 @@
     text-align: left;
 }
 
-.playlist-title {
-    color: red;
-}

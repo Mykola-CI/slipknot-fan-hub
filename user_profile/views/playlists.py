@@ -1,4 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.contrib import messages
 from django.views.generic import (
     TemplateView,
@@ -101,3 +104,26 @@ class PlaylistDeleteView(
         # Call the function to add the success message
         add_success_message(self.request)
         return self.success_url
+
+
+def toggle_playlist_status(request, pk):
+    playlist = get_object_or_404(Playlist, pk=pk)
+
+    # Toggle the status
+    if playlist.status == 1:  # If currently "Published"
+        playlist.status = 0  # Change to "Draft"
+        messages.success(
+            request,
+            "Your playlist has been successfully removed from the FanHub Blog!"
+        )
+    else:
+        playlist.status = 1  # Change to "Published"
+        messages.success(
+            request,
+            "Your playlist has been successfully shared to the FanHub Blog!"
+        )
+
+    playlist.save()
+
+    # Redirect back to the playlist_created page
+    return HttpResponseRedirect(reverse('playlist_created', args=[pk]))

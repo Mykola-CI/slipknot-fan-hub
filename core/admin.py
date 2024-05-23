@@ -3,9 +3,13 @@ from .models import PlaylistPost, Comment
 
 
 class PlaylistPostAdmin(admin.ModelAdmin):
-    list_display = ('playlist', 'created_on', 'updated_on')
+    list_display = ('playlist', 'author_username', 'created_on', 'updated_on')
     search_fields = ('playlist', 'created_on')
     list_filter = ('created_on', 'updated_on')
+
+    def author_username(self, obj):
+        return obj.playlist.author.username
+    author_username.short_description = 'Author'
 
 
 class CommentAdmin(admin.ModelAdmin):

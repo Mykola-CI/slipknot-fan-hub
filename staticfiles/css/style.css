@@ -12,6 +12,7 @@ html {
     background-size: cover;
 }
 
+/* Utilities */
 .flex {
     display: flex;
     justify-content: space-around;
@@ -46,6 +47,31 @@ html {
     align-items: center;
 }
 
+.back-red {
+    background-color: red;
+}
+
+.back-dark {
+    background-color: rgb(29, 33, 36);
+}
+
+.back-white {
+    background-color: white;
+}
+
+.color-white {
+    color: white;
+}
+
+.color-red {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Contents */
 body {
     color: antiquewhite;
     display: flex;
