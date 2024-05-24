@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cloudinary %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'core/css/core_styles.css' %}" />
@@ -8,19 +9,72 @@
 {% block main_content %}
 
 <div class="core-main grid-blog">
-    <aside class="core-menu">
-        <a href="{% url 'profile' %}" class="nav-item nav-link">Edit Profile And Manage Your Playlists</a>
+    <aside class="core-menu flex-column border-red box-shadow">
+        <div class="nav-item">
+            <a href="{% url 'profile' %}" class="navigation-btn">Edit Profile</a>
+        </div>
+        <div class="nav-item">
+            <a href="{% url 'profile' %}" class="navigation-btn">Manage Playlists</a>
+        </div>
+        <div class="nav-item">
+            <a href="{% url 'profile' %}" class="navigation-btn">Go To Papa Site</a>
+        </div>
+        <div class="nav-item">
+            <a href="{% url 'profile' %}" class="navigation-btn">About And Round</a>
+        </div>
     </aside>
-    <section class="core-hero">
-        <h1>Home Page</h1>
+
+    <section class="core-hero box-shadow">
+        <h1>Hero Section</h1>
         <p>Create different styles and texts</p>
     </section>
-    <section class="fanhub-blog">
-        <h2 class="hidden">Content</h2>
-        {% for post in playlist_posts %}
-        <p>Playlist: {{ post.playlist.title }} | posted on: {{ post.created_on }}</p>
-        {% endfor %}
-    </section> 
+
+    <section class="core-featured-1 box-shadow">
+        <h2>Featured Section 1</h2>
+        <p>Featured content goes here</p>
+    </section>
+
+    <section class="core-featured-2 border-white box-shadow">
+        <h2>Featured Section 2</h2>
+        <p>Featured content goes here</p>
+    </section>
+
+    <h3 class="blog-title">
+        Playlist Blog Section
+    </h3>
+
+    {% for post in playlist_posts %}
+    <article class="playlist-card">
+        {% if post.playlist.featured_image %}
+        {% cloudinary post.playlist.featured_image %}
+        {% else %}
+        <img src="{% static 'images/hero_banner_slipknot.png' %}" alt="default featured image">
+        {% endif %}
+        <p>{{ post.playlist.title }}</p>
+        <p>Shared by: {{ post.playlist.author }}</p>
+        <p>Posted on: {{ post.created_on }}</p>
+        <p>Total Likes: {{ post.total_likes }}</p>
+        <p>Total Comments:</p>
+    </article>
+    {% endfor %}
+
+    <div class="pagination shadow-white flex-column">
+        <span class="step-links">
+            {% if playlist_posts.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ playlist_posts.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ playlist_posts.number }} of {{ playlist_posts.paginator.num_pages }}.
+            </span>
+
+            {% if playlist_posts.has_next %}
+                <a href="?page={{ playlist_posts.next_page_number }}">next</a>
+                <a href="?page={{ playlist_posts.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 </div>
 
 {% endblock %}
