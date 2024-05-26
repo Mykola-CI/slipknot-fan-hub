@@ -3,7 +3,13 @@ from .models import PlaylistPost, Comment
 
 
 class PlaylistPostAdmin(admin.ModelAdmin):
-    list_display = ('playlist', 'author_username', 'created_on', 'updated_on')
+    list_display = (
+        'playlist',
+        'author_username',
+        'created_on',
+        'updated_on',
+        'total_likes'
+    )
     search_fields = ('playlist', 'created_on')
     list_filter = ('created_on', 'updated_on')
 
@@ -13,9 +19,9 @@ class PlaylistPostAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('post', 'author', 'created_on', 'approved')
-    list_filter = ('created_on', 'approved')
-    search_fields = ('post', 'author')
+    list_display = ('playlist_post', 'author', 'created_on', 'total_likes')
+    list_filter = ('created_on', 'author')
+    search_fields = ('playlist_post', 'author')
 
 
 admin.site.register(PlaylistPost, PlaylistPostAdmin)

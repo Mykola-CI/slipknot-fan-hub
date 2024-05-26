@@ -3,4 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.home_view, name='home'),
+    path(
+        'playlistpost/<int:pk>/',
+        views.PlaylistPostDetailView.as_view(),
+        name='playlistpost_detail'),
 ]

@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic.detail import DetailView
 from .models import PlaylistPost
-from user_profile.models import Playlist
+from user_profile.models import Playlist, UserProfile, PlaylistItem
 
 
 def home_view(request):
@@ -26,3 +27,21 @@ def home_view(request):
         'playlists': playlists,
     }
     return render(request, 'core/home.html', context)
+
+
+class PlaylistPostDetailView(DetailView):
+    model = PlaylistPost
+    template_name = 'core/playlistpost_detail.html'
+    context_object_name = 'playlistpost'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        playlist = self.object.playlist
+        context['playlist'] = playlist
+        context['author_profile'] = UserProfile.objects.get(
+            user=playlist.author
+        )
+        context['playlist_items'] = PlaylistItem.objects.filter(
+            playlist=playlist
+        )
+        return context

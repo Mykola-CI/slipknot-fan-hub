@@ -85,11 +85,6 @@ class PlaylistItem(models.Model):
     artist = models.CharField(max_length=200)
     album = models.CharField(max_length=200, blank=True)
     song_url = models.URLField(blank=True)
-    song_video = CloudinaryField(
-        'video',
-        resource_type='video',
-        folder='fanhub/song_videos',
-        blank=True)
     song_audio = CloudinaryField(
         'audios',
         resource_type='raw',
@@ -110,5 +105,4 @@ class PlaylistItem(models.Model):
     def __str__(self):
         return (
             f"'{self.song_title}' by {self.artist} | "
-            f"in '{self.playlist.title}'"
         )

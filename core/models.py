@@ -28,18 +28,19 @@ class PlaylistPost(models.Model):
 
 class Comment(models.Model):
     """
-    Stores a single comment entry related to :model:`auth.User`
-    and :model:`blog.Post`.
+    Stores a single comment entry related to User and to PlaylistPost.
     """
-    post = models.ForeignKey(PlaylistPost, on_delete=models.CASCADE,
-                             related_name="comments")
+    playlist_post = models.ForeignKey(PlaylistPost, on_delete=models.CASCADE,
+                                      related_name="comments")
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="commenter")
-    body = models.TextField()
+    content = models.TextField()
     likes = models.ManyToManyField(
         User, related_name="playlist_comments", blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
+
+    def total_likes(self):
+        return self.likes.count()
 
     class Meta:
         ordering = ["created_on"]

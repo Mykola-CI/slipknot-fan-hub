@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cloudinary %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'core/css/core_styles.css' %}" />
+{% endblock extra_head %}
+
+{% block main_content %}
+
+
+<div class="grid-post-detail grid">
+
+    <section class="playlist-description">
+        <h2>"{{ playlistpost.playlist.title }}" shared by &nbsp; &nbsp;
+            <span>
+                {% if author_profile.avatar.url %}
+                <a href="#" aria-label="link to the author profile page" id="playlist-author-avatar">
+                    {% cloudinary author_profile.avatar %}</a>
+                {% endif %}
+            </span>
+            <span id="palylist-author-name">
+                <a href="#" aria-label="link to the author profile page">{{ author_profile.user.username }}</a>
+            </span>
+        </h2>
+    
+        <article>
+            {% if playlistpost.playlist.featured_image %}
+            <div class="featured-image">
+                {% cloudinary playlistpost.playlist.featured_image %}
+            </div>
+            {% else %}
+            <p>No Featured image provided by Author</p>
+            {% endif %}
+    
+            <p>{{ playlistpost.playlist.description | safe }}</p>
+            {% if playlistpost.playlist.reference_url %}
+            <a href="{{ playlistpost.playlist.reference_url }}" aria-label="url reference featuring playlist main message"
+                target="_blank">The Author has provided this link for your reference (opens in a new window)</a>
+            {% endif %}
+            <p>Likes: {{ playlistpost.total_likes }}</p>
+            <p>Created on: {{ playlistpost.created_on }}</p>
+        </article>
+    </section>
+    <section class="playlist-items-container">
+        <h2>Songs or other Items in this Playlist:</h2>
+        <ul class="flex-column">
+            {% for item in playlist_items %}
+            <li>{{ item }} Performance Type: {{ item.get_performance_type_display }}</li>
+            <article class="playlist-item pop-down">
+                <div>
+                    <p>Artist/Author:</p>
+                    <p>{{ item.artist }}</p>
+                </div>
+                <div>
+                    {% if item.album %}
+                    <p>Album:</p>
+                    <p>{{ item.album }}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if item.song_url %}
+                    <a href="{{ item.song_url }}" aria-label="link reference to the song" target="_blank">Follow this
+                        link provided by the Playlist's Author</a>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if item.song_audio %}
+                    <p>Song Audio:</p>
+                    <a href="{{ item.song_audio.url }}" aria-label="link to the song audio file">Follow this link to
+                        download audio file</a>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if item.song_tabs %}
+                    <p>Song Docs (song tabs/notation or other useful stuff):</p>
+                    <a href="{{ item.song_tabs.url }}" aria-label="link to the song docs file">Follow this link</a>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if item.performance_year %}
+                    <p>Performed in:</p>
+                    <p>{{ item.performance_year }}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <p>The song category:</p>
+                    <p>{{ item.get_performance_type_display }}</p>
+                </div>
+                <div>
+                    {% if item.song_comments %}
+                    <p>The Playlist's Author comments on the song:</p>
+                    <p>{{ item.song_comments | linebreaks }}</p>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+
+{% endblock main_content %}

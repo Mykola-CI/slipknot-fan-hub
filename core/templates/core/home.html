@@ -50,7 +50,7 @@
         {% else %}
         <img src="{% static 'images/hero_banner_slipknot.png' %}" alt="default featured image">
         {% endif %}
-        <p>{{ post.playlist.title }}</p>
+        <a href="{% url 'playlistpost_detail' post.pk %}">{{ post.playlist.title }}</a>
         <p>Shared by: {{ post.playlist.author }}</p>
         <p>Posted on: {{ post.created_on }}</p>
         <p>Total Likes: {{ post.total_likes }}</p>
