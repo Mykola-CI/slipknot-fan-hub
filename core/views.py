@@ -1,11 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.detail import DetailView
-from .models import PlaylistPost
+from django.http import HttpResponseRedirect
+from django.contrib import messages
+from .models import PlaylistPost, Comment
 from user_profile.models import Playlist, UserProfile, PlaylistItem
 from .forms import CommentForm
 
 
+# Apart from general context creates dynamic blog context with pagination
 def home_view(request):
     playlist_posts = PlaylistPost.objects.all().order_by('-created_on')
     playlists = Playlist.objects.filter(playlist_post__isnull=False)
@@ -31,6 +34,12 @@ def home_view(request):
 
 
 class PlaylistPostDetailView(DetailView):
+    """
+    Display a Playlist Detail view selected on the home page.
+    Creating contexts: playlists, playlist items, author's profile,
+    comments, comment count and comment form
+
+    """
     model = PlaylistPost
     template_name = 'core/playlist_post_detail.html'
     context_object_name = 'playlist_post'
@@ -67,3 +76,28 @@ class PlaylistPostDetailView(DetailView):
             context = self.get_context_data()
             context['comment_form'] = comment_form
             return self.render_to_response(context)
+
+
+def comment_edit(request, pk, comment_id):
+    """
+    Display an individual comment for edit.
+
+    """
+    if request.method == "POST":
+
+        queryset = PlaylistPost.objects.all()
+        post = get_object_or_404(queryset, pk=pk)
+        comment = get_object_or_404(Comment, pk=comment_id)
+        comment_form = CommentForm(data=request.POST, instance=comment)
+
+        if comment_form.is_valid() and comment.author == request.user:
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.approved = False
+            comment.save()
+            messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
+        else:
+            messages.add_message(request, messages.ERROR,
+                                 'Error updating comment!')
+
+    return HttpResponseRedirect(reverse('playlist_post_detail', args=[pk]))

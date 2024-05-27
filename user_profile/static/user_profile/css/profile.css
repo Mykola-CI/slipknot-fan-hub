@@ -1,10 +1,10 @@
 /* profile.html specific styles */
 #about-myself {
-    grid-column: span 2;
+    grid-row: span 2;
 }
 
 .profile-section {
-    padding: 20px 20px 20px 50px;
+    padding: 20px 20px 20px 40px;
     max-width: 50ch;
     text-align: left;
     justify-self: start;

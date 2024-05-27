@@ -8,7 +8,13 @@
 
 {% block main_content %}
 
-
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <div class="grid-post-detail grid container">
 
     <section class="playlist-description flex-column-left">
@@ -24,7 +30,6 @@
                 <a href="#" aria-label="link to the author profile page">{{ author_profile.user.username }}</a>
             </span>
         </h2>
-    
         <article class="flex-column-left">
             {% if playlist_post.playlist.featured_image %}
             <div class="featured-image">
@@ -46,6 +51,7 @@
             <p>Total Comments: {{ comment_count }}</p>
         </article>
     </section>
+
     <section class="playlist-items-container box-shadow back-dark padding-20">
         <h2>Songs or other Items in this Playlist:</h2>
         <ul class="flex-column">
@@ -101,6 +107,7 @@
             {% endfor %}
         </ul>
     </section>
+
 </div>
 
 <div class="playlist-comment grid container">
@@ -109,7 +116,9 @@
         <div>
             <p><strong>{{ comment.author }}</strong> made a comment {{ comment.created_on|timesince }} ago:</p>
             <div class="flex-start">
-                <div class="comment-content shadow-white">{{ comment.content | linebreaks }}</div>
+                <div id="comment{{ comment.id }}" class="comment-content shadow-white">
+                    {{ comment.content | linebreaks }}
+                </div>
                 {% if user.is_authenticated and comment.author == user %}
                 <button class="btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
                 <button class="btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
@@ -124,13 +133,19 @@
     {% if user.is_authenticated %}
     <div class="box-shadow back-dark padding-20">
         <h3>Add a Comment</h3>
-        <form method="post">
+        <form id="commentForm" method="post">
             {% csrf_token %}
             {{ comment_form.as_p }}
-            <button type="submit">Submit</button>
+            <button id="submitButton" type="submit">Submit</button>
         </form>
     </div>
+    {% else %}
+    <p>Log in to leave a comment</p>
     {% endif %}
 </div>
 
 {% endblock main_content %}
+
+{% block bottom %}
+<script src="{% static 'js/comments.js' %}"></script>
+{% endblock %}
