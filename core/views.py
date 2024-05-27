@@ -101,3 +101,19 @@ def comment_edit(request, pk, comment_id):
                                  'Error updating comment!')
 
     return HttpResponseRedirect(reverse('playlist_post_detail', args=[pk]))
+
+
+def comment_delete(request, pk, comment_id):
+    """
+    view to delete comments
+    """
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+    else:
+        messages.add_message(
+            request, messages.ERROR, 'You can only delete your own comments!')
+
+    return HttpResponseRedirect(reverse('playlist_post_detail', args=[pk]))

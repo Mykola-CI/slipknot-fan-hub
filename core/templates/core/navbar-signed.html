@@ -1,6 +1,7 @@
 <p id="hello-user">Hello, <span id="username">{{ user.username }}!</span></p>
 <nav class="navbar">
     <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
+    <a href="{% url 'profile' %}" class="nav-item nav-link">Your Profile</a>
     <a href="{% url 'account_logout' %}" class="nav-item nav-link">Sign Out</a>
 </nav>
 

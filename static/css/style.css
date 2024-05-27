@@ -212,3 +212,39 @@ a:hover {
 .navigation-btn:hover {
     background-color: black;
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: transparent;
+}
+
+.modal.show {
+    display: block; /* Show the modal when the 'show' class is added */
+}
+
+.modal-content {
+    background-color: black;
+    margin: 40% auto;
+    padding: 20px;
+    border: 4px solid #888;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+    -webkit-box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+    -moz-box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}

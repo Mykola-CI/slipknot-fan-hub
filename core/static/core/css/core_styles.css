@@ -127,7 +127,13 @@
 
 .grid-post-detail,
 .playlist-comment {
-    padding: 45px;
+    padding: 20px 20px 40px 20px;
+}
+
+.playlist-comment {
+    h2 {
+        text-align: center;
+    }
 }
 
 .comment-content {
