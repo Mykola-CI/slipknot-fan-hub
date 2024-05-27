@@ -9,10 +9,11 @@
 {% block main_content %}
 
 
-<div class="grid-post-detail grid">
+<div class="grid-post-detail grid container">
 
-    <section class="playlist-description">
-        <h2>"{{ playlistpost.playlist.title }}" shared by &nbsp; &nbsp;
+    <section class="playlist-description flex-column-left">
+        <h1>Playlist Details:</h1>
+        <h2>"{{ playlist_post.playlist.title }}" shared by &nbsp; &nbsp;
             <span>
                 {% if author_profile.avatar.url %}
                 <a href="#" aria-label="link to the author profile page" id="playlist-author-avatar">
@@ -24,25 +25,28 @@
             </span>
         </h2>
     
-        <article>
-            {% if playlistpost.playlist.featured_image %}
+        <article class="flex-column-left">
+            {% if playlist_post.playlist.featured_image %}
             <div class="featured-image">
-                {% cloudinary playlistpost.playlist.featured_image %}
+                {% cloudinary playlist_post.playlist.featured_image %}
             </div>
             {% else %}
             <p>No Featured image provided by Author</p>
             {% endif %}
-    
-            <p>{{ playlistpost.playlist.description | safe }}</p>
-            {% if playlistpost.playlist.reference_url %}
-            <a href="{{ playlistpost.playlist.reference_url }}" aria-label="url reference featuring playlist main message"
-                target="_blank">The Author has provided this link for your reference (opens in a new window)</a>
+            <div>
+                <p>Description:</p>
+                <div class="shadow-white padding-10">{{ playlist_post.playlist.description | safe }}</div>
+            </div>
+            {% if playlist_post.playlist.reference_url %}
+            <a href="{{ playlist_post.playlist.reference_url }}" aria-label="url reference featuring playlist main message"
+                target="_blank">🔗 The Author has provided this link for your reference (opens in a new window)</a>
             {% endif %}
-            <p>Likes: {{ playlistpost.total_likes }}</p>
-            <p>Created on: {{ playlistpost.created_on }}</p>
+            <p>Created on: {{ playlist_post.created_on }}</p>
+            <p>Total Likes: {{ playlist_post.total_likes }}</p>
+            <p>Total Comments: {{ comment_count }}</p>
         </article>
     </section>
-    <section class="playlist-items-container">
+    <section class="playlist-items-container box-shadow back-dark padding-20">
         <h2>Songs or other Items in this Playlist:</h2>
         <ul class="flex-column">
             {% for item in playlist_items %}
@@ -60,21 +64,21 @@
                 </div>
                 <div>
                     {% if item.song_url %}
-                    <a href="{{ item.song_url }}" aria-label="link reference to the song" target="_blank">Follow this
+                    <a href="{{ item.song_url }}" aria-label="link reference to the song" target="_blank">🔗 Follow this
                         link provided by the Playlist's Author</a>
                     {% endif %}
                 </div>
                 <div>
                     {% if item.song_audio %}
                     <p>Song Audio:</p>
-                    <a href="{{ item.song_audio.url }}" aria-label="link to the song audio file">Follow this link to
+                    <a href="{{ item.song_audio.url }}" aria-label="link to the song audio file">🔗 Follow this link to
                         download audio file</a>
                     {% endif %}
                 </div>
                 <div>
                     {% if item.song_tabs %}
                     <p>Song Docs (song tabs/notation or other useful stuff):</p>
-                    <a href="{{ item.song_tabs.url }}" aria-label="link to the song docs file">Follow this link</a>
+                    <a href="{{ item.song_tabs.url }}" aria-label="link to the song docs file">🔗 Follow this link</a>
                     {% endif %}
                 </div>
                 <div>
@@ -97,6 +101,36 @@
             {% endfor %}
         </ul>
     </section>
+</div>
+
+<div class="playlist-comment grid container">
+    <div class="flex-column-left">
+        {% for comment in comments %}
+        <div>
+            <p><strong>{{ comment.author }}</strong> made a comment {{ comment.created_on|timesince }} ago:</p>
+            <div class="flex-start">
+                <div class="comment-content shadow-white">{{ comment.content | linebreaks }}</div>
+                {% if user.is_authenticated and comment.author == user %}
+                <button class="btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
+                <button class="btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p>No comments yet. Be the first to comment!</p>
+        {% endfor %}
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="box-shadow back-dark padding-20">
+        <h3>Add a Comment</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock main_content %}

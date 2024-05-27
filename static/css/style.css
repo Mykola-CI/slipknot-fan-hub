@@ -17,8 +17,17 @@ html {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    justify-items: center;
+    justify-content: center;
     align-items: center;
+    gap: 20px;
+}
+
+.flex-start {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
     gap: 20px;
 }
 
@@ -39,7 +48,7 @@ html {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-auto-flow: dense;
     justify-items: center;
     align-items: center;
@@ -96,6 +105,14 @@ html {
     box-shadow: inset 0px 0px 3px 3px #ffffff7f;
 }
 
+.padding-10 {
+    padding: 10px;
+}
+
+.padding-20 {
+    padding: 20px 30px;
+}
+
 /* Contents */
 body {
     color: antiquewhite;
@@ -146,11 +163,10 @@ header > p {
 
 .container {
     margin: 20px auto;
-    width: 90vw;
+    width: 95vw;
     padding: 10px;
     border: 2px solid red;
     border-radius: 10px;
-    text-align: center;
 }  
 
 .navbar {

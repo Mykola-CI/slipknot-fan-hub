@@ -6,5 +6,5 @@ urlpatterns = [
     path(
         'playlistpost/<int:pk>/',
         views.PlaylistPostDetailView.as_view(),
-        name='playlistpost_detail'),
+        name='playlist_post_detail'),
 ]

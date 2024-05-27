@@ -124,3 +124,14 @@
         object-fit: contain;
     }
 }
+
+.grid-post-detail,
+.playlist-comment {
+    padding: 45px;
+}
+
+.comment-content {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
