@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.detail import DetailView
@@ -47,6 +48,9 @@ class PlaylistPostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         playlist = self.object.playlist
+        user = self.request.user
+
+        # Adding playlist, author profile, and playlist items to context
         context['playlist'] = playlist
         context['author_profile'] = UserProfile.objects.get(
             user=playlist.author)
@@ -61,6 +65,10 @@ class PlaylistPostDetailView(DetailView):
         context['comments'] = comments
         context['comment_count'] = comment_count
         context['comment_form'] = comment_form
+
+        # Check if the current user has liked the post (False or True)
+        context['liked'] = self.object.likes.filter(id=user.id).exists()
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -115,5 +123,17 @@ def comment_delete(request, pk, comment_id):
     else:
         messages.add_message(
             request, messages.ERROR, 'You can only delete your own comments!')
+
+    return HttpResponseRedirect(reverse('playlist_post_detail', args=[pk]))
+
+
+@login_required
+def like_view(request, pk):
+    post = get_object_or_404(PlaylistPost, pk=pk)
+
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
 
     return HttpResponseRedirect(reverse('playlist_post_detail', args=[pk]))

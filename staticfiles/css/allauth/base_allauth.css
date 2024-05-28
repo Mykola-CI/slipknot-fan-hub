@@ -7,20 +7,104 @@ html {
 }
 
 body {
-    padding: 150px 10px 10px clamp(20px, 9vw, 200px);
     color: antiquewhite;
     font-size: 130%;
     line-height: 150%;
 }
 
+.wrapper {
+    padding: 50px 10px 10px clamp(20px, 9vw, 200px);
+}
+
 li {
-    color: red;
+    list-style-type: none;
 }
 
 a {
+    text-decoration: none;
     color: red;
+    display: inline-block;
 }
 
-p {
-    max-width: 60ch;
+a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+header {
+    top: 0;
+    padding: 20px 50px 20px 50px;
+    background-color: #000000b2;
+}
+
+
+header > p {
+    grid-column: 3 / 4;
+    font-size: 125%;
+}
+
+.navbar {
+    grid-column: 4 / span 2;
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    /* font-size: 125%; */
+    gap: 50px;
+    text-shadow: 3px 1px 0px rgba(0, 0, 0, 1);
+    text-decoration: overline;
+    color: red
+}
+
+.grid-header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+#logo-block {
+    justify-self: start;
+    display: flex;
+}
+
+#logo-block > p {
+    font-size: 100%;
+    align-self: flex-end;
+    text-decoration: overline;
+}
+
+
+#logo-picture {
+    max-width: 100px;
+}
+
+#logo-picture img {
+    width: 100%;
+}
+
+form {
+    label {
+        display: block;
+    }
+    label[for="id_remember"] {
+        display: inline;
+    }
+    input {
+        padding: 5px 10px 5px 10px;
+        border-radius: 10px;
+        width: 300px;
+        font-size: large;
+    }
+    #id_remember {
+        width: 40px;
+    }
+    p {
+        padding-bottom: 10px;
+    }
+    button {
+        padding: 5px 10px 5px 10px;
+        border-radius: 10px;
+        font-size: large;
+    }
 }

@@ -3,59 +3,73 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            {% block head_title %}
-            FanHub Login
-            {% endblock head_title %}
-        </title>
-        {% block extra_head %}
-        {% endblock extra_head %}
-        <link rel="stylesheet" href="{% static 'css/allauth/base_allauth.css' %}">
-    </head>
-    <body>
-        <header class="nav-container">
-            <h1>Slipknot FanHub</h1>
-            {% block navbar %}
-            <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
-            {% endblock %}
-        </header>
-
-        {% block body %}
-            {% if messages %}
-                <div>
-                    <strong>{% trans "Messages:" %}</strong>
-                    <ul>
-                        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-            <div>
-                <strong>{% trans "Menu:" %}</strong>
-                <ul>
-                    {% if user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'account_email' %}">{% trans "Change Email" %}</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-                        </li>
-                    {% endif %}
-                </ul>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block head_title %}
+        FanHub Login
+        {% endblock head_title %}
+    </title>
+    {% block extra_head %}
+    {% endblock extra_head %}
+    <link rel="stylesheet" href="{% static 'css/allauth/base_allauth.css' %}">
+</head>
+<body>
+    <header class="grid-header">
+        <div id="logo-block">
+            <div id="logo-picture">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/slipknot-logo-transparent.png' %}" alt="Slipknot Fan Hub">
+                </a>
             </div>
-            {% block content %}
-            {% endblock content %}
+            <p>FanHub</p>
+        </div>
+        {% block navbar %}
+
+        {% if not user.is_authenticated %}
+        {% include 'core/navbar-signup.html' %}
+        {% else %}
+        {% include 'core/navbar-signed.html' %}
+        {% endif %}
+
+        {% endblock %}
+    </header>
+    <div class="wrapper">
+        {% block body %}
+        {% if messages %}
+        <div>
+            <strong>{% trans "Messages:" %}</strong>
+            <ul>
+                {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <div>
+            <strong>{% trans "Menu:" %}</strong>
+            <ul>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'account_email' %}">{% trans "Change Email" %}</a>
+                </li>
+                <li>
+                    <a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+                </li>
+                <li>
+                    <a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% block content %}
+        {% endblock content %}
         {% endblock body %}
         {% block extra_body %}
         {% endblock extra_body %}
-    </body>
+    </div>
+</body>
 </html>

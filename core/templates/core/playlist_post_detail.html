@@ -3,12 +3,6 @@
 {% load cloudinary %}
 
 {% block extra_head %}
-# This is where we load the jQuery library for the comments.js file
-<script 
-    src="https://code.jquery.com/jquery-3.7.1.js" 
-    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous"></script>
-
 <!-- Custom CSS for core application playlist_post_detail.html -->
 <link rel="stylesheet" href="{% static 'core/css/core_styles.css' %}" />
 {% endblock extra_head %}
@@ -54,17 +48,38 @@
                 target="_blank">🔗 The Author has provided this link for your reference (opens in a new window)</a>
             {% endif %}
             <p>Created on: {{ playlist_post.created_on }}</p>
-            <p>Total Likes: {{ playlist_post.total_likes }}</p>
+            
             <p>Total Comments: {{ comment_count }}</p>
         </article>
+        {% if liked %}
+        <div class="flex-start">
+            <form action="{% url 'like_view' playlist_post.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit", name="playlist_post_id", value="{{ playlist_post.id }}", class="likes back-red">&#129311;&#127995;</button>
+            </form>
+            <p>{{ playlist_post.total_likes }} likes</p>
+        </div>
+        {% else %}
+        <div class="flex-start">
+            <form action="{% url 'like_view' playlist_post.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit", name="playlist_post_id", value="{{ playlist_post.id }}", class="likes back-transparent">&#129311;&#127995;</button>
+            </form>
+            <p>{{ playlist_post.total_likes }} likes</p>
+        </div>
+        {% endif %}
+
     </section>
 
     <section class="playlist-items-container box-shadow back-dark padding-20">
         <h2>Songs or other Items in this Playlist:</h2>
         <ul class="flex-column">
             {% for item in playlist_items %}
-            <li>{{ item }} Performance Type: {{ item.get_performance_type_display }}</li>
-            <article class="playlist-item pop-down">
+            <li>
+                {{ item }} Performance Type: {{ item.get_performance_type_display }}
+                <button>↯</button>
+            </li>
+            <article class="playlist-item pop-down hidden">
                 <div>
                     <p>Artist/Author:</p>
                     <p>{{ item.artist }}</p>
@@ -136,10 +151,11 @@
                         {{ comment.content | linebreaks }}
                     </div>
                     {% if user.is_authenticated and comment.author == user %}
-                    <button class="btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
-                    <button class="btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
+                    <button class="btn-edit btn-form" data-comment_id="{{ comment.id }}">Edit</button>
+                    <button class="btn-delete btn-form back-red color-white" data-comment_id="{{ comment.id }}">Delete</button>
                     {% endif %}
                 </div>
+                <button class="likes back-transparent">&#129311;&#127995;</button>
             </div>
             {% empty %}
             <p>No comments yet. Be the first to comment!</p>
@@ -147,12 +163,14 @@
         </div>
     
         {% if user.is_authenticated %}
-        <div class="box-shadow back-dark padding-20">
+        <div class="comment-form-container box-shadow back-dark padding-20 flex-column-left">
             <h3 id="formTitle">Add a Comment</h3>
-            <form id="commentForm" method="post">
+            <form id="commentForm" method="post" class="add-comment-form">
                 {% csrf_token %}
                 {{ comment_form.as_p }}
-                <button id="submitButton" type="submit">Submit</button>
+                <button id="submitButton" type="submit" class="btn-form">
+                    Submit
+                </button>
             </form>
             <a href="{% url 'playlist_post_detail' pk=playlist_post.pk %}" id="discardChanges" class="hidden">Discard Changes</a>
         </div>

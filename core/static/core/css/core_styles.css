@@ -125,6 +125,24 @@
     }
 }
 
+.playlist-items-container {
+    h2 {
+        padding-bottom: 20px;
+    }
+    ul {
+        text-align: left;
+        max-width: 80ch;
+        list-style-position: inside;
+    }
+    ul li {
+        list-style-type: treble-clef;
+        padding-bottom: 10px;
+    }
+    ul li::marker {
+        font-size: 1.7em;
+    }
+}
+
 .grid-post-detail,
 .playlist-comment {
     padding: 20px 20px 40px 20px;
@@ -140,4 +158,29 @@
     padding: 10px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.7);
+}
+
+.comment-form-container {
+    align-self: start
+}
+
+.add-comment-form {
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    p {
+        margin-bottom: 20px;
+    }
+}
+
+.likes {
+    padding: 5px 9px;
+    border-radius: 50%;
+    margin-top: 5px;
+    font-size: 125%;
+}
+
+.likes:hover {
+    background-color: dimgray;
 }
