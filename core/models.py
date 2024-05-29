@@ -35,12 +35,24 @@ class Comment(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="commenter")
     content = models.TextField()
-    likes = models.ManyToManyField(
+    likes_comment = models.ManyToManyField(
         User, related_name="playlist_comments", blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
-    def total_likes(self):
-        return self.likes.count()
+    def total_likes_comment(self):
+        return self.likes_comment.count()
+
+    # Check if the current user has liked the comment (False or True)
+    # GETTER method decorator and definition:
+    @property
+    def is_liked_by_user(self):
+        return self._is_liked_by_user
+
+    # SETTER method decorator and definition:
+    @is_liked_by_user.setter
+    def is_liked_by_user(self, user):
+        # prefix '_' to indicate that this is a private attribute
+        self._is_liked_by_user = self.likes_comment.filter(id=user.id).exists()
 
     class Meta:
         ordering = ["-created_on"]

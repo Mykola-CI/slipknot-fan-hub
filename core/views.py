@@ -59,6 +59,11 @@ class PlaylistPostDetailView(DetailView):
 
         # Adding comments and comment form to context
         comments = self.object.comments.all()
+
+        # Check if the current user has liked the comment (False or True)
+        for comment in comments:
+            comment.is_liked_by_user = user
+
         comment_count = comments.count()
         comment_form = CommentForm()
 
@@ -66,7 +71,7 @@ class PlaylistPostDetailView(DetailView):
         context['comment_count'] = comment_count
         context['comment_form'] = comment_form
 
-        # Check if the current user has liked the post (False or True)
+        # Check if the current user has liked the playlist_post (False or True)
         context['liked'] = self.object.likes.filter(id=user.id).exists()
 
         return context
@@ -137,3 +142,15 @@ def like_view(request, pk):
         post.likes.add(request.user)
 
     return HttpResponseRedirect(reverse('playlist_post_detail', args=[pk]))
+
+
+@login_required
+def like_comment(request, pk, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if comment.likes_comment.filter(id=request.user.id).exists():
+        comment.likes_comment.remove(request.user)
+    else:
+        comment.likes_comment.add(request.user)
+
+    return redirect(reverse('playlist_post_detail', args=[pk]))

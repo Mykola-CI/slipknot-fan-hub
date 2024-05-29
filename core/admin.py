@@ -19,7 +19,8 @@ class PlaylistPostAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('playlist_post', 'author', 'created_on', 'total_likes')
+    list_display = (
+        'playlist_post', 'author', 'created_on', 'total_likes_comment')
     list_filter = ('created_on', 'author')
     search_fields = ('playlist_post', 'author')
 

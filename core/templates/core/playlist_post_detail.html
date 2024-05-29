@@ -51,23 +51,19 @@
             
             <p>Total Comments: {{ comment_count }}</p>
         </article>
-        {% if liked %}
+        
         <div class="flex-start">
             <form action="{% url 'like_view' playlist_post.pk %}" method="POST">
                 {% csrf_token %}
-                <button type="submit", name="playlist_post_id", value="{{ playlist_post.id }}", class="likes back-red">&#129311;&#127995;</button>
+                <button type="submit" class="likes 
+                {% if liked %}
+                back-red
+                {% else %}
+                back-transparent
+                {% endif %}">&#129311;&#127995;</button>
             </form>
             <p>{{ playlist_post.total_likes }} likes</p>
         </div>
-        {% else %}
-        <div class="flex-start">
-            <form action="{% url 'like_view' playlist_post.pk %}" method="POST">
-                {% csrf_token %}
-                <button type="submit", name="playlist_post_id", value="{{ playlist_post.id }}", class="likes back-transparent">&#129311;&#127995;</button>
-            </form>
-            <p>{{ playlist_post.total_likes }} likes</p>
-        </div>
-        {% endif %}
 
     </section>
 
@@ -155,7 +151,18 @@
                     <button class="btn-delete btn-form back-red color-white" data-comment_id="{{ comment.id }}">Delete</button>
                     {% endif %}
                 </div>
-                <button class="likes back-transparent">&#129311;&#127995;</button>
+                <div class="flex-start">
+                    <form action="{% url 'like_comment' playlist_post.id comment.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="likes-comment 
+                        {% if comment.is_liked_by_user %}
+                        back-red
+                        {% else %}
+                        back-transparent
+                        {% endif %}">&#129311;&#127995;</button>
+                    </form>
+                    <p>{{ comment.total_likes_comment }} likes</p>
+                </div>
             </div>
             {% empty %}
             <p>No comments yet. Be the first to comment!</p>
