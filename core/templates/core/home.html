@@ -39,30 +39,41 @@
         <p>Featured content goes here</p>
     </section>
 
-    <h3 class="blog-title">
-        Playlist Blog Section
-    </h3>
+    <section class="title-and-messages flex">
+        <h2 class="blog-title">
+            Playlist Blog Section
+        </h2>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+    </section>
 
     {% for post in playlist_posts %}
-    <article class="playlist-card">
+    <article class="playlist-card-home">
         {% if post.playlist.featured_image %}
         {% cloudinary post.playlist.featured_image %}
         {% else %}
         <img src="{% static 'images/hero_banner_slipknot.png' %}" alt="default featured image">
         {% endif %}
-        <a href="{% url 'playlist_post_detail' post.pk %}">{{ post.playlist.title }}</a>
-        <p>Shared by: {{ post.playlist.author }}</p>
-        <p>Posted on: {{ post.created_on }}</p>
-        <p>Total Likes: {{ post.total_likes }}</p>
-        <p>Total Comments:</p>
+        <div class="playlist-card--content">
+            <a href="{% url 'playlist_post_detail' post.pk %}">{{ post.playlist.title }}</a>
+            <p>Shared by: {{ post.playlist.author }}</p>
+            <p>Posted on: {{ post.created_on }}</p>
+            <p>Total Likes: {{ post.total_likes }}</p>
+            <p>Total Comments: {{ post.comment_count }}</p>
+        </div>
     </article>
     {% endfor %}
 
     <div class="pagination shadow-white flex-column">
         <span class="step-links">
             {% if playlist_posts.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ playlist_posts.previous_page_number }}">previous</a>
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ playlist_posts.previous_page_number }}">previous</a>
             {% endif %}
 
             <span class="current">
@@ -70,8 +81,8 @@
             </span>
 
             {% if playlist_posts.has_next %}
-                <a href="?page={{ playlist_posts.next_page_number }}">next</a>
-                <a href="?page={{ playlist_posts.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ playlist_posts.next_page_number }}">next</a>
+            <a href="?page={{ playlist_posts.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
     </div>

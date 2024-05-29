@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
 from django.views.generic.detail import DetailView
 from django.http import HttpResponseRedirect
 from django.contrib import messages
@@ -11,7 +12,10 @@ from .forms import CommentForm
 
 # Apart from general context creates dynamic blog context with pagination
 def home_view(request):
-    playlist_posts = PlaylistPost.objects.all().order_by('-created_on')
+    # Annotating each PlaylistPost with the count of related comments
+    playlist_posts = PlaylistPost.objects.annotate(
+        comment_count=Count('comments')).order_by('-created_on')
+
     playlists = Playlist.objects.filter(playlist_post__isnull=False)
 
     # Pagination logic

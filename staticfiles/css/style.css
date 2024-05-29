@@ -17,14 +17,12 @@ html {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
     gap: 20px;
 }
 
 .flex-start {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-end;
