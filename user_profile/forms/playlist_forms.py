@@ -1,5 +1,4 @@
 from django import forms
-from django_summernote.widgets import SummernoteWidget
 from user_profile.models import Playlist, PlaylistItem
 from cloudinary.forms import CloudinaryFileField
 
@@ -26,9 +25,6 @@ class PlaylistForm(forms.ModelForm):
             'reference_url',
             'status'
         ]
-        widgets = {
-            'description': SummernoteWidget(),
-        }
 
 
 class PlaylistItemForm(forms.ModelForm):

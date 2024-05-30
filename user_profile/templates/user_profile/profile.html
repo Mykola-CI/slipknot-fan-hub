@@ -4,9 +4,7 @@
 
 {% block title %}Slipknot Fan Profile{% endblock %}
 {% block extra_head %}
-<script 
-    src="https://code.jquery.com/jquery-3.7.1.js" 
-    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 
 <!-- Custom CSS for user_profile application profile.html -->
@@ -17,18 +15,18 @@
 {% block main_content %}
 
 <div class="avatar-profile-page">
-    {% if "default_avatar" in user_profile.avatar.url %}    
-        <img src="{% static 'images/nobody.jpg' %}" alt="default avatar">
+    {% if "default_avatar" in user_profile.avatar.url %}
+    <img src="{% static 'images/nobody.jpg' %}" alt="default avatar">
     {% else %}
-        {% cloudinary user_profile.avatar %}
+    {% cloudinary user_profile.avatar %}
     {% endif %}
 </div>
 
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
 </ul>
 {% endif %}
 
@@ -102,7 +100,6 @@
 {% endblock main_content %}
 
 {% block bottom %}
-<!-- Store the current url to a variable, the rest of code to move outside -->
 <script type="text/javascript">
     var profileUrl = '{% url "profile" %}';
 </script>

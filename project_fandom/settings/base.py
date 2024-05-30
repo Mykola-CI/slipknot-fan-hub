@@ -40,17 +40,13 @@ INSTALLED_APPS = [
 ]
 
 SUMMERNOTE_CONFIG = {
+    'iframe': True,
     'summernote': {
         'width': '100%',
         'height': '300',
         'toolbar': [
-            ['style', ['style']],
-            ['font', ['bold', 'italic', 'underline', 'clear']],
-            ['fontname', ['fontname']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['view', ['fullscreen', 'help']],
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
         ],
     },
     'disable_attachment': True,

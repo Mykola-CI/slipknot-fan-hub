@@ -69,23 +69,55 @@
     </article>
     {% endfor %}
 
-    <div class="pagination shadow-white flex-column">
-        <span class="step-links">
-            {% if playlist_posts.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ playlist_posts.previous_page_number }}">previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ playlist_posts.number }} of {{ playlist_posts.paginator.num_pages }}.
+    <footer class="home-footer flex shadow-white">
+        <div class="pagination">
+            <span class="step-links">
+                {% if playlist_posts.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ playlist_posts.previous_page_number }}">previous</a>
+                {% endif %}
+    
+                <span class="current">
+                    Page {{ playlist_posts.number }} of {{ playlist_posts.paginator.num_pages }}.
+                </span>
+    
+                {% if playlist_posts.has_next %}
+                <a href="?page={{ playlist_posts.next_page_number }}">next</a>
+                <a href="?page={{ playlist_posts.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
             </span>
-
-            {% if playlist_posts.has_next %}
-            <a href="?page={{ playlist_posts.next_page_number }}">next</a>
-            <a href="?page={{ playlist_posts.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+        </div>
+        <div class="social-media">
+            <ul class="flex-end">
+                <li>
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener"
+                        aria-label="Visit our Facebook page (opens in a new tab)">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://x.com/" target="_blank" rel="noopener"
+                        aria-label="Visit our X page (opens in a new tab)">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener"
+                        aria-label="Visit our Youtube page (opens in a new tab)">
+                        <i class="fa-brands fa-square-youtube"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener"
+                        aria-label="Visit our Instagram page (opens in a new tab)">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
 </div>
 
 {% endblock %}
+
+{% block footer %}{% endblock %}

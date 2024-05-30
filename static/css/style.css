@@ -15,7 +15,7 @@ html {
 /* Utilities */
 .flex {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
     gap: 20px;
@@ -25,6 +25,14 @@ html {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.flex-end {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     align-items: flex-end;
     gap: 20px;
 }
@@ -131,7 +139,7 @@ html {
 
 .playlist-card {
     background-color: rgb(46, 53, 59);
-    padding: 20px;
+    padding: 30px 20px 20px 30px;
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 13px 3px #000000; 
     box-shadow: 0px 0px 13px 3px #000000;
@@ -291,4 +299,27 @@ a:hover {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+}
+
+/* Footer styles */
+
+.footer-social {
+    width: 100%;
+    padding: 20px 50px 20px 20px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-media {
+    font-size: 1.5em;
+    li {
+        display: inline;
+        padding: 10px;
+        list-style-type: none;
+    }
+    a {
+        color: antiquewhite;
+    }
 }
