@@ -1,5 +1,5 @@
 .image-container {
-    width: 300px;
+    max-width: 600px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -81,5 +81,9 @@
 .caption {
     max-width: 40ch;
     text-align: left;
+}
+
+.featured-image-profile {
+    flex-grow: 0.1;
 }
 

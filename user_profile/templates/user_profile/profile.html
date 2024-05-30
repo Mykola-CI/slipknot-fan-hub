@@ -31,70 +31,72 @@
 {% endif %}
 
 <!-- Modal -->
-<div id="modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <form id="modal-form" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div id="form-fields">
-                {% if form_type == 'about' %}
-                {{ about_form.media }}
-                {{ about_form.as_p }}
-                {% elif form_type == 'email' %}
-                {{ email_form.as_p }}
-                {% elif form_type == 'password' %}
-                {{ password_form.as_p }}
-                {% elif form_type == 'name' %}
-                {{ name_form.as_p }}
-                {% elif form_type == 'dob' %}
-                {{ dob_form.as_p }}
-                {% elif form_type == 'avatar' %}
-                {{ avatar_form.as_p }}
-                {% endif %}
-            </div>
-            <button type="submit">Save</button>
-        </form>
+<div class="flex-1-1">
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="modal-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div id="form-fields">
+                    {% if form_type == 'about' %}
+                    {{ about_form.media }}
+                    {{ about_form.as_p }}
+                    {% elif form_type == 'email' %}
+                    {{ email_form.as_p }}
+                    {% elif form_type == 'password' %}
+                    {{ password_form.as_p }}
+                    {% elif form_type == 'name' %}
+                    {{ name_form.as_p }}
+                    {% elif form_type == 'dob' %}
+                    {{ dob_form.as_p }}
+                    {% elif form_type == 'avatar' %}
+                    {{ avatar_form.as_p }}
+                    {% endif %}
+                </div>
+                <button type="submit">Save</button>
+            </form>
+        </div>
     </div>
-</div>
-
-<div class="container grid">
-
-    <div class="profile-section">
-        <h3> Avatar</h3>
-        <button class="edit-btn" data-form="avatar">Update</button>
+    
+    <div class="container grid">
+    
+        <div class="profile-section">
+            <h3> Avatar</h3>
+            <button class="edit-btn" data-form="avatar">Update</button>
+        </div>
+    
+        <div class="profile-section">
+            <h3>Email</h3>
+            <p>{{ request.user.email }}</p>
+            <button class="edit-btn" data-form="email">Update</button>
+        </div>
+    
+        <div class="profile-section">
+            <h3>Password</h3>
+            <p>********</p>
+            <button class="edit-btn" data-form="password">Change</button>
+        </div>
+    
+        <div class="profile-section">
+            <h3>Name</h3>
+            <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+            <button class="edit-btn" data-form="name">Update</button>
+        </div>
+    
+        <div class="profile-section">
+            <h3>Date of Birth</h3>
+            <p>{{ user_profile.date_of_birth }}</p>
+            <button class="edit-btn" data-form="dob">Update</button>
+        </div>
+    
+        <div id="about-myself" class="profile-section">
+            <h3>About Myself</h3>
+            <p>{{ user_profile.about_myself | safe }}</p>
+            <button class="edit-btn" data-form="about">Update</button>
+        </div>
+    
+        {% include 'user_profile/playlist.html' %}
     </div>
-
-    <div class="profile-section">
-        <h3>Email</h3>
-        <p>{{ request.user.email }}</p>
-        <button class="edit-btn" data-form="email">Update</button>
-    </div>
-
-    <div class="profile-section">
-        <h3>Password</h3>
-        <p>********</p>
-        <button class="edit-btn" data-form="password">Change</button>
-    </div>
-
-    <div class="profile-section">
-        <h3>Name</h3>
-        <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
-        <button class="edit-btn" data-form="name">Update</button>
-    </div>
-
-    <div class="profile-section">
-        <h3>Date of Birth</h3>
-        <p>{{ user_profile.date_of_birth }}</p>
-        <button class="edit-btn" data-form="dob">Update</button>
-    </div>
-
-    <div id="about-myself" class="profile-section">
-        <h3>About Myself</h3>
-        <p>{{ user_profile.about_myself | safe }}</p>
-        <button class="edit-btn" data-form="about">Update</button>
-    </div>
-
-    {% include 'user_profile/playlist.html' %}
 </div>
 
 {% endblock main_content %}

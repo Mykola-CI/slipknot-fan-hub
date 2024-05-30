@@ -19,10 +19,10 @@
 </ul>
 {% endif %}
 
-<div class="container flex">
-    <section class="featured-image">
+<div class="container flex flex-1-1">
+    <section class="flex-column-left">
         <h4>Playlist Image:</h4> 
-        <div class="image-container">
+        <div class=" featured-image-profile image-container">
         {% if playlist.featured_image %}
             {% cloudinary playlist.featured_image %} 
         {% else %}
@@ -34,7 +34,7 @@
         </div>
         {% endif %}
     </section>
-    <section class="playlist-card">
+    <section class="playlist-card flex-column-left flex-grow-1">
         <div>
             <h3>Playlist Title:</h3>
             <p>{{ playlist.title }}</p>
@@ -82,7 +82,7 @@
                 <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-btn back-red color-white"><strong>Delete Playlist</strong></a>
             </div>
     </section>
-    <section class="playlist-card">
+    <section class="playlist-card flex-column-left flex-grow-1">
         <h3>Playlist Items:</h3>
         <div>
             <a href="{% url 'add_playlist_item' playlist_id=playlist.id %}" class="navigation-btn"><strong>Add Items to Your Playlist</strong></a>

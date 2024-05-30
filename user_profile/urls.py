@@ -1,6 +1,7 @@
 from django.urls import path
 from .views.profile import profile
 from .views.playlists import (
+    PlaylistManageView,
     PlaylistCreateView,
     PlaylistCreatedView,
     PlaylistUpdateView,
@@ -10,7 +11,7 @@ from .views.playlists import (
 from .views.playlist_items import (
     PlaylistItemCreateView,
     PlaylistItemUpdateView,
-    PlaylistItemDeleteView
+    PlaylistItemDeleteView,
 )
 
 urlpatterns = [
@@ -23,6 +24,10 @@ urlpatterns = [
         'playlists/<int:pk>/create/created/',
         PlaylistCreatedView.as_view(),
         name='playlist_created'),
+    path(
+        'playlists/',
+        PlaylistManageView.as_view(),
+        name='playlist_manage'),
     path(
         'playlists/<int:pk>/update/',
         PlaylistUpdateView.as_view(),

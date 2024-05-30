@@ -41,7 +41,7 @@
             {% endif %}
             <div>
                 <p>Description:</p>
-                <div class="shadow-white padding-10">{{ playlist_post.playlist.description | safe }}</div>
+                <div class="text-description shadow-white padding-20">{{ playlist_post.playlist.description | linebreaks }}</div>
             </div>
             {% if playlist_post.playlist.reference_url %}
             <a href="{{ playlist_post.playlist.reference_url }}" aria-label="url reference featuring playlist main message"
@@ -64,7 +64,6 @@
             </form>
             <p>{{ playlist_post.total_likes }} likes</p>
         </div>
-
     </section>
 
     <section class="playlist-items-container box-shadow back-dark padding-20">
@@ -75,7 +74,7 @@
                 {{ item }} Performance Type: {{ item.get_performance_type_display }}
                 <button>↯</button>
             </li>
-            <article class="playlist-item pop-down hidden">
+            <article class="playlist-item pop-down">
                 <div>
                     <p>Artist/Author:</p>
                     <p>{{ item.artist }}</p>
@@ -95,14 +94,16 @@
                 <div>
                     {% if item.song_audio %}
                     <p>Song Audio:</p>
-                    <a href="{{ item.song_audio.url }}" aria-label="link to the song audio file">🔗 Follow this link to
-                        download audio file</a>
+                    <audio id="audio-example" controls>
+                        <source src="{{ item.song_audio.url }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
                     {% endif %}
                 </div>
                 <div>
                     {% if item.song_tabs %}
                     <p>Song Docs (song tabs/notation or other useful stuff):</p>
-                    <a href="{{ item.song_tabs.url }}" aria-label="link to the song docs file">🔗 Follow this link</a>
+                    <a href="{{ item.song_tabs.url }}" download target="_blank" rel="noopener noreferrer" aria-label="link to the song docs file">🔗 Preview doc file here and download if you need</a>
                     {% endif %}
                 </div>
                 <div>
@@ -198,5 +199,13 @@
 {% endblock main_content %}
 
 {% block bottom %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the audio element
+        var audioElement = document.getElementById('audio-example');
+        // Set the volume to 1/3 (0.33)
+        audioElement.volume = 0.2;
+    });
+</script>
 <script src="{% static 'js/comments.js' %}"></script>
 {% endblock %}

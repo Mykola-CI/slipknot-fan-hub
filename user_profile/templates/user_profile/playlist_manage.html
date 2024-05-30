@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cloudinary %}
+
+{% block title %}Slipknot Fan Profile{% endblock %}
+{% block extra_head %}
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+<!-- Custom CSS for user_profile application profile.html -->
+<link rel="stylesheet" href="{% static 'user_profile/css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'user_profile/css/playlist_update.css' %}" />
+{% endblock extra_head %}
+
+{% block main_content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+<div class="container flex-1-1">
+    {% include 'user_profile/playlist.html' %}
+</div>
+
+{% endblock main_content %}

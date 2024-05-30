@@ -53,6 +53,22 @@ class PlaylistCreatedView(
         return context
 
 
+class PlaylistManageView(
+        LoginRequiredMixin,
+        TemplateView):
+
+    template_name = 'user_profile/playlist_manage.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        playlists = Playlist.objects.filter(author=user)
+
+        context['playlists'] = playlists
+
+        return context
+
+
 class PlaylistUpdateView(
         LoginRequiredMixin,
         AuthorRequiredMixin,

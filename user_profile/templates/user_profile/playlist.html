@@ -1,4 +1,4 @@
-<section id="playlists" class="playlist-card">
+<section id="playlists" class="playlist-card flex-column-left">
     <h3>Manage Your Playlists,&nbsp;<span id="username">{{ user.username }}</span>!</h3>
     <ul>
         {% for playlist in playlists %}
@@ -9,7 +9,7 @@
         <li>No playlists found.</li>
         {% endfor %}
     </ul>
-    <div>
+    <div class="padding-20">
         <a href="{% url 'playlist_create' %}" class="navigation-btn back-dark color-red"><strong>Create New Playlist</strong></a>
     </div>
 </section>
