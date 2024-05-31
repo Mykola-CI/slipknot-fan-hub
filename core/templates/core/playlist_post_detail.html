@@ -72,57 +72,59 @@
             {% for item in playlist_items %}
             <li>
                 {{ item }} Performance Type: {{ item.get_performance_type_display }}
-                <button>↯</button>
+                <input type="checkbox" id="nav-toggle-{{ forloop.counter }}" class="nav-toggle hidden" name="nav-toggle">
+                <label for="nav-toggle-{{ forloop.counter }}" class="nav-toggle--label"><i class="fa-solid fa-bars"></i></label>
+                <article class="playlist-item pop-down flex-column-left">
+                    <div>
+                        <p>Artist/Author:</p>
+                        <p>{{ item.artist }}</p>
+                    </div>
+                    <div>
+                        {% if item.album %}
+                        <p>Album:</p>
+                        <p>{{ item.album }}</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if item.song_url %}
+                        <a href="{{ item.song_url }}" aria-label="link reference to the song" target="_blank">🔗 Follow this
+                            link provided by the Playlist's Author</a>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if item.song_audio %}
+                        <p>Song Audio:</p>
+                        <audio id="audio-example" controls>
+                            <source src="{{ item.song_audio.url }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if item.song_tabs %}
+                        <p>Song Docs (song tabs/notation or other useful stuff):</p>
+                        <a href="{{ item.song_tabs.url }}" download target="_blank" rel="noopener noreferrer" aria-label="link to the song docs file">🔗 Preview doc file here and download if you need</a>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if item.performance_year %}
+                        <p>Performed in:</p>
+                        <p>{{ item.performance_year }}</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p>The song category:</p>
+                        <p>{{ item.get_performance_type_display }}</p>
+                    </div>
+                    <div>
+                        {% if item.song_comments %}
+                        <p>The Playlist's Author comments on the song:</p>
+                        <p>{{ item.song_comments | linebreaks }}</p>
+                        {% endif %}
+                    </div>
+                </article>
             </li>
-            <article class="playlist-item pop-down">
-                <div>
-                    <p>Artist/Author:</p>
-                    <p>{{ item.artist }}</p>
-                </div>
-                <div>
-                    {% if item.album %}
-                    <p>Album:</p>
-                    <p>{{ item.album }}</p>
-                    {% endif %}
-                </div>
-                <div>
-                    {% if item.song_url %}
-                    <a href="{{ item.song_url }}" aria-label="link reference to the song" target="_blank">🔗 Follow this
-                        link provided by the Playlist's Author</a>
-                    {% endif %}
-                </div>
-                <div>
-                    {% if item.song_audio %}
-                    <p>Song Audio:</p>
-                    <audio id="audio-example" controls>
-                        <source src="{{ item.song_audio.url }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    {% endif %}
-                </div>
-                <div>
-                    {% if item.song_tabs %}
-                    <p>Song Docs (song tabs/notation or other useful stuff):</p>
-                    <a href="{{ item.song_tabs.url }}" download target="_blank" rel="noopener noreferrer" aria-label="link to the song docs file">🔗 Preview doc file here and download if you need</a>
-                    {% endif %}
-                </div>
-                <div>
-                    {% if item.performance_year %}
-                    <p>Performed in:</p>
-                    <p>{{ item.performance_year }}</p>
-                    {% endif %}
-                </div>
-                <div>
-                    <p>The song category:</p>
-                    <p>{{ item.get_performance_type_display }}</p>
-                </div>
-                <div>
-                    {% if item.song_comments %}
-                    <p>The Playlist's Author comments on the song:</p>
-                    <p>{{ item.song_comments | linebreaks }}</p>
-                    {% endif %}
-                </div>
-            </article>
+            
             {% endfor %}
         </ul>
     </section>
@@ -199,13 +201,6 @@
 {% endblock main_content %}
 
 {% block bottom %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get the audio element
-        var audioElement = document.getElementById('audio-example');
-        // Set the volume to 1/3 (0.33)
-        audioElement.volume = 0.2;
-    });
-</script>
+<script src="{% static 'js/item-detail-toggle.js' %}"></script>
 <script src="{% static 'js/comments.js' %}"></script>
 {% endblock %}

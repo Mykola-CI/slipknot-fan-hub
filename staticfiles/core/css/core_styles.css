@@ -136,13 +136,39 @@
         max-width: 80ch;
         list-style-position: inside;
     }
-    ul li {
+    li {
         list-style-type: treble-clef;
         padding-bottom: 10px;
+        position: relative
     }
-    ul li::marker {
+    li::marker {
         font-size: 1.7em;
     }
+
+}
+
+.pop-down {
+    position: absolute;
+    width: 150%;
+    padding: 20px;
+    top: 40px;
+    right: 0;
+    background-color: black;
+    opacity: 0;
+    max-height: 0;
+    /* overflow: hidden; */
+    z-index: 99;
+    transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
+}
+
+.nav-toggle--label {
+    padding: 15px;
+    font-size: 1.2em;
+}
+
+.nav-toggle--label:hover {
+    font-size: 1.5em;
+    border: 1px solid red;
 }
 
 .text-description p {
