@@ -17,7 +17,7 @@ html {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
 }
 
@@ -48,7 +48,7 @@ html {
 .flex-column {display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: stretch;
+    align-items: center;
     gap: 20px;
 }
 

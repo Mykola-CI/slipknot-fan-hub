@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var audioElement = document.getElementById('audio-example');
     audioElement.volume = 0.2;
 
-
+    // Handling playlist items modals
     const toggles = document.querySelectorAll('.nav-toggle');
 
     toggles.forEach(toggle => {
