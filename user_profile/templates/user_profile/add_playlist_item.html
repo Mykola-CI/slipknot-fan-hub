@@ -17,17 +17,23 @@
         <section class="form-edit">
             <form method="post" enctype="multipart/form-data" class="form-control">
                 {% csrf_token %}
-                {% for field in form %}
-                <div class="field-block">
-                    <p>{{ field.errors }}</p>
-                    <p>{{ field.label_tag }}</p> 
-                    {{ field }}
+                <div class="flex">
+                    <div class="field-block">
+                        {% for field in form %}
+                        <p>{{ field.errors }}</p>
+                        <p>{{ field.label_tag }}</p> 
+                        {{ field }}
+                        {% if forloop.counter|divisibleby:3 %}
+                        </div>
+                        <div class="field-block">
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-                {% endfor %}
                 <button type="submit" class="button btn-edit">Add Your Item</button>
             </form>
         </section>
-        <section class="navigation flex-column-left">
+        <section class="navigation flex-column">
             <div>
                 <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red"><strong>Back to the Playlist View</strong></a>
             </div>

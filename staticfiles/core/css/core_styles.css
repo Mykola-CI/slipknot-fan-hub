@@ -150,10 +150,11 @@
 .pop-down {
     position: absolute;
     width: 150%;
-    padding: 20px;
+    padding: 20px 40px;
     top: 40px;
     right: 0;
     background-color: black;
+    border-radius: 5px;
     opacity: 0;
     max-height: 0;
     /* overflow: hidden; */
