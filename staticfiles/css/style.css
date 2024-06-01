@@ -1,10 +1,34 @@
-* {
+:root {
+    /* font-sizes */
+    --fs-300: 0.875rem;
+    /* 14px */
+    --fs-400: clamp(1rem, 3vw, 1.125rem);
+    --fs-500: clamp(1.125rem, 3vw, 1.25rem);
+    --fs-600: clamp(1.25rem, 3vw, 1.5rem);
+    --fs-700: clamp(2.5rem, 5vw, 4rem);
+
+    /* font-weights */
+    --fw-300: 300;
+    --fw-400: 400;
+    --fw-500: 500;
+    --fw-600: 600;
+    --fw-700: 700;
+    --fw-800: 800;
+    --fw-900: 900;
+}
+
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
     background: url(../images/wallpaper_fan_hub.png) no-repeat left center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -13,11 +37,11 @@ html {
 }
 
 /* Utilities */
+
 .flex {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    align-items: flex-start;
     gap: 20px;
 }
 
@@ -45,7 +69,8 @@ html {
     gap: 20px;
 }
 
-.flex-column {display: flex;
+.flex-column {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -122,12 +147,12 @@ html {
 }
 
 .box-shadow {
-    -webkit-box-shadow: 0px 0px 6px 6px #000000; 
+    -webkit-box-shadow: 0px 0px 6px 6px #000000;
     box-shadow: 0px 0px 6px 6px #000000;
 }
 
 .shadow-white {
-    -webkit-box-shadow: 0px 0px 3px 3px #ffffff71; 
+    -webkit-box-shadow: 0px 0px 3px 3px #ffffff71;
     box-shadow: inset 0px 0px 3px 3px #ffffff7f;
 }
 
@@ -143,22 +168,25 @@ html {
     padding: 5px 15px;
     border: 1px solid black;
     border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 13px 3px #000000; 
+    -webkit-box-shadow: 0px 0px 13px 3px #000000;
     box-shadow: 0px 0px 13px 3px #000000;
 }
 
 @counter-style treble-clef {
     system: cyclic;
-    symbols: "\1D11E"; /* Unicode for the treble clef symbol */
-    suffix: "  "; /* Add a space after the symbol */
+    symbols: "\1D11E";
+    /* Unicode for the treble clef symbol */
+    suffix: "  ";
+    /* Add a space after the symbol */
 }
 
 .playlist-card {
     background-color: rgb(46, 53, 59);
     padding: 30px 20px 20px 30px;
     border-radius: 5px;
-    -webkit-box-shadow: 0px 0px 13px 3px #000000; 
+    -webkit-box-shadow: 0px 0px 13px 3px #000000;
     box-shadow: 0px 0px 13px 3px #000000;
+
     div,
     ul {
         margin-inline: auto;
@@ -166,13 +194,16 @@ html {
         max-width: 80ch;
         list-style-position: inside;
     }
+
     ul li {
         list-style-type: treble-clef;
         padding-bottom: 10px;
     }
+
     ul li::marker {
         font-size: 1.7em;
     }
+
     h3 {
         color: red;
     }
@@ -186,6 +217,33 @@ body {
     flex-direction: column;
     min-height: 100dvh;
 }
+
+body,
+h1,
+h2,
+h3,
+h4,
+p {
+    margin: 0;
+    font-family:
+        Bahnschrift,
+        'DIN Alternate',
+        'Franklin Gothic Medium',
+        'Nimbus Sans Narrow',
+        sans-serif-condensed,
+        sans-serif;
+    font-weight: normal;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    text-shadow: 1px 1px 2px black;
+}
+
+
+
 
 header {
     top: 0;
@@ -232,7 +290,7 @@ header > p {
     padding: 20px;
     border: 2px solid red;
     border-radius: 10px;
-}  
+}
 
 .navbar {
     grid-column: 4 / span 2;
@@ -270,7 +328,7 @@ a:hover {
     padding: 10px 20px;
     border: 1px solid black;
     border-radius: 5px;
-    -webkit-box-shadow: 0px 0px 13px 3px #000000; 
+    -webkit-box-shadow: 0px 0px 13px 3px #000000;
     box-shadow: 0px 0px 13px 3px #000000;
 }
 
@@ -291,7 +349,8 @@ a:hover {
 }
 
 .modal.show {
-    display: block; /* Show the modal when the 'show' class is added */
+    display: block;
+    /* Show the modal when the 'show' class is added */
 }
 
 .modal-content {
@@ -301,9 +360,9 @@ a:hover {
     border: 4px solid #888;
     width: 80%;
     border-radius: 10px;
-    box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
-    -webkit-box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
-    -moz-box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+    box-shadow: -2px 5px 21px 18px rgba(0, 0, 0, 0.78);
+    -webkit-box-shadow: -2px 5px 21px 18px rgba(0, 0, 0, 0.78);
+    -moz-box-shadow: -2px 5px 21px 18px rgba(0, 0, 0, 0.78);
 }
 
 .close {
@@ -327,11 +386,13 @@ a:hover {
 
 .social-media {
     font-size: 1.5em;
+
     li {
         display: inline;
         padding: 10px;
         list-style-type: none;
     }
+
     a {
         color: antiquewhite;
     }

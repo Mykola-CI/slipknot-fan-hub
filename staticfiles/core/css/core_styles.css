@@ -24,26 +24,46 @@
 .core-hero {
     grid-column: span 6;
     grid-row: span 5;
-    background: url(../../../../static/images/slipknot-web-header.jpg) no-repeat center center scroll;
+    background: url(../../../../static/images/fanhub-entry-zone-1.png) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    h1 span {
+        text-decoration: overline;
+    }
+}
+
+.core-featured-1 {
+    grid-column: span 4;
+    grid-row: span 5;
+    background: url(../../../../static/images/hero_banner_slipknot.png) no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 
-.core-featured-1 {
-    grid-column: span 4;
-    grid-row: span 5;
-    background: url(../../../../static/images/the-faces-of-slipknot-1.webp) no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: 100% auto;
+#moderator_section {
+    color: white;
+    text-decoration: none;
+}
+
+#moderator_section:hover {
+    color: red;
+    -webkit-box-shadow: 0px 0px 6px 6px white;
+    box-shadow: 0px 0px 6px 6px white;
 }
 
 .core-featured-2 {
     grid-column: span 2;
     grid-row: span 6;
+    background: url(../../../../static/images/slipknot-spacecraft-surface.png) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: 0.8;
 }
 
 .title-and-messages {
@@ -56,7 +76,6 @@
 }
 
 .pagination {
-    /* padding: 20px 30px; */
     color: white;
     text-align: center;
     letter-spacing: 2px;
@@ -231,5 +250,16 @@
 .home-footer {
     grid-column: 3 / span 10;
     background-color: black;
-    padding: 20px 30px;
+    padding: 10px 30px;
+    align-items: center;
+}
+
+#fanhub-presentation {
+    max-width: 1200px;
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+    }
 }

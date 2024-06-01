@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "cloudinary",
     'core.apps.CoreConfig',
     'user_profile.apps.UserProfileConfig',
+    'moderator',
 ]
 
 SUMMERNOTE_CONFIG = {

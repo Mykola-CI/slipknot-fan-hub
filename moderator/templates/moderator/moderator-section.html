@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cloudinary %}
+
+{% block title %}Slipknot Fan Profile{% endblock %}
+{% block extra_head %}
+<!-- Custom CSS for user_profile application profile.html -->
+<link rel="stylesheet" href="{% static 'core/css/core_styles.css' %}" />
+{% endblock extra_head %}
+
+{% block main_content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+<div class="container flex-1-1">
+    <Section id="fanhub-presentation">
+        <h2>FanHub Round and About</h2>
+        <div id="fanhub-profile-image">
+            {% if "placeholder" in moderator.profile_image.url %}
+            <img src="{% static 'images/slipknot-logo-transparent.png' %}" alt="default fanhub image">
+            {% else %}
+            {% cloudinary moderator.profile_image %}
+            {% endif %}
+        </div>
+        {{ moderator.content | safe }}
+    </Section>
+</div>
+
+{% endblock main_content %}

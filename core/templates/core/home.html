@@ -9,7 +9,7 @@
 {% block main_content %}
 
 <div class="core-main grid-blog">
-    <aside class="core-menu flex-column border-red box-shadow">
+    <aside class="core-menu flex-column-stretch border-red box-shadow">
         <div class="nav-item">
             <a href="{% url 'profile' %}" class="navigation-btn">Edit Profile</a>
         </div>
@@ -25,23 +25,22 @@
     </aside>
 
     <section class="core-hero box-shadow">
-        <h1>Hero Section</h1>
-        <p>Create different styles and texts</p>
+        <h1><span>FanHub</span> Place</h1>
     </section>
 
-    <section class="core-featured-1 box-shadow">
-        <h2>Featured Section 1</h2>
-        <p>Featured content goes here</p>
-    </section>
+    <a href="{% url 'moderator_section' %}" id="moderator_section" class="core-featured-1 box-shadow">
+        <h2>FanHub Page</h2>
+        <p>Want to know more what this is about?</p>
+    </a>
 
     <section class="core-featured-2 border-white box-shadow">
-        <h2>Featured Section 2</h2>
-        <p>Featured content goes here</p>
+        <h2>Shared Playlists</h2>
+        <p>Full list of the shared playlists here</p>
     </section>
 
     <section class="title-and-messages flex">
         <h2 class="blog-title">
-            Playlist Blog Section
+            Playlists Shared By FanHub Elite
         </h2>
         {% if messages %}
         <ul class="messages">

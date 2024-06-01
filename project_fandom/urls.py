@@ -10,6 +10,7 @@ handler403 = my_custom_permission_denied_view
 urlpatterns = [
     path("", include("core.urls"), name="core-urls"),
     path("profile/", include("user_profile.urls"), name="profile-urls"),
+    path("moderator/", include("moderator.urls"), name="moderator-urls"),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path('summernote/', include('django_summernote.urls')),
