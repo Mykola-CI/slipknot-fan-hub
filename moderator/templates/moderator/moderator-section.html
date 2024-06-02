@@ -19,16 +19,18 @@
 {% endif %}
 
 <div class="container flex-1-1">
-    <Section id="fanhub-presentation">
-        <h2>FanHub Round and About</h2>
-        <div id="fanhub-profile-image">
-            {% if "placeholder" in moderator.profile_image.url %}
-            <img src="{% static 'images/slipknot-logo-transparent.png' %}" alt="default fanhub image">
-            {% else %}
-            {% cloudinary moderator.profile_image %}
-            {% endif %}
+    <Section id="fanhub-presentation" class="grid">
+        <div>
+            <h2>FanHub Round and About</h2>
+            <div id="fanhub-profile-image">
+                {% if "placeholder" in moderator.profile_image.url %}
+                <img src="{% static 'images/slipknot-logo-transparent.png' %}" alt="default fanhub image">
+                {% else %}
+                {% cloudinary moderator.profile_image %}
+                {% endif %}
+            </div>
         </div>
-        {{ moderator.content | safe }}
+        <div>{{ moderator.content | safe }}</div>
     </Section>
 </div>
 

@@ -20,7 +20,7 @@
             <a href="https://slipknot1.com/" target="_blank" rel="noopener noreferrer" class="navigation-btn">Go To Papa Site</a>
         </div>
         <div class="nav-item">
-            <a href="{% url 'profile' %}" class="navigation-btn">About And Round</a>
+            <a href="{% url 'moderator_section' %}" class="navigation-btn">Round And About</a>
         </div>
     </aside>
 
@@ -28,15 +28,15 @@
         <h1><span>FanHub</span> Place</h1>
     </section>
 
-    <a href="{% url 'moderator_section' %}" id="moderator_section" class="core-featured-1 box-shadow">
+    <a href="{% url 'moderator_section' %}" id="moderator-section" class="core-featured-1 box-shadow">
         <h2>FanHub Page</h2>
         <p>Want to know more what this is about?</p>
     </a>
 
-    <section class="core-featured-2 border-white box-shadow">
+    <a href="{% url 'playlist_list' %}" id="playlists-preview" class="core-featured-2 border-white box-shadow">
         <h2>Shared Playlists</h2>
-        <p>Full list of the shared playlists here</p>
-    </section>
+        <p>All shared playlists here</p>
+    </a>
 
     <section class="title-and-messages flex">
         <h2 class="blog-title">

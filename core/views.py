@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 from django.views.generic.detail import DetailView
+from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .models import PlaylistPost, Comment
@@ -36,6 +37,24 @@ def home_view(request):
         'playlists': playlists,
     }
     return render(request, 'core/home.html', context)
+
+
+class PlaylistPreviewView(TemplateView):
+    template_name = 'core/playlist_preview.html'
+    context_object_name = 'playlist_posts'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Fetching all PlaylistPost objects ordered by '-created_on'
+        # and select related Playlist objects
+        playlist_posts = PlaylistPost.objects.select_related(
+            'playlist').order_by('-created_on')
+
+        # Adding PlaylistPost objects to the context
+        context['playlist_posts'] = playlist_posts
+
+        return context
 
 
 class PlaylistPostDetailView(DetailView):

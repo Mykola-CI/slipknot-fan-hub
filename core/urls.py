@@ -20,4 +20,8 @@ urlpatterns = [
         views.like_comment,
         name='like_comment'
     ),
+    path(
+        'playlistpost/list/',
+        views.PlaylistPreviewView.as_view(),
+        name='playlist_list'),
 ]

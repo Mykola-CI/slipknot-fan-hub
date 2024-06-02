@@ -44,12 +44,20 @@
     background-size: cover;
 }
 
-#moderator_section {
+#moderator-section,
+#playlists-preview {
     color: white;
     text-decoration: none;
 }
 
-#moderator_section:hover {
+#moderator-section:hover {
+    color: red;
+    -webkit-box-shadow: 0px 0px 6px 6px white;
+    box-shadow: 0px 0px 6px 6px white;
+}
+
+
+#playlists-preview:hover {
     color: red;
     -webkit-box-shadow: 0px 0px 6px 6px white;
     box-shadow: 0px 0px 6px 6px white;
@@ -255,11 +263,19 @@
 }
 
 #fanhub-presentation {
-    max-width: 1200px;
+    max-width: 1600px;
+    margin-inline: auto;
     img {
         max-width: 100%;
         max-height: 100%;
         width: auto;
         height: auto;
     }
+    b {
+        color: red;
+    }
+}
+
+#fanhub-presentation:last-child {
+    max-width: 180ch;
 }

@@ -2,10 +2,10 @@
     /* font-sizes */
     --fs-300: 0.875rem;
     /* 14px */
-    --fs-400: clamp(1rem, 3vw, 1.125rem);
-    --fs-500: clamp(1.125rem, 3vw, 1.25rem);
-    --fs-600: clamp(1.25rem, 3vw, 1.5rem);
-    --fs-700: clamp(2.5rem, 5vw, 4rem);
+    --fs-400: clamp(0.8rem, 1.1vw, 1.125rem);
+    --fs-500: clamp(1.125rem, 2vw, 1.25rem);
+    --fs-600: clamp(1.25rem, 2vw, 1.5rem);
+    --fs-700: clamp(2rem, 3vw, 3rem);
 
     /* font-weights */
     --fw-300: 300;
@@ -225,13 +225,7 @@ h3,
 h4,
 p {
     margin: 0;
-    font-family:
-        Bahnschrift,
-        'DIN Alternate',
-        'Franklin Gothic Medium',
-        'Nimbus Sans Narrow',
-        sans-serif-condensed,
-        sans-serif;
+    font-family: system-ui, sans-serif;
     font-weight: normal;
 }
 
@@ -242,8 +236,21 @@ h4 {
     text-shadow: 1px 1px 2px black;
 }
 
+h1 {
+    font-size: var(--fs-700);
+}
 
+h2 {
+    font-size: var(--fs-600);
+}
 
+h3 {
+    font-size: var(--fs-500);
+}
+
+p {
+    font-size: var(--fs-400);
+}
 
 header {
     top: 0;
