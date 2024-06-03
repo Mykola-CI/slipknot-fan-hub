@@ -1,5 +1,11 @@
-<nav class="navbar">
-    <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
-    <a href="{% url 'account_signup' %}" class="nav-item nav-link">Sign Up</a>
-    <a href="{% url 'account_login' %}" class="nav-item nav-link">Login</a>
+<nav class="nav">
+    <input type="checkbox" id="menuToggle" class="menu-toggle hidden">
+    <label for="menuToggle" class="menu-icon">&#9776;</label>
+    <div class="navbar">
+        <div class="header-menu">
+            <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
+            <a href="{% url 'account_signup' %}" class="nav-item nav-link">Sign Up</a>
+            <a href="{% url 'account_login' %}" class="nav-item nav-link">Login</a>
+        </div>
+    </div>
 </nav>

@@ -8,8 +8,9 @@ html {
 
 body {
     color: antiquewhite;
-    font-size: 130%;
-    line-height: 150%;
+    font-family: system-ui, sans-serif;
+    /* font-size: 130%; */
+    /* line-height: 150%; */
 }
 
 .wrapper {
@@ -38,21 +39,36 @@ header {
 }
 
 
-header > p {
+#hello-user {
     grid-column: 3 / 4;
-    font-size: 125%;
+    font-size: clamp(1rem, 1.3vw, 1.4rem);
 }
 
-.navbar {
+#username {
+    font-size: 120%;
+    color: whitesmoke;
+    text-shadow: 3px 1px 0px rgba(0, 0, 0, 1);
+    text-transform: capitalize;
+}
+
+.nav {
     grid-column: 4 / span 2;
+    justify-self: end;
+}
+
+.header-menu {
     display: flex;
     justify-content: end;
     width: 100%;
-    /* font-size: 125%; */
+    font-size: (1rem, 1.3vw, 1.4rem);
     gap: 50px;
     text-shadow: 3px 1px 0px rgba(0, 0, 0, 1);
     text-decoration: overline;
     color: red
+}
+
+.menu-icon {
+    display: none;
 }
 
 .grid-header {
@@ -68,9 +84,9 @@ header > p {
     display: flex;
 }
 
-#logo-block > p {
+#logo-block > div {
     font-size: 100%;
-    align-self: flex-end;
+    align-self: flex-end !important;
     text-decoration: overline;
 }
 
@@ -132,4 +148,45 @@ form {
 
 .hidden {
     display: none;
+}
+
+
+/* Media Queries */
+@media (max-width: 1020px) {
+    .menu-icon {
+        display: block;
+        font-size: 250%;
+    }
+    .menu-icon:hover,
+    .menu-icon:focus,
+    .menu-icon:active {
+        color: red;
+        cursor: pointer;
+    }
+
+    .navbar {
+        display: none;
+        position: absolute;
+        top: 83px;
+        right: 0;
+        width: 80%;
+        padding: 20px 30px;
+        background-color: #000000c6;
+        z-index: 1;
+    }
+    .header-menu {
+        flex-direction: column;
+        gap: 25px;  
+    }
+    .menu-toggle:checked + .menu-icon + .navbar {
+        display: block;
+    }
+
+    .nav-item {
+        padding: 10px 0;
+    }
+    .nav-item:hover {
+        background-color: black;
+    }
+
 }

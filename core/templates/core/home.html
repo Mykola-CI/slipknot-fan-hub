@@ -8,8 +8,8 @@
 
 {% block main_content %}
 
-<div class="core-main grid-blog">
-    <aside class="core-menu flex-column-stretch border-red box-shadow">
+<div class="grid-blog core-main">
+    <aside class="core-menu flex-column-center-stretch border-red box-shadow">
         <div class="nav-item">
             <a href="{% url 'profile' %}" class="navigation-btn">Edit Profile</a>
         </div>
@@ -17,7 +17,8 @@
             <a href="{% url 'playlist_manage' %}" class="navigation-btn">Manage Playlists</a>
         </div>
         <div class="nav-item">
-            <a href="https://slipknot1.com/" target="_blank" rel="noopener noreferrer" class="navigation-btn">Go To Papa Site</a>
+            <a href="https://slipknot1.com/" target="_blank" rel="noopener noreferrer" class="navigation-btn">Go To Papa
+                Site</a>
         </div>
         <div class="nav-item">
             <a href="{% url 'moderator_section' %}" class="navigation-btn">Round And About</a>
@@ -26,6 +27,13 @@
 
     <section class="core-hero box-shadow">
         <h1><span>FanHub</span> Place</h1>
+        <p>Share your playlists with the world</p>
+        <p>Share your playlists with the world</p>
+        <p>Share your playlists with the world</p>
+        <p>Share your playlists with the world</p>
+        <p>Share your playlists with the world</p>
+        <p>Share your playlists with the world</p>
+        <p>Share your playlists with the world</p>
     </section>
 
     <a href="{% url 'moderator_section' %}" id="moderator-section" class="core-featured-1 box-shadow">
@@ -75,11 +83,11 @@
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ playlist_posts.previous_page_number }}">previous</a>
                 {% endif %}
-    
+
                 <span class="current">
                     Page {{ playlist_posts.number }} of {{ playlist_posts.paginator.num_pages }}.
                 </span>
-    
+
                 {% if playlist_posts.has_next %}
                 <a href="?page={{ playlist_posts.next_page_number }}">next</a>
                 <a href="?page={{ playlist_posts.paginator.num_pages }}">last &raquo;</a>
@@ -116,6 +124,7 @@
         </div>
     </footer>
 </div>
+
 
 {% endblock %}
 

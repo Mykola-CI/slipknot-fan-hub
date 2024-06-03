@@ -5,9 +5,11 @@
 
 {% block main_content %}
 
-<h1 class="access-denied">Access Denied</h1>
-<h2>403 Forbidden</h2>
-<p>You do not have permission to access this page.</p>
-<p>Error Details: {{ exception }}</p>
+<section class="container flex-1-1 text-center">
+    <h1 class="access-denied padding-20">Access Denied</h1>
+    <h2 class="padding-10">403 Forbidden</h2>
+    <p class="padding-10">You do not have permission to access this page.</p>
+    <p class="padding-10">Error Details: {{ exception }}</p>
+</section>
 
 {% endblock %}
