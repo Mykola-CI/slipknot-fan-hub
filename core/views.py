@@ -11,7 +11,7 @@ from user_profile.models import Playlist, UserProfile, PlaylistItem
 from .forms import CommentForm
 
 
-# Apart from general context creates dynamic blog context with pagination
+# Apart from general context creates dynamic blog post context with pagination
 def home_view(request):
     # Annotating each PlaylistPost with the count of related comments
     playlist_posts = PlaylistPost.objects.annotate(
@@ -40,6 +40,10 @@ def home_view(request):
 
 
 class PlaylistPreviewView(TemplateView):
+    """
+    Creating context and view for the full list of shared playlists page.
+    """
+
     template_name = 'core/playlist_preview.html'
     context_object_name = 'playlist_posts'
 
@@ -55,6 +59,33 @@ class PlaylistPreviewView(TemplateView):
         context['playlist_posts'] = playlist_posts
 
         return context
+
+
+# Creating context for author presentation page with info and playlists
+def user_profile_presentation(request, username):
+    user_profile = get_object_or_404(
+        UserProfile.objects.select_related('user'), user__username=username)
+    profile_user = user_profile.user
+    playlists = Playlist.objects.filter(author=profile_user, status=1)
+
+    # Create a list comprehension to hold playlists with their associated
+    # PlaylistPost pk. The goal is to avoid creation of extra views and
+    # templates and enable user to access the existing PlaylistPost detail view
+    playlist_with_posts = [
+        {
+            'playlist': playlist,
+            'playlist_post_pk': PlaylistPost.objects.get(playlist=playlist).pk
+        }
+        for playlist in playlists
+    ]
+
+    return render(
+        request,
+        'core/user_profile_presentation.html',
+        {'profile_user': profile_user,
+         'user_profile': user_profile,
+         'playlist_with_posts': playlist_with_posts}
+    )
 
 
 class PlaylistPostDetailView(DetailView):

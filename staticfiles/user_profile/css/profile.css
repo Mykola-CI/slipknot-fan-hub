@@ -84,3 +84,7 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+#author-playlist-presentation > p {
+    padding-bottom: 5px;
+}

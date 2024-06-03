@@ -279,3 +279,18 @@
 #fanhub-presentation:last-child {
     max-width: 180ch;
 }
+
+#playlist-full-list {
+    a {
+        font-size: var(--fs-500);
+        padding-bottom: 10px;
+    }
+
+    li {
+        padding: 20px 0;
+    }
+
+    p {
+        padding-bottom: 5px;
+    }
+}

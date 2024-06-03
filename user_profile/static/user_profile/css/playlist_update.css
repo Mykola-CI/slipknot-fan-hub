@@ -23,19 +23,17 @@
 }
 
 /* Styling forms */
+.container--inner {
+    max-width: 500px;
+    margin: auto;
+}
 .form-edit {
+    width: 100%;
     background-color: black;
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 13px 3px #000000; 
     box-shadow: 0px 0px 13px 3px #000000;
     text-align: left;
-
-    .form-control {
-        padding: 10px;
-        display: flex;
-        flex-direction: column; 
-        gap: 20px;   
-    }
 
     input,
     textarea,
@@ -70,12 +68,18 @@
     }
 }
 
+.form-control {
+    max-width: 500px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+    div > * {
+        width: 100%;
+    }   
+}
 
-/* .navigation {
-    div {
-        align-self: stretch;
-    }
-} */
+
 
 .caption {
     max-width: 40ch;

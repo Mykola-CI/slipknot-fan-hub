@@ -24,4 +24,8 @@ urlpatterns = [
         'playlistpost/list/',
         views.PlaylistPreviewView.as_view(),
         name='playlist_list'),
+    path(
+        'presentation/<str:username>/',
+        views.user_profile_presentation,
+        name='user_profile_presentation'),
 ]

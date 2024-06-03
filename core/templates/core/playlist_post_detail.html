@@ -23,12 +23,12 @@
         <h2>"{{ playlist_post.playlist.title }}" shared by &nbsp; &nbsp;
             <span>
                 {% if author_profile.avatar.url %}
-                <a href="#" aria-label="link to the author profile page" id="playlist-author-avatar">
+                <a href="{% url 'user_profile_presentation'  author_profile.user.username %}" aria-label="link to the author profile page" id="playlist-author-avatar">
                     {% cloudinary author_profile.avatar %}</a>
                 {% endif %}
             </span>
             <span id="palylist-author-name">
-                <a href="#" aria-label="link to the author profile page">{{ author_profile.user.username }}</a>
+                <a href="{% url 'user_profile_presentation'  author_profile.user.username %}" aria-label="link to the author profile page">{{ author_profile.user.username }}</a>
             </span>
         </h2>
         <article class="flex-column-left">

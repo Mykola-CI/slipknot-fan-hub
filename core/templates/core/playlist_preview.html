@@ -25,7 +25,7 @@
             <li>
                 <a href="{% url 'playlist_post_detail' pk=post.id %}">{{ post.playlist.title }}</a>
                 <p>Created by: {{ post.playlist.author }}</p>
-                <p>Description: {{ post.playlist.description }}</p>
+                <p>Description: {{ post.playlist.description | linebreaks }}</p>
                 <p>Total Likes: {{ post.total_likes }}</p>
             </li>
             {% endfor %}
