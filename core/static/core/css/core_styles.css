@@ -6,9 +6,8 @@
 }
 
 .grid-blog {
-    min-height: 100%;
     display: grid;
-    grid-template-columns: repeat(30, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-auto-rows: minmax(0, auto);
     grid-auto-flow: row;
     justify-items: stretch;
@@ -18,14 +17,14 @@
 }
 
 .core-menu {
-    grid-column: span 5;
+    grid-column: span 2;
     grid-row: span 4;
     padding: 0 20px 0 20px;
     font-size: var(--fs-400);
 }
 
 .core-hero {
-    grid-column: span 15;
+    grid-column: span 6;
     grid-row: span 5;
     background: url(../../../../static/images/fanhub-entry-zone-1.png) no-repeat center center scroll;
     -webkit-background-size: cover;
@@ -37,12 +36,12 @@
     }
     p {
         padding: 20px;
-        /* color: transparent; */
+        color: transparent;
     }
 }
 
 .core-featured-1 {
-    grid-column: span 10;
+    grid-column: span 4;
     grid-row: span 5;
     background: url(../../../../static/images/hero_banner_slipknot.png) no-repeat center center scroll;
     -webkit-background-size: cover;
@@ -71,8 +70,8 @@
 }
 
 .core-featured-2 {
-    grid-column: span 5;
-    grid-row: span 6;
+    grid-column: 1 / span 2;
+    grid-row: 5 / span 6;
     background: url(../../../../static/images/slipknot-spacecraft-surface.png) no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -82,7 +81,7 @@
 }
 
 .title-and-messages {
-    grid-column: span 25;
+    grid-column: span 10;
     align-self: end;
     letter-spacing: 5px;
     li {
@@ -106,8 +105,8 @@
 }
 
 .playlist-card-home {
-    grid-column: span 5;
-    grid-row: span 3;
+    grid-column: span 2;
+    grid-row: 7 / span 3;
     background-color: rgba(26, 29, 32, 0.7);
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 13px 3px #000000;
@@ -149,7 +148,7 @@
 
 /* Footer on the home page */
 .home-footer {
-    grid-column: 6 / span 25;
+    grid-column: 3 / span 10;
     background-color: black;
     padding: 10px 30px;
     align-items: center;
@@ -311,7 +310,7 @@
 @container main-home (max-width: 1600px) {
 
     .core-menu {
-        grid-column: span 30;
+        grid-column: span 10;
         grid-row: span 1;
         display: flex;
         flex-direction: row;
@@ -319,55 +318,165 @@
         align-items: center;
         flex-wrap: wrap;
         font-size: var(--fs-500);
+        padding: 7px 0;
+        div {
+            background-color: #000000cb;
+            border: 0.5px solid white;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+        }
     }
     .core-featured-2 {
-        grid-column: 1 / span 5;
+        grid-column: 1 / span 2;
         grid-row: 2 / span 5;
     }
-    .title-and-messages {
-        grid-column: span 30;
-    }
-    .playlist-card-home {
-        grid-column: span 6;
-    }
-    .home-footer {
-        grid-column: span 30;
-    }
-}
-
-@container main-home (max-width: 1200px) {
-
     .core-hero {
-        display:none;
+        grid-column: span 5;
+        grid-row: span 5;
     }
     .core-featured-1 {
-        grid-column: span 30;
-    }
-    .core-featured-2 {
-        grid-column: 1 / span 30;
-        grid-row: 7 / span 1;
+        grid-column: span 3;
+        grid-row: span 5;
     }
     .title-and-messages {
-        display: none;
+        grid-column: span 10;
+        grid-row-start: 7;
     }
     .playlist-card-home {
-        grid-column: span 10;
+        grid-column: span 2;
+        grid-row-start: 8;
     }
     .home-footer {
-        grid-column: span 30;
-    }
-    .core-main :nth-last-child(2) {
-        grid-column: 18 / span 10; 
-    }
-    .core-main :nth-last-child(3) {
-        grid-column: 4 / span 10; 
+        grid-column: span 10;
     }
 }
 
-/* @container main-home (max-width: 800px) {
-
-    .grid-blog {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
+@container main-home (max-width: 1250px) {
+    .core-menu :nth-child(3) {
+        display: none;
     }
-} */
+    .core-menu {
+        grid-column: span 6;
+    }
+    .core-hero {
+        display: none;
+    }
+    .core-featured-1 {
+        grid-column: span 6;
+        grid-row: 2 / span 1;
+    }
+    .title-and-messages {
+        grid-column: span 6;
+        grid-row-start: 3;
+    }
+    .core-featured-2 {
+        grid-column: 1 / span 2;
+        grid-row: 4 / span 3;
+    }
+    .playlist-card-home {
+        grid-column: span 2;
+        grid-row-start: 4;
+    }
+    .home-footer {
+        grid-column: span 6;
+    }
+    .core-main :nth-last-child(4),
+    .core-main :nth-last-child(3),
+    .core-main :nth-last-child(2) {
+        grid-row-start: 7;
+    }
+}
+
+@container main-home (max-width: 780px) {
+    #round-about {
+        display: none;
+    }
+    .core-menu {
+        grid-column: 1 / span 4;
+        grid-row: 1 / span 1;
+    }
+    .core-featured-1 {
+        grid-column: 1 / span 4;
+        grid-row: 2 / span 1;
+    }
+    .title-and-messages {
+        grid-column: 1 / span 4;
+        grid-row: 3 / 4;
+    }
+    .core-featured-2 {
+        grid-column: 1 / span 2;
+        grid-row: 4 / span 3;
+    }
+    .playlist-card-home {
+        grid-column: span 2;
+        padding-bottom: 10px;
+    }
+    .home-footer {
+        grid-column: span 4;
+        grid-row-start: 13;
+    }
+    .core-main :nth-last-child(6) {
+        grid-column: 3 / span 2;
+        grid-row-start: 4;
+    }
+    .core-main :nth-last-child(5),
+    .core-main :nth-last-child(4) {
+        grid-row-start: 7;
+    }
+    .core-main :nth-last-child(3),
+    .core-main :nth-last-child(2) {
+        grid-row-start: 10;
+    }
+}
+
+@container main-home (max-width: 600px) {
+    #round-about {
+        display: none;
+    }
+    .core-menu {
+        font-size: var(--fs-400);
+        .nav-item {
+            width: 150px;
+        }
+        .navigation-btn {
+            padding: 5px 10px;
+        }
+    }
+    .core-featured-1 {
+        h2 {
+            font-size: var(--fs-500);
+        }
+        p {
+            font-size: var(--fs-400);
+        }
+        opacity: 0.8;
+    }
+    .core-featured-2 {
+        grid-column: 1 / span 4;
+        grid-row: 19 / span 1;
+    }
+    .playlist-card-home {
+        grid-column: span 4;
+    }
+    .home-footer {
+        grid-column: span 4;
+        grid-row-start: 20;
+    }
+    .core-main :nth-last-child(6) {
+        grid-column: span 4;
+        grid-row-start: 4;
+    }
+    .core-main :nth-last-child(5) {
+        grid-row-start: 7;
+    }
+    .core-main :nth-last-child(4) {
+        grid-row-start: 10;
+    }
+    .core-main :nth-last-child(3) {
+        grid-row-start: 13;
+    }
+    .core-main :nth-last-child(2) {
+        grid-row-start: 16;
+    }
+}
