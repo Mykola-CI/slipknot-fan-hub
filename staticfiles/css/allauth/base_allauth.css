@@ -81,15 +81,21 @@ header {
 
 #logo-block {
     justify-self: start;
-    display: flex;
+    a {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        flex-wrap: wrap;
+    }
 }
 
-#logo-block > div {
-    font-size: 100%;
-    align-self: flex-end !important;
+
+#logo-block p {
+    font-size: var(--fs-500);
+    align-self: flex-end;
     text-decoration: overline;
+    color: white !important;
 }
-
 
 #logo-picture {
     max-width: 100px;
@@ -183,6 +189,49 @@ form {
     }
 
     .nav-item {
+        padding: 10px 0;
+    }
+    .nav-item:hover {
+        background-color: black;
+    }
+
+}
+
+@media (max-width: 1020px) {
+    .menu-icon {
+        display: block;
+        font-size: 3em;
+    }
+    .menu-icon:hover,
+    .menu-icon:focus,
+    .menu-icon:active {
+        color: red;
+        cursor: pointer;
+    }
+
+    .navbar {
+        display: none;
+        position: absolute;
+        top: 83px;
+        right: 0;
+        width: 80%;
+        padding: 20px 30px;
+        background-color: #000000ce;
+        z-index: 1;
+    }
+    .header-menu {
+        flex-direction: column;
+        gap: 25px;  
+    }
+    .menu-toggle:checked + .menu-icon + .navbar {
+        display: block;    
+    }
+
+    .menu-toggle:checked + .menu-icon {
+        transform: rotate(90deg)
+    }
+
+    .nav-link {
         padding: 10px 0;
     }
     .nav-item:hover {
