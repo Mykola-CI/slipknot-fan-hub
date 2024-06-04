@@ -1,8 +1,8 @@
 :root {
     /* font-sizes */
-    --fs-300: clamp(0.8rem, 1vw, 1rem);
+    --fs-300: clamp(0.7rem, 1vw, 0.9rem);
     /* 14px */
-    --fs-400: clamp(1rem, 1vw, 1.125rem);
+    --fs-400: clamp(0.9rem, 1vw, 1.125rem);
     --fs-500: clamp(1rem, 1.3vw, 1.4rem);
     --fs-600: clamp(1.25rem, 1.5vw, 1.5rem);
     --fs-700: clamp(2rem, 3vw, 3rem);
@@ -479,24 +479,15 @@ a:hover {
 
 }
 
-
 @media (max-width: 760px) {
-
-    .grid-blog {
-        display: block !important;
+    .pagination {
+        font-size: var(--fs-400);
     }
-    .grid-blog > a {
-        display: block;
-        margin: 20px 0;
+    .social-media {
+        font-size: 1.2rem;
     }
-    .core-menu {
-        gap: 5px;
-        /* text-align: center ; */
-    }
-    .core-menu :nth-child(3) {
-        display: none;
-    }
-    .core-menu > div {
-        width: 175px;
+    .home-footer {
+        justify-content: center;
+        gap: 10px;
     }
 }
