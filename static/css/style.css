@@ -2,9 +2,9 @@
     /* font-sizes */
     --fs-300: clamp(0.7rem, 1vw, 0.9rem);
     /* 14px */
-    --fs-400: clamp(0.9rem, 1vw, 1.125rem);
-    --fs-500: clamp(1rem, 1.3vw, 1.4rem);
-    --fs-600: clamp(1.25rem, 1.5vw, 1.5rem);
+    --fs-400: clamp(0.9rem, 2vw, 1.125rem);
+    --fs-500: clamp(1rem, 3vw, 1.3rem);
+    --fs-600: clamp(1.2rem, 3vw, 1.6rem);
     --fs-700: clamp(2rem, 3vw, 3rem);
 
     /* font-weights */
@@ -68,6 +68,15 @@ html {
     align-items: flex-end;
     gap: 20px;
 }
+
+.flex-end-start {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 20px;
+}
+
 
 .flex-column-left {
     display: flex;

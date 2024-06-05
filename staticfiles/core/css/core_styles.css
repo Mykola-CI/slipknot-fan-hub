@@ -195,10 +195,11 @@
 
 .pop-down {
     position: absolute;
+    max-width: 80dvw;
     width: 150%;
     padding: 20px 40px;
-    top: 40px;
-    right: 0;
+    top: 100px;
+    right: -30px;
     background-color: black;
     border-radius: 5px;
     opacity: 0;
@@ -354,6 +355,13 @@
         grid-column: span 10;
     }
 }
+
+@media (max-width: 1306px) {
+    .pop-down {
+        left: -20px;
+    }
+}
+
 
 @media (max-width: 1250px) {
     .grid-blog {

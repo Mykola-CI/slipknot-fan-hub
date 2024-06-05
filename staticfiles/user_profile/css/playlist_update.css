@@ -18,20 +18,18 @@
 
 .navigation,
 .form-edit {
-    font-size: large;
+    font-size: var(--fs-500);
     padding: 20px;
 }
 
 /* Styling forms */
 .container--inner {
-    max-width: 500px;
     margin: auto;
 }
 
 .form-edit {
-    /* min-width: 320px; */
     width: 100%;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.623);
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 13px 3px #000000;
     box-shadow: 0px 0px 13px 3px #000000;
@@ -43,13 +41,13 @@
     button {
         padding: 10px;
         border-radius: 7px;
-        font-size: medium;
+        font-size: var(--fs-400);
         margin-bottom: 10px;
     }
 
     p {
         font-style: oblique;
-        font-weight: bold;
+        font-weight: var(--fw-500);
         margin-bottom: 5px;
         color: red;
     }
@@ -68,19 +66,22 @@
         font-size: medium;
         padding: 0;
     }
+    h2 {
+        text-align: center;
+    }
 }
 
 .form-control {
     margin-inline: auto;
-    max-width: 500px;
+    /* max-width: 500px; */
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 
-    div > * {
+    /* div > * {
         width: 100%;
-    }
+    } */
 }
 
 

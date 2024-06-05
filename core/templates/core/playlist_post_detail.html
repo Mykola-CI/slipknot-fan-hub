@@ -16,7 +16,7 @@
     {% endfor %}
 </ul>
 {% endif %}
-<div class="grid-post-detail grid container">
+<div class="grid-post-detail flex-start-center container">
 
     <section class="playlist-description flex-column-left">
         <h1>Playlist Details:</h1>
@@ -140,12 +140,12 @@
 
 <section class="playlist-comment container">
     <h2>Comments:</h2>
-    <div class="grid">
+    <div class="flex">
         <div class="flex-column-left">
             {% for comment in comments %}
             <div>
                 <p><strong>{{ comment.author }}</strong> made a comment {{ comment.created_on|timesince }} ago:</p>
-                <div class="flex-start">
+                <div class="flex-start-end">
                     <div id="comment{{ comment.id }}" class="comment-content shadow-white">
                         {{ comment.content | linebreaks }}
                     </div>

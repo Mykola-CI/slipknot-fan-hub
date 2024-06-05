@@ -56,3 +56,6 @@ class PlaylistItemForm(forms.ModelForm):
             'performance_year',
             'performance_type'
         ]
+        widgets = {
+            'song_comments': forms.Textarea(attrs={'cols': 30, 'rows': 6}),
+        }
