@@ -7,6 +7,7 @@ Used as a base file for further modularisation of local.py and production.py
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import sys
 import dj_database_url
 
 
@@ -110,8 +111,14 @@ DATABASES = {
     'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
 }
 
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',  # Using in-memory database for tests
+    }
+
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.herokuapp.com"
+    "https://*.herokuapp.com",
 ]
 
 

@@ -9,8 +9,8 @@ html {
 body {
     color: antiquewhite;
     font-family: system-ui, sans-serif;
-    /* font-size: 130%; */
-    /* line-height: 150%; */
+    /* font-size: 130%;
+    line-height: 150%; */
 }
 
 .wrapper {
@@ -51,6 +51,13 @@ header {
     text-transform: capitalize;
 }
 
+.auth-menu {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+
+}
+
 .nav {
     grid-column: 4 / span 2;
     justify-self: end;
@@ -58,9 +65,9 @@ header {
 
 .header-menu {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     width: 100%;
-    font-size: (1rem, 1.3vw, 1.4rem);
+    font-size: clamp(1rem, 1.3vw, 1.4rem);
     gap: 50px;
     text-shadow: 3px 1px 0px rgba(0, 0, 0, 1);
     text-decoration: overline;
@@ -91,11 +98,13 @@ header {
 
 
 #logo-block p {
-    font-size: var(--fs-500);
+    margin: 0;
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
     align-self: flex-end;
     text-decoration: overline;
     color: white !important;
 }
+
 
 #logo-picture {
     max-width: 100px;
@@ -131,25 +140,8 @@ form {
     }
 }
 
-.footer-social {
-    width: 100%;
-    padding: 20px 50px 20px 20px;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.social-media {
-    font-size: 1.5em;
-    li {
-        display: inline;
-        padding: 10px;
-        list-style-type: none;
-    }
-    a {
-        color: antiquewhite;
-    }
+form li {
+    padding: 6px 0;
 }
 
 .hidden {
@@ -197,45 +189,12 @@ form {
 
 }
 
-@media (max-width: 1020px) {
-    .menu-icon {
-        display: block;
-        font-size: 3em;
+@media (max-width: 560px) {
+    form ul {
+        padding-left: 0;
     }
-    .menu-icon:hover,
-    .menu-icon:focus,
-    .menu-icon:active {
-        color: red;
-        cursor: pointer;
-    }
-
-    .navbar {
-        display: none;
-        position: absolute;
-        top: 83px;
-        right: 0;
-        width: 80%;
-        padding: 20px 30px;
-        background-color: #000000ce;
-        z-index: 1;
-    }
-    .header-menu {
-        flex-direction: column;
-        gap: 25px;  
-    }
-    .menu-toggle:checked + .menu-icon + .navbar {
-        display: block;    
-    }
-
-    .menu-toggle:checked + .menu-icon {
-        transform: rotate(90deg)
-    }
-
-    .nav-link {
-        padding: 10px 0;
-    }
-    .nav-item:hover {
-        background-color: black;
+    form input {
+        max-width: 90%;
     }
 
 }

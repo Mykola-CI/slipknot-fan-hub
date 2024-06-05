@@ -26,8 +26,9 @@
     width: 100%;
     margin-top: 20px;
     letter-spacing: 2px;
-    grid-column: span 2;
+    grid-column: 1 / -1;
     grid-row: span 2;
+
     :last-child {
         align-self: center;
     }
@@ -36,9 +37,9 @@
 .avatar-profile-page {
     max-width: 100px;
     margin-inline: auto;
-    box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+    box-shadow: -2px 5px 21px 18px rgba(0, 0, 0, 0.78);
     -webkit-box-shadow: -2px 5px 21px 18px rgba(64, 38, 38, 0.78);
-    -moz-box-shadow: -2px 5px 21px 18px rgba(0,0,0,0.78);
+    -moz-box-shadow: -2px 5px 21px 18px rgba(0, 0, 0, 0.78);
 }
 
 .avatar-profile-page > img {
@@ -46,12 +47,34 @@
 }
 
 .edit-btn {
-    margin-block-start: auto;
+    /* margin-block-start: auto; */
     height: 40px;
     border-radius: 20px;
     align-self: flex-start;
-    padding: 10px;
+    padding: 5px;
     width: 120px;
+    font-size: var(--fs-400);
+}
+
+#modal-form {
+    button {
+        margin-inline: auto;
+        margin-top: 20px;
+    }
+}
+
+#form-fields input {
+    padding: 5px;
+    border-radius: 5px;
+    font-size: var(--fs-400);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 #form-fields label {
@@ -78,22 +101,27 @@
     margin-inline: auto;
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 #author-playlist-presentation > p {
     padding-bottom: 5px;
 }
 
-@media screen and (max-width: 550px) {
+/* Media queries */
+@media (max-width: 850px) {
+
+    #profile-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    #playlists {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 550px) {
     #profile-container {
         grid-template-columns: 1fr;
     }
+
     .profile-section {
         padding: 20px;
         max-width: 40ch;
@@ -103,16 +131,20 @@
         -webkit-box-shadow: 0px 0px 6px 6px #000000;
         box-shadow: 0px 0px 6px 6px #000000;
     }
+
     #playlists {
         grid-column: span 1;
         grid-row: span 5;
         font-size: var(--fs-400);
+
         a {
-            text-align: right;
+            text-align: center;
         }
+
         padding: 10px;
 
     }
+
     #about-myself {
         grid-column: span 1;
         grid-row: span 2;

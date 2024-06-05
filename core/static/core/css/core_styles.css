@@ -198,7 +198,7 @@
     max-width: 80dvw;
     width: 150%;
     padding: 20px 40px;
-    top: 100px;
+    top: 50px;
     right: -30px;
     background-color: black;
     border-radius: 5px;
@@ -231,6 +231,7 @@
 .playlist-comment {
     h2 {
         text-align: center;
+        margin-bottom: 30px;
     }
 }
 
@@ -241,7 +242,8 @@
 }
 
 .comment-form-container {
-    align-self: start
+    align-self: start;
+    margin-top: 20px;
 }
 
 .add-comment-form {
@@ -275,6 +277,28 @@
     background-color: dimgray;
 }
 
+.close {
+    font-size: 2em;
+    cursor: pointer;
+    text-align: right;
+}
+
+#deleteConfirm {
+    padding: 6px 20px;
+    margin-top: 20px;
+    font-size: var(--fs-500);
+    font-weight: var(--fw-500);
+    border-radius: 10px;
+}
+
+#deleteConfirm:hover,
+#deleteConfirm:focus,
+#deleteConfirm:active {
+    background-color: black;
+}
+
+
+/* Author profile presentation styles */
 #fanhub-presentation {
     max-width: 1600px;
     margin-inline: auto;
@@ -308,6 +332,8 @@
     }
 }
 
+
+/* Media Queries */
 @media (max-width: 1600px) {
 
     .grid-blog {
@@ -327,7 +353,7 @@
             background-color: #000000cb;
             border: 0.5px solid white;
             border-radius: 5px;
-            width: 200px;
+            width: 230px;
             text-align: center;
         }
     }
@@ -354,14 +380,10 @@
     .home-footer {
         grid-column: span 10;
     }
-}
-
-@media (max-width: 1306px) {
-    .pop-down {
-        left: -20px;
+    #fanhub-presentation {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 }
-
 
 @media (max-width: 1250px) {
     .grid-blog {
@@ -379,6 +401,8 @@
     .core-featured-1 {
         grid-column: span 6;
         grid-row: 2 / span 1;
+        border: 0.8px solid white;
+        padding: 5px;
     }
     .title-and-messages {
         grid-column: span 6;
@@ -399,6 +423,9 @@
     .core-main :nth-last-child(3),
     .core-main :nth-last-child(2) {
         grid-row-start: 7;
+    }
+    #fanhub-presentation {
+        align-items: start;
     }
 }
 
@@ -495,5 +522,13 @@
     }
     .core-main :nth-last-child(2) {
         grid-row-start: 16;
+    }
+    .playlist-item audio {
+        padding-left: 0;
+        max-width: 100%;
+    }
+    .playlist-item {
+        padding: 10px;
+        top: 80px;
     }
 }
