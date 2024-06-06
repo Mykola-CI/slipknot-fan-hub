@@ -12,8 +12,8 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
 </ul>
 {% endif %}
 <div class="grid-post-detail flex-evenly container">
@@ -23,35 +23,40 @@
         <h2>"{{ playlist_post.playlist.title }}" shared by &nbsp; &nbsp;
             <span>
                 {% if author_profile.avatar.url %}
-                <a href="{% url 'user_profile_presentation'  author_profile.user.username %}" aria-label="link to the author profile page" id="playlist-author-avatar">
-                    {% cloudinary author_profile.avatar %}</a>
+                <a href="{% url 'user_profile_presentation'  author_profile.user.username %}"
+                    aria-label="link to the {{ author_profile.user.username }}'s page" id="playlist-author-avatar">
+                    <img src="{{ author_profile.avatar.url }}" alt="{{ author_profile.user.username }}'s avatar">
+                </a>
                 {% endif %}
             </span>
             <span id="palylist-author-name">
-                <a href="{% url 'user_profile_presentation'  author_profile.user.username %}" aria-label="link to the author profile page">{{ author_profile.user.username }}</a>
+                <a href="{% url 'user_profile_presentation'  author_profile.user.username %}"
+                    aria-label="link to the {{ author_profile.user.username }}'s page">{{ author_profile.user.username }}</a>
             </span>
         </h2>
         <article class="flex-column-left">
             {% if playlist_post.playlist.featured_image %}
             <div class="featured-image">
-                {% cloudinary playlist_post.playlist.featured_image %}
+                <img src="{{ playlist_post.playlist.featured_image.url }}" alt="'{{playlist_post.playlist.title }}' featured image">
             </div>
             {% else %}
             <p>No Featured image provided by Author</p>
             {% endif %}
             <div>
                 <p>Description:</p>
-                <div class="text-description shadow-white padding-20">{{ playlist_post.playlist.description | linebreaks }}</div>
+                <div class="text-description shadow-white padding-20">
+                    {{ playlist_post.playlist.description | linebreaks }}</div>
             </div>
             {% if playlist_post.playlist.reference_url %}
-            <a href="{{ playlist_post.playlist.reference_url }}" aria-label="url reference featuring playlist main message"
-                target="_blank">🔗 The Author has provided this link for your reference (opens in a new window)</a>
+            <a href="{{ playlist_post.playlist.reference_url }}"
+                aria-label="url reference featuring playlist main message" target="_blank">🔗 The Author has provided
+                this link for your reference (opens in a new window)</a>
             {% endif %}
             <p>Created on: {{ playlist_post.created_on }}</p>
-            
+
             <p>Total Comments: {{ comment_count }}</p>
         </article>
-        
+
         <div class="flex-start">
             <form action="{% url 'like_view' playlist_post.pk %}" method="POST">
                 {% csrf_token %}
@@ -72,8 +77,10 @@
             {% for item in playlist_items %}
             <li>
                 {{ item }} Performance Type: {{ item.get_performance_type_display }}
-                <input type="checkbox" id="nav-toggle-{{ forloop.counter }}" class="nav-toggle hidden" name="nav-toggle">
-                <label for="nav-toggle-{{ forloop.counter }}" class="nav-toggle--label"><i class="fa-solid fa-bars"></i></label>
+                <input type="checkbox" id="nav-toggle-{{ forloop.counter }}" class="nav-toggle hidden"
+                    name="nav-toggle">
+                <label for="nav-toggle-{{ forloop.counter }}" class="nav-toggle--label"><i
+                        class="fa-solid fa-bars"></i></label>
                 <article class="playlist-item pop-down flex-column-left">
                     <div>
                         <p>Artist/Author:</p>
@@ -87,7 +94,8 @@
                     </div>
                     <div>
                         {% if item.song_url %}
-                        <a href="{{ item.song_url }}" aria-label="link reference to the song" target="_blank">🔗 Follow this
+                        <a href="{{ item.song_url }}" aria-label="link reference to the song" target="_blank">🔗 Follow
+                            this
                             link provided by the Playlist's Author</a>
                         {% endif %}
                     </div>
@@ -103,7 +111,9 @@
                     <div>
                         {% if item.song_tabs %}
                         <p>Song Docs (song tabs/notation or other useful stuff):</p>
-                        <a href="{{ item.song_tabs.url }}" download target="_blank" rel="noopener noreferrer" aria-label="link to the song docs file">🔗 Preview doc file here and download if you need</a>
+                        <a href="{{ item.song_tabs.url }}" download target="_blank" rel="noopener noreferrer"
+                            aria-label="link to the song docs file">🔗 Preview doc file here and download if you
+                            need</a>
                         {% endif %}
                     </div>
                     <div>
@@ -124,7 +134,7 @@
                     </div>
                 </article>
             </li>
-            
+
             {% endfor %}
         </ul>
     </section>
@@ -133,8 +143,8 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
 </ul>
 {% endif %}
 
@@ -151,7 +161,8 @@
                     </div>
                     {% if user.is_authenticated and comment.author == user %}
                     <button class="btn-edit btn-form" data-comment_id="{{ comment.id }}">Edit</button>
-                    <button class="btn-delete btn-form back-red color-white" data-comment_id="{{ comment.id }}">Delete</button>
+                    <button class="btn-delete btn-form back-red color-white"
+                        data-comment_id="{{ comment.id }}">Delete</button>
                     {% endif %}
                 </div>
                 <div class="flex-start">
@@ -171,7 +182,7 @@
             <p>No comments yet. Be the first to comment!</p>
             {% endfor %}
         </div>
-    
+
         {% if user.is_authenticated %}
         <div class="comment-form-container box-shadow back-dark padding-20 flex-column-left">
             <h3 id="formTitle">Add a Comment</h3>
@@ -182,7 +193,8 @@
                     Submit
                 </button>
             </form>
-            <a href="{% url 'playlist_post_detail' pk=playlist_post.pk %}" id="discardChanges" class="hidden">Discard Changes</a>
+            <a href="{% url 'playlist_post_detail' pk=playlist_post.pk %}" id="discardChanges" class="hidden">Discard
+                Changes</a>
         </div>
         {% else %}
         <p>Log in to leave a comment</p>
@@ -194,7 +206,7 @@
     <div class="modal-content">
         <p class="close">&times;</p>
         <h2>Are you sure you want to delete this comment?</h2>
-        <a href="#" id="deleteConfirm" class="back-red color-white">Confirm Delete</a>
+        <a href="#" id="deleteConfirm" class="back-red color-white" aria-label="confirm delete">Confirm Delete</a>
     </div>
 </div>
 

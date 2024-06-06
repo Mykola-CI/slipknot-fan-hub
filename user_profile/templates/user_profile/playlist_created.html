@@ -14,19 +14,19 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
 {% endif %}
 
 <div class="container flex-start-center flex-1-1">
     <section class="flex-column-left">
-        <h4>Playlist Image:</h4> 
+        <h4>Playlist Image:</h4>
         <div class=" featured-image-profile image-container">
-        {% if playlist.featured_image %}
-            {% cloudinary playlist.featured_image %} 
-        {% else %}
-            <img src="{% static 'images/hero_banner_slipknot.png' %}" alt="default featured image">
+            {% if playlist.featured_image %}
+            <img src="{{ playlist.featured_image.url }}" alt="'{{ playlist.title }}' featured image">
+            {% else %}
+            <img src="{% static 'images/hero_banner_slipknot.png' %}" alt="default image for the playlist">
         </div>
         <div class="caption">
             <p>No Custom Image Was Uploaded!</p>
@@ -44,11 +44,12 @@
             <p>{{ playlist.description | linebreaks }}</p>
         </div>
         <div>
-            <h3>Playlist Reference:</h3> 
-            {% if playlist.reference_url %}  
-            <a href="{{ playlist.reference_url }}" target="_blank" rel="noopener noreferrer">{{ playlist.reference_url }}</a>
+            <h3>Playlist Reference:</h3>
+            {% if playlist.reference_url %}
+            <a href="{{ playlist.reference_url }}" target="_blank" rel="noopener noreferrer"
+                aria-label="'{{ playlist.title }}' featured link">{{ playlist.reference_url }}</a>
             {% else %}
-                <p>No URL Uploaded</p>    
+            <p>No URL Uploaded</p>
             {% endif %}
         </div>
         <div>
@@ -57,48 +58,54 @@
         </div>
     </section>
     <section class="navigation flex-column-stretch text-center">
-            <div>
-                <a href="{% url 'playlist_update' playlist.id %}" class="navigation-btn back-dark color-red"><strong>Edit Playlist Details and Image</strong></a>
-            </div>
-            <div>
-                <a href="{% url 'playlist_create' %}" class="navigation-btn back-dark color-red"><strong>Create New Playlist</strong></a>
-            </div>
-            <div>
-                <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"><strong>Back to Your Profile Page</strong></a>
-            </div>
-            <div id="playlist-{{ playlist.id }}">
-                <form method="post" action="{% url 'toggle_playlist_status' playlist.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="navigation-btn back-white color-red">
-                        {% if playlist.status == 1 %}
-                        <strong>Remove playlist from FanHub</strong>
-                        {% else %}
-                        <strong>Share playlist with FanHub</strong>
-                        {% endif %}
-                    </button>
-                </form>
-            </div>
-            <div>
-                <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-btn back-red color-white"><strong>Delete Playlist</strong></a>
-            </div>
+        <div>
+            <a href="{% url 'playlist_update' playlist.id %}" class="navigation-btn back-dark color-red"
+                aria-label="edit playlist details"><strong>Edit Playlist Details and Image</strong></a>
+        </div>
+        <div>
+            <a href="{% url 'playlist_create' %}" class="navigation-btn back-dark color-red"
+                aria-label="create new playlist"><strong>Create New Playlist</strong></a>
+        </div>
+        <div>
+            <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"
+                aria-label="back to the profile page"><strong>Back to Your Profile Page</strong></a>
+        </div>
+        <div id="playlist-{{ playlist.id }}">
+            <form method="post" action="{% url 'toggle_playlist_status' playlist.id %}">
+                {% csrf_token %}
+                <button type="submit" class="navigation-btn back-white color-red">
+                    {% if playlist.status == 1 %}
+                    <strong>Remove playlist from FanHub</strong>
+                    {% else %}
+                    <strong>Share playlist with FanHub</strong>
+                    {% endif %}
+                </button>
+            </form>
+        </div>
+        <div>
+            <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-btn back-red color-white"
+                aria-label="delete playlist"><strong>Delete Playlist</strong></a>
+        </div>
     </section>
     <section class="playlist-card flex-column-left flex-grow-1">
         <h3>Playlist Items:</h3>
         <div>
-            <a href="{% url 'add_playlist_item' playlist_id=playlist.id %}" class="navigation-btn"><strong>Add Items to Your Playlist</strong></a>
+            <a href="{% url 'add_playlist_item' playlist_id=playlist.id %}" class="navigation-btn"
+                aria-label="add items to the playlist"><strong>Add Items to Your Playlist</strong></a>
         </div>
         <p>OR</p>
         <p>Click to Edit or Delete Your Playlist Items:</p>
         {% if playlist_items %}
-            <ul>
-                {% for item in playlist_items %}
-                    <li>
-                        <a href="{% url 'playlist_item_update' playlist_id=playlist.id pk=item.id %}">{{ item }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for item in playlist_items %}
+            <li>
+                <a href="{% url 'playlist_item_update' playlist_id=playlist.id pk=item.id %}"
+                    aria-label="edit or delete playlist items">{{ item }}</a>
+            </li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>No Playlist Items Yet</p>
+        <p>No Playlist Items Yet</p>
         {% endif %}
 
     </section>

@@ -19,18 +19,18 @@
 {% endif %}
 
 <div class="container flex-column-stretch flex-1-1">
-    <section class="flex">
+    <section class="flex-around">
         <div class="flex-column">
             <h1>{{ profile_user.username }}'s Profile</h1>
             <div class="avatar-profile-page">
                 {% if "default_avatar" in user_profile.avatar.url %}
                 <img src="{% static 'images/nobody.jpg' %}" alt="default avatar">
                 {% else %}
-                {% cloudinary user_profile.avatar %}
+                <img src="{{ user_profile.avatar.url }}" alt="{{ profile_user.username }}'s avatar">
                 {% endif %}
             </div>
         </div>
-        <div>
+        <div class="presentation-profile-info">
             <div class="profile-section">
                 <h3>Email:</h3>
                 <p>{{ profile_user.email }}</p>
@@ -46,7 +46,7 @@
                 <p>{{ user_profile.date_of_birth }}</p>
             </div>
         </div>
-        <div id="about-myself" class="profile-section">
+        <div id="about-myself-presentation" class="profile-section">
             <h3>About Myself</h3>
             <p>{{ user_profile.about_myself | safe }}</p>
         </div>
@@ -57,7 +57,8 @@
         <ul id="author-playlist-presentation">
             {% for item in playlist_with_posts %}
             <li>
-                <a href="{% url 'playlist_post_detail' pk=item.playlist_post_pk %}">
+                <a href="{% url 'playlist_post_detail' pk=item.playlist_post_pk %}"
+                    aria-label="go to {{ item.playlist.title }}">
                     {{ item.playlist.title }}
                 </a>
             </li>

@@ -157,11 +157,9 @@
 /* Playlist detail view */
 
 .featured-image {
-    max-width: 200px;
+    max-width: 600px;
     img {
         max-width: 100%;
-        max-height: 100%;
-        width: auto;
         height: auto;
     }
 }

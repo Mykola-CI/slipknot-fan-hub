@@ -1,12 +1,12 @@
 <p id="hello-user">Hello, <span id="username">{{ request.user.username }}!</span></p>
 <nav class="nav">
     <input type="checkbox" id="menuToggle" class="menu-toggle hidden">
-    <label for="menuToggle" class="menu-icon">&#9776;</label>
+    <label for="menuToggle" class="menu-icon color-white">&#9776;</label>
     <div class="navbar">
         <div class="header-menu">
-            <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
-            <a href="{% url 'profile' %}" class="nav-item nav-link">Your Profile</a>
-            <a href="{% url 'account_logout' %}" class="nav-item nav-link">Sign Out</a>
+            <a href="{% url 'home' %}" class="nav-item nav-link" aria-label="back to the home page">Home</a>
+            <a href="{% url 'profile' %}" class="nav-item nav-link" aria-label="go to your profile">Your Profile</a>
+            <a href="{% url 'account_logout' %}" class="nav-item nav-link" aria-label="sign out">Sign Out</a>
         </div>
     </div>
 </nav>

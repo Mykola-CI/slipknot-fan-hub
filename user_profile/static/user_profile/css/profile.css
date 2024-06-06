@@ -4,6 +4,10 @@
     grid-column: span 2;
 }
 
+#about-myself-presentation {
+    justify-content: flex-start;
+}
+
 .profile-section {
     padding: 20px 20px 20px 40px;
     max-width: 50ch;
@@ -44,16 +48,6 @@
 
 .avatar-profile-page > img {
     width: 100%;
-}
-
-.edit-btn {
-    /* margin-block-start: auto; */
-    height: 40px;
-    border-radius: 20px;
-    align-self: flex-start;
-    padding: 5px;
-    width: 120px;
-    font-size: var(--fs-400);
 }
 
 #modal-form {
@@ -145,8 +139,13 @@
 
     }
 
+    .presentation-profile-info {
+        width: 100%;
+    }
+
     #about-myself {
         grid-column: span 1;
         grid-row: span 2;
+        width: 100%;
     }
 }

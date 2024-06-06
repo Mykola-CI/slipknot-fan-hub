@@ -35,10 +35,10 @@
         </section>
         <section class="navigation flex-column">
             <div>
-                <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red"><strong>Back to the Playlist View</strong></a>
+                <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red" aria-label="back to the playlist page"><strong>Back to the Playlist View</strong></a>
             </div>
             <div>
-                <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"><strong>Back to Your Profile Page</strong></a>
+                <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red" aria-label="back to the profile page"><strong>Back to Your Profile Page</strong></a>
             </div>
         </section>
     </div>

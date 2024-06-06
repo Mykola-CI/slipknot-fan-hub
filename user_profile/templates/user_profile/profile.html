@@ -18,7 +18,8 @@
     {% if "default_avatar" in user_profile.avatar.url %}
     <img src="{% static 'images/nobody.jpg' %}" alt="default avatar">
     {% else %}
-    {% cloudinary user_profile.avatar %}
+    <img src="{{ user_profile.avatar.url }}" alt="{{ user_profile.user.username }}'s avatar">
+    <!-- {% cloudinary user_profile.avatar %} -->
     {% endif %}
 </div>
 
@@ -57,44 +58,44 @@
             </form>
         </div>
     </div>
-    
+
     <div id="profile-container" class="container grid">
-    
+
         <div class="profile-section">
             <h3> Avatar</h3>
             <button class="edit-btn" data-form="avatar">Update</button>
         </div>
-    
+
         <div class="profile-section">
             <h3>Email</h3>
             <p>{{ request.user.email }}</p>
             <button class="edit-btn" data-form="email">Update</button>
         </div>
-    
+
         <div class="profile-section">
             <h3>Password</h3>
             <p>********</p>
             <button class="edit-btn" data-form="password">Change</button>
         </div>
-    
+
         <div class="profile-section">
             <h3>Name</h3>
             <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
             <button class="edit-btn" data-form="name">Update</button>
         </div>
-    
+
         <div class="profile-section">
             <h3>Date of Birth</h3>
             <p>{{ user_profile.date_of_birth }}</p>
             <button class="edit-btn" data-form="dob">Update</button>
         </div>
-    
+
         <div id="about-myself" class="profile-section">
             <h3>About Myself</h3>
             <p>{{ user_profile.about_myself | safe }}</p>
             <button class="edit-btn" data-form="about">Update</button>
         </div>
-    
+
         {% include 'user_profile/playlist.html' %}
     </div>
 </div>

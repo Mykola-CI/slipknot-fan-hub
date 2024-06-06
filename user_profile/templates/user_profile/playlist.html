@@ -3,13 +3,14 @@
     <ul>
         {% for playlist in playlists %}
         <li>
-            <a href="{% url 'playlist_created' playlist.id %}">{{ playlist }}</a>
+            <a href="{% url 'playlist_created' playlist.id %}" aria-label="go to playlist details">{{ playlist }}</a>
         </li>
         {% empty %}
         <li>No playlists found.</li>
         {% endfor %}
     </ul>
     <div class="padding-20">
-        <a href="{% url 'playlist_create' %}" class="navigation-btn back-dark color-red"><strong>Create New Playlist</strong></a>
+        <a href="{% url 'playlist_create' %}" aria-label="create new playlist"
+            class="navigation-btn back-dark color-red"><strong>Create New Playlist</strong></a>
     </div>
 </section>

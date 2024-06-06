@@ -17,7 +17,7 @@
             {% for field in form %}
             <div class="field-block">
                 <p>{{ field.errors }}</p>
-                <p>{{ field.label_tag }}</p> 
+                <p>{{ field.label_tag }}</p>
                 {{ field }}
             </div>
             {% endfor %}
@@ -26,28 +26,32 @@
     </section>
     <section class="playlist-card flex-column-left">
         <h2>Playlist Items</h2>
-        <div><a href="{% url 'add_playlist_item' playlist_id=playlist.id %}" class="navigation-btn back-dark color-red"><strong>Add New Item</strong></a></div>
+        <div><a href="{% url 'add_playlist_item' playlist_id=playlist.id %}" class="navigation-btn back-dark color-red"
+                aria-label="add new playlist item"><strong>Add New Item</strong></a></div>
         <p>OR</p>
         <p>Click to Edit or Delete Your Playlist Items:</p>
         {% if playlist_items %}
         <ul>
             {% for item in playlist_items %}
-                <li>
-                    <a href="{% url 'playlist_item_update' playlist_id=playlist.id pk=item.id %}">{{ item }}</a>
-                </li>
+            <li>
+                <a href="{% url 'playlist_item_update' playlist_id=playlist.id pk=item.id %}"
+                    aria-label="manage playlist item details">{{ item }}</a>
+            </li>
             {% endfor %}
         </ul>
         {% else %}
-            <p>No Playlist Items Yet</p>
+        <p>No Playlist Items Yet</p>
         {% endif %}
     </section>
     <section class="navigation flex-column-left">
         <div>
-            <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red"><strong>Back to the Playlist View</strong></a>
+            <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red"
+                aria-label="back to the playlist view"><strong>Back to the Playlist View</strong></a>
         </div>
         <div>
-            <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"><strong>Back to Your Profile Page</strong></a>
-        </div>    
+            <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"
+                aria-label="back to the profile page"><strong>Back to Your Profile Page</strong></a>
+        </div>
     </section>
 </div>
 

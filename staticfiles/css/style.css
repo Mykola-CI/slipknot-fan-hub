@@ -45,6 +45,13 @@ html {
     gap: 20px;
 }
 
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
 .flex-start-end {
     display: flex;
     flex-wrap: wrap;
@@ -248,6 +255,23 @@ html {
     h3 {
         color: red;
     }
+}
+
+.edit-btn {
+    height: 40px;
+    border-radius: 20px;
+    align-self: flex-start;
+    padding: 5px;
+    min-width: 120px;
+    font-size: var(--fs-400);
+    margin-top: 20px;
+}
+
+.edit-btn:hover,
+.edit-btn:focus,
+.edit-btn:active {
+    background-color: black;
+    color: white;
 }
 
 

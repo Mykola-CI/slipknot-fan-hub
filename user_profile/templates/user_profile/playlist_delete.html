@@ -9,20 +9,24 @@
 {% endblock extra_head %}
 
 {% block main_content %}
-<div class="container grid">
-    <section>
-        <h3>Are you sure you want to delete the Playlist "{{ playlist.title }}"?</h3>
+<div class="container grid flex-1-1">
+    <section class="flex-column-left delete-case">
+        <h2>Delete Playlist: "{{ playlist.title }}"</h2>
+        <p>Are you sure you want to delete this Playlist?</p>
         <form method="post">
             {% csrf_token %}
-            <input type="submit" value="Confirm">
+            <button type="submit" class="edit-btn">Confirm Delete</button>
         </form>
     </section>
-    <section class="navigation flex-column-left">
+    <section class="navigation flex-column-stretch">
+        <h2 class="hidden">Navigation</h2>
         <div>
-            <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red">Back to the Playlist View</a>
+            <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red"
+                aria-label="go to the playlist view">Back to the Playlist View</a>
         </div>
         <div>
-            <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red">Back to Your Profile Page</a>
+            <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"
+                aria-label="back to the profile page">Back to Your Profile Page</a>
         </div>
     </section>
 </div>

@@ -21,11 +21,11 @@
                     <div class="field-block">
                         {% for field in form %}
                         <p>{{ field.errors }}</p>
-                        <p>{{ field.label_tag }}</p> 
+                        <p>{{ field.label_tag }}</p>
                         {{ field }}
                         {% if forloop.counter|divisibleby:3 %}
-                        </div>
-                        <div class="field-block">
+                    </div>
+                    <div class="field-block">
                         {% endif %}
                         {% endfor %}
                     </div>
@@ -35,13 +35,17 @@
         </section>
         <section class="navigation flex-column">
             <div>
-                <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red"><strong>Back to the Playlist View</strong></a>
+                <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red"
+                    aria-label="back to the playlist view"><strong>Back to the Playlist View</strong></a>
             </div>
             <div>
-                <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"><strong>Back to Your Profile Page</strong></a>
+                <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"
+                    aria-label="back to the profile page"><strong>Back to Your Profile
+                        Page</strong></a>
             </div>
             <div>
-                <a href="{% url 'delete_playlist_item' playlist_id=playlist.id pk=item.id %}" class="navigation-btn back-red color-white">Delete Item</a>
+                <a href="{% url 'delete_playlist_item' playlist_id=playlist.id pk=item.id %}"
+                    class="navigation-btn back-red color-white" aria-label="delete item">Delete Item</a>
             </div>
         </section>
     </div>
