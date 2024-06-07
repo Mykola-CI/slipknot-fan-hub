@@ -57,7 +57,7 @@
         <ul id="author-playlist-presentation">
             {% for item in playlist_with_posts %}
             <li>
-                <a href="{% url 'playlist_post_detail' pk=item.playlist_post_pk %}"
+                <a href="{% url 'playlist_post_detail' item.playlist_post_slug %}"
                     aria-label="go to {{ item.playlist.title }}">
                     {{ item.playlist.title }}
                 </a>

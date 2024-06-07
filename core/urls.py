@@ -4,6 +4,10 @@ from . import views
 urlpatterns = [
     path('', views.home_view, name='home'),
     path(
+        'playlistpost/list/',
+        views.PlaylistPreviewView.as_view(),
+        name='playlist_list'),
+    path(
         'playlistpost/<slug:slug>/',
         views.PlaylistPostDetailView.as_view(),
         name='playlist_post_detail'),
@@ -20,10 +24,6 @@ urlpatterns = [
         views.like_comment,
         name='like_comment'
     ),
-    path(
-        'playlistpost/list/',
-        views.PlaylistPreviewView.as_view(),
-        name='playlist_list'),
     path(
         'presentation/<str:username>/',
         views.user_profile_presentation,

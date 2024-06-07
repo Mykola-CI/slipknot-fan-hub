@@ -74,7 +74,8 @@ def user_profile_presentation(request, username):
     playlist_with_posts = [
         {
             'playlist': playlist,
-            'playlist_post_pk': PlaylistPost.objects.get(playlist=playlist).pk
+            'playlist_post_slug': (
+                PlaylistPost.objects.get(playlist=playlist).slug)
         }
         for playlist in playlists
     ]
@@ -147,16 +148,15 @@ class PlaylistPostDetailView(DetailView):
             return self.render_to_response(context)
 
 
-def comment_edit(request, pk, comment_id):
+def comment_edit(request, slug, comment_id):
     """
     Display an individual comment for edit.
 
     """
-    if request.method == "POST":
+    post = get_object_or_404(PlaylistPost, slug=slug)
+    comment = get_object_or_404(Comment, pk=comment_id)
 
-        queryset = PlaylistPost.objects.all()
-        post = get_object_or_404(queryset, pk=pk)
-        comment = get_object_or_404(Comment, pk=comment_id)
+    if request.method == "POST":
         comment_form = CommentForm(data=request.POST, instance=comment)
 
         if comment_form.is_valid() and comment.author == request.user:
@@ -169,10 +169,10 @@ def comment_edit(request, pk, comment_id):
             messages.add_message(request, messages.ERROR,
                                  'Error updating comment!')
 
-    return HttpResponseRedirect(reverse('playlist_post_detail', args=[pk]))
+    return HttpResponseRedirect(reverse('playlist_post_detail', args=[slug]))
 
 
-def comment_delete(request, pk, comment_id):
+def comment_delete(request, slug, comment_id):
     """
     view to delete comments
     """
@@ -185,23 +185,23 @@ def comment_delete(request, pk, comment_id):
         messages.add_message(
             request, messages.ERROR, 'You can only delete your own comments!')
 
-    return HttpResponseRedirect(reverse('playlist_post_detail', args=[pk]))
+    return HttpResponseRedirect(reverse('playlist_post_detail', args=[slug]))
 
 
 @login_required
-def like_view(request, pk):
-    post = get_object_or_404(PlaylistPost, pk=pk)
+def like_view(request, slug):
+    post = get_object_or_404(PlaylistPost, slug=slug)
 
     if post.likes.filter(id=request.user.id).exists():
         post.likes.remove(request.user)
     else:
         post.likes.add(request.user)
 
-    return HttpResponseRedirect(reverse('playlist_post_detail', args=[pk]))
+    return HttpResponseRedirect(reverse('playlist_post_detail', args=[slug]))
 
 
 @login_required
-def like_comment(request, pk, comment_id):
+def like_comment(request, slug, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
 
     if comment.likes_comment.filter(id=request.user.id).exists():
@@ -209,4 +209,4 @@ def like_comment(request, pk, comment_id):
     else:
         comment.likes_comment.add(request.user)
 
-    return redirect(reverse('playlist_post_detail', args=[pk]))
+    return redirect(reverse('playlist_post_detail', args=[slug]))

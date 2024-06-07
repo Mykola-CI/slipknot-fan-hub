@@ -23,7 +23,7 @@
         <ul>
             {% for post in playlist_posts %}
             <li>
-                <a href="{% url 'playlist_post_detail' pk=post.id %}"
+                <a href="{% url 'playlist_post_detail' post.slug %}"
                     aria-label="go to {{ post.playlist.title }}">{{ post.playlist.title }}</a>
                 <p>Created by: {{ post.playlist.author }}</p>
                 <p>Description: {{ post.playlist.description | linebreaks }}</p>

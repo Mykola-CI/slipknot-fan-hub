@@ -239,6 +239,10 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+.label-for-comments {
+    padding: 10px 0;
+}
+
 .comment-form-container {
     align-self: start;
     margin-top: 20px;

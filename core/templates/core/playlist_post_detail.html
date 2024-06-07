@@ -58,7 +58,7 @@
         </article>
 
         <div class="flex-start">
-            <form action="{% url 'like_view' playlist_post.pk %}" method="POST">
+            <form action="{% url 'like_view' playlist_post.slug %}" method="POST">
                 {% csrf_token %}
                 <button type="submit" class="likes 
                 {% if liked %}
@@ -154,7 +154,7 @@
         <div class="flex-column-left">
             {% for comment in comments %}
             <div>
-                <p><strong>{{ comment.author }}</strong> made a comment {{ comment.created_on|timesince }} ago:</p>
+                <p class="label-for-comments"><strong>{{ comment.author }}</strong> made a comment {{ comment.created_on|timesince }} ago:</p>
                 <div class="flex-start-end">
                     <div id="comment{{ comment.id }}" class="comment-content shadow-white">
                         {{ comment.content | linebreaks }}
@@ -166,7 +166,7 @@
                     {% endif %}
                 </div>
                 <div class="flex-start">
-                    <form action="{% url 'like_comment' playlist_post.id comment.id %}" method="POST">
+                    <form action="{% url 'like_comment' playlist_post.slug comment.id %}" method="POST">
                         {% csrf_token %}
                         <button type="submit" class="likes-comment 
                         {% if comment.is_liked_by_user %}
@@ -185,7 +185,10 @@
 
         {% if user.is_authenticated %}
         <div class="comment-form-container box-shadow back-dark padding-20 flex-column-left">
-            <h3 id="formTitle">Add a Comment</h3>
+            <div>
+                <h3 id="formTitle">Add a Comment</h3>
+                <p><small>(drag bottom-right corner of the window to resize)</small></p>
+            </div>
             <form id="commentForm" method="post" class="add-comment-form">
                 {% csrf_token %}
                 {{ comment_form.as_p }}

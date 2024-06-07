@@ -60,7 +60,7 @@
     {% for post in playlist_posts %}
     <article class="playlist-card-home">
         {% if post.playlist.featured_image %}
-        {% cloudinary post.playlist.featured_image %}
+        <img src="{{ post.playlist.featured_image.url }}" alt="{{ post.playlist.title }}'s featured image">
         {% else %}
         <img src="{% static 'images/hero_banner_slipknot.png' %}" alt="default featured image">
         {% endif %}
