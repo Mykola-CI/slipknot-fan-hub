@@ -19,7 +19,7 @@ def create_or_update_or_delete_playlist_post(
         sender, instance, created, **kwargs):
     if created:
         if instance.status == 1:  # 1 corresponds to "Published"
-            PlaylistPost.objects.create(playlist=instance)
+            PlaylistPost.objects.create(playlist=instance, slug=instance.slug)
     else:
         prev_status = previous_status.get(instance.pk)
         if prev_status is not None:
@@ -31,15 +31,21 @@ def create_or_update_or_delete_playlist_post(
                 # Check if a PlaylistPost already exists
                 # (might be created through admin console)
                 playlist_post, created = PlaylistPost.objects.get_or_create(
-                    playlist=instance)
+                    playlist=instance,
+                    defaults={'slug': instance.slug}
+                )
                 if not created:
-                    # If it already exists, update the updated_on field
+                    # If it already exists, update the slug field
+                    playlist_post.slug = instance.slug
                     playlist_post.save()
             elif instance.status == 1:  # Still "Published"
                 playlist_post, created = PlaylistPost.objects.get_or_create(
-                    playlist=instance)
+                    playlist=instance,
+                    defaults={'slug': instance.slug}
+                )
                 if not created:
-                    # If it already exists, update the updated_on field
+                    # If it already exists, update the slug field
+                    playlist_post.slug = instance.slug
                     playlist_post.save()
         # Clean up the previous status dictionary
         previous_status.pop(instance.pk, None)

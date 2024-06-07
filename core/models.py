@@ -11,6 +11,7 @@ class PlaylistPost(models.Model):
     playlist = models.OneToOneField(
         Playlist, on_delete=models.CASCADE, related_name="playlist_post"
     )
+    slug = models.SlugField(unique=True, null=False)
     likes = models.ManyToManyField(
         User, related_name="playlist_likes", blank=True)
     created_on = models.DateTimeField(auto_now_add=True)

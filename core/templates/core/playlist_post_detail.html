@@ -16,7 +16,7 @@
         {% endfor %}
 </ul>
 {% endif %}
-<div class="grid-post-detail flex-evenly container">
+<div class="grid-post-detail flex-evenly container flex-1-1">
 
     <section class="playlist-description flex-column-left">
         <h1>Playlist Details:</h1>
@@ -193,7 +193,7 @@
                     Submit
                 </button>
             </form>
-            <a href="{% url 'playlist_post_detail' pk=playlist_post.pk %}" id="discardChanges" class="hidden">Discard
+            <a href="{% url 'playlist_post_detail' playlist_post.slug %}" id="discardChanges" class="hidden">Discard
                 Changes</a>
         </div>
         {% else %}

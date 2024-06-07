@@ -5,6 +5,7 @@ from .models import PlaylistPost, Comment
 class PlaylistPostAdmin(admin.ModelAdmin):
     list_display = (
         'playlist',
+        'slug',
         'author_username',
         'created_on',
         'updated_on',

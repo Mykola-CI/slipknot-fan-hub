@@ -98,6 +98,8 @@ class PlaylistPostDetailView(DetailView):
     model = PlaylistPost
     template_name = 'core/playlist_post_detail.html'
     context_object_name = 'playlist_post'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -138,7 +140,7 @@ class PlaylistPostDetailView(DetailView):
             new_comment.playlist_post = self.object
             new_comment.author = request.user
             new_comment.save()
-            return redirect('playlist_post_detail', pk=self.object.pk)
+            return redirect('playlist_post_detail', slug=self.object.slug)
         else:
             context = self.get_context_data()
             context['comment_form'] = comment_form
