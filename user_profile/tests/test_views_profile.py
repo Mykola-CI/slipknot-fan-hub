@@ -41,7 +41,6 @@ class ProfileViewTests(TestCase):
             'email': 'invalid-email'
         }, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
-        print(response.content)
         self.assertContains(response, '"status": "error"')
         self.assertContains(
             response, 'Enter a valid email address.')

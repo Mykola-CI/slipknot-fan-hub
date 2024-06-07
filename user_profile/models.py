@@ -81,17 +81,6 @@ class Playlist(models.Model):
 
         super(Playlist, self).save(*args, **kwargs)
 
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:  # Check if the slug is already set
-    #         self.slug = slugify(self.title)  # Generate a slug from the title
-    #         # Ensure the slug is unique
-    #         original_slug = self.slug
-    #         num = 1
-    #         while Playlist.objects.filter(slug=self.slug).exists():
-    #             self.slug = f'{original_slug}-{num}'
-    #             num += 1
-    #     super(Playlist, self).save(*args, **kwargs)
-
     def __str__(self):
         return f"{self.title} | status: {self.get_status_display()}"
 
