@@ -19,12 +19,14 @@ def create_or_update_or_delete_playlist_post(
         sender, instance, created, **kwargs):
     if created:
         if instance.status == 1:  # 1 corresponds to "Published"
+            print(f"Creating PlaylistPost for playlist {instance.pk} with slug {instance.slug}")
             PlaylistPost.objects.create(playlist=instance, slug=instance.slug)
     else:
         prev_status = previous_status.get(instance.pk)
         if prev_status is not None:
             # From "Published" to "Draft"
             if prev_status == 1 and instance.status == 0:
+                print(f"Deleting PlaylistPost for playlist {instance.pk}")
                 PlaylistPost.objects.filter(playlist=instance).delete()
             # From "Draft" to "Published"
             elif prev_status == 0 and instance.status == 1:
