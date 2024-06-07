@@ -71,6 +71,7 @@ admin.site.register(PlaylistItem, PlaylistItemAdmin)
 
 class PlaylistAdmin(SummernoteModelAdmin):
     list_display = (
+        'title',
         'id',
         'slug',
         'author',

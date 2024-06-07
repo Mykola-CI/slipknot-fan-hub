@@ -38,7 +38,7 @@ class Playlist(models.Model):
     """
     Stores user playlist general info and umbrella image
     """
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="playlists"

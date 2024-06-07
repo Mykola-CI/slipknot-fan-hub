@@ -12,7 +12,7 @@
 }
 
 .container--inner {
-    /* max-width: 500px; */
+    max-width: 500px;
     margin: auto;
 }
 
@@ -28,7 +28,6 @@
 }
 
 .form-edit {
-    width: 100%;
     background-color: rgba(0, 0, 0, 0.623);
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 13px 3px #000000;

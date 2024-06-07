@@ -59,21 +59,21 @@
     </section>
     <section class="navigation flex-column-stretch text-center">
         <div>
-            <a href="{% url 'playlist_update' playlist.id %}" class="navigation-btn back-dark color-red"
+            <a href="{% url 'playlist_update' playlist.id %}" class="navigation-btn back-dark color-red width-100"
                 aria-label="edit playlist details"><strong>Edit Playlist Details and Image</strong></a>
         </div>
         <div>
-            <a href="{% url 'playlist_create' %}" class="navigation-btn back-dark color-red"
+            <a href="{% url 'playlist_create' %}" class="navigation-btn back-dark color-red width-100"
                 aria-label="create new playlist"><strong>Create New Playlist</strong></a>
         </div>
         <div>
-            <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"
+            <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red width-100"
                 aria-label="back to the profile page"><strong>Back to Your Profile Page</strong></a>
         </div>
         <div id="playlist-{{ playlist.id }}">
             <form method="post" action="{% url 'toggle_playlist_status' playlist.id %}">
                 {% csrf_token %}
-                <button type="submit" class="navigation-btn back-white color-red">
+                <button type="submit" class="navigation-btn back-white color-red width-100">
                     {% if playlist.status == 1 %}
                     <strong>Remove playlist from FanHub</strong>
                     {% else %}
@@ -83,7 +83,7 @@
             </form>
         </div>
         <div>
-            <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-btn back-red color-white"
+            <a href="{% url 'playlist_delete' playlist.id %}" class="navigation-btn back-red color-white width-100"
                 aria-label="delete playlist"><strong>Delete Playlist</strong></a>
         </div>
     </section>

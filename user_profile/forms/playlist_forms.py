@@ -26,7 +26,7 @@ class PlaylistForm(forms.ModelForm):
             'status'
         ]
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 33, 'rows': 10}),
+            'description': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
         }
 
 

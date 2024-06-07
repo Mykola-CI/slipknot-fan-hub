@@ -38,6 +38,10 @@ html {
 
 /* Utilities */
 
+.width-100 {
+    width: 100%;
+}
+
 .flex {
     display: flex;
     justify-content: space-between;
@@ -411,7 +415,6 @@ a:hover {
 }
 
 .navigation-btn {
-    width: 100%;
     display: inline-block;
     padding: 10px 20px;
     border: 1px solid black;

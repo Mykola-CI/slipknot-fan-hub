@@ -11,7 +11,7 @@
 
 {% block main_content %}
 
-<div class="container">
+<div class="container flex-1-1">
     <div class="container--inner">
         <section class="form-edit">
             <form method="post" enctype="multipart/form-data" class="form-control">
@@ -19,15 +19,16 @@
                 {% for field in form %}
                 <div class="field-block">
                     <p>{{ field.errors }}</p>
-                    <p>{{ field.label_tag }}</p> 
+                    <p>{{ field.label_tag }}</p>
                     {{ field }}
                 </div>
                 {% endfor %}
                 <button type="submit" class="button btn-edit">Create Playlist</button>
             </form>
         </section>
-        <section class="navigation">
-            <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red" aria-label="back to the profile page"><strong>Back to Your Profile Page</strong></a>
+        <section class="navigation flex-column">
+            <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"
+                aria-label="back to the profile page"><strong>Back to Your Profile Page</strong></a>
         </section>
     </div>
 </div>
