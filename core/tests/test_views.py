@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.messages import get_messages
 from core.models import PlaylistPost, Comment
 from user_profile.models import Playlist, UserProfile, PlaylistItem
 from core.forms import CommentForm
@@ -146,3 +147,63 @@ class PlaylistPostDetailViewTest(TestCase):
         self.assertFalse(Comment.objects.filter(content='').exists())
         self.assertIsInstance(response.context['comment_form'], CommentForm)
         self.assertTrue(response.context['comment_form'].errors)
+
+
+class CommentDeleteViewTest(TestCase):
+    """
+    Testing playlist post detail view
+    """
+
+    def setUp(self):
+        # Create users
+        self.user = User.objects.create_user(
+            username='testuser', password='12345')
+        self.other_user = User.objects.create_user(
+            username='otheruser', password='12345')
+
+        # Creating a playlist post based on playlist
+        self.playlist = Playlist.objects.create(
+            title='Test Playlist', author=self.user)
+        self.playlist_post = PlaylistPost.objects.create(
+            playlist=self.playlist, slug='test-playlist')
+
+        # Create a comment
+        self.comment = Comment.objects.create(
+            playlist_post=self.playlist_post,
+            author=self.user,
+            content='Test comment')
+
+    def test_comment_delete_by_author(self):
+        self.client.login(username='testuser', password='12345')
+        response = self.client.post(
+            reverse('comment_delete',
+                    args=[self.playlist_post.slug, self.comment.id]))
+
+        # Check that the comment is deleted
+        self.assertFalse(Comment.objects.filter(id=self.comment.id).exists())
+
+        # Check for success message
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Comment deleted!')
+
+        # Check redirection
+        self.assertRedirects(response, reverse('playlist_post_detail', args=[self.playlist_post.slug]))
+
+    def test_comment_delete_by_non_author(self):
+        self.client.login(username='otheruser', password='12345')
+        response = self.client.post(reverse('comment_delete', args=[self.playlist_post.slug, self.comment.id]))
+
+        # Check that the comment is not deleted
+        self.assertTrue(Comment.objects.filter(id=self.comment.id).exists())
+
+        # Check for error message
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(
+            str(messages[0]), 'You can only delete your own comments!')
+
+        # Check redirection
+        self.assertRedirects(
+            response, reverse(
+                'playlist_post_detail', args=[self.playlist_post.slug]))
