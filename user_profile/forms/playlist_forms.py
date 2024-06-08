@@ -4,6 +4,10 @@ from cloudinary.forms import CloudinaryFileField
 
 
 class PlaylistForm(forms.ModelForm):
+    """
+    Form for creating and updating Playlist model instances
+    """
+
     featured_image = CloudinaryFileField(
         options={
             'folder': 'fanhub/playlist_images',
@@ -31,6 +35,9 @@ class PlaylistForm(forms.ModelForm):
 
 
 class PlaylistItemForm(forms.ModelForm):
+    """
+    Form for creating and updating Playlist Items
+    """
     song_audio = CloudinaryFileField(
         options={
             'resource_type': 'raw',
@@ -59,6 +66,3 @@ class PlaylistItemForm(forms.ModelForm):
             'performance_year',
             'performance_type'
         ]
-        widgets = {
-            'song_comments': forms.Textarea(attrs={'cols': 30, 'rows': 6}),
-        }

@@ -16,6 +16,10 @@
     margin: auto;
 }
 
+#id_song_comments {
+    max-width: clamp(200px, 80vw, 600px)
+}
+
 .navigation,
 .form-edit {
     font-size: var(--fs-500);
