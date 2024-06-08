@@ -124,3 +124,29 @@ class PlaylistUpdateViewTests(TestCase):
         self.assertRedirects(
             response,
             reverse('playlist_updated', kwargs={'pk': self.playlist.pk}))
+
+
+class PlaylistDeleteViewTests(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='12345')
+        self.playlist = Playlist.objects.create(author=self.user, title='Test Playlist')
+        self.url = reverse('playlist_delete', args=[self.playlist.id])
+
+    # Ensure that only authenticated users can access the view.
+    def test_redirect_if_not_logged_in(self):
+        response = self.client.get(self.url)
+        self.assertRedirects(response, f'/accounts/login/?next={self.url}')
+
+    def test_logged_in_uses_correct_template(self):
+        self.client.login(username='testuser', password='12345')
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'user_profile/playlist_delete.html')
+
+    # Testing deletion of a playlist
+    def test_playlist_deletion(self):
+        self.client.login(username='testuser', password='12345')
+        response = self.client.post(self.url)
+        self.assertRedirects(response, '/profile/')
+        self.assertFalse(Playlist.objects.filter(id=self.playlist.id).exists())

@@ -172,6 +172,10 @@
     }
 }
 
+.playlist-description {
+    max-width: 60ch;
+}
+
 .playlist-items-container {
     h2 {
         padding-bottom: 20px;

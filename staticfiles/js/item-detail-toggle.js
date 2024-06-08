@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Setting volume reduced at loading of the page 
     var audioElement = document.getElementById('audio-example');
-    audioElement.volume = 0.2;
+    if (audioElement) {
+        audioElement.volume = 0.2;
+    }
 
     // Handling playlist items modals
     const toggles = document.querySelectorAll('.nav-toggle');

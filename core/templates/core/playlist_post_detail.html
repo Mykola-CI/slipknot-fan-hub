@@ -42,7 +42,7 @@
             {% else %}
             <p>No Featured image provided by Author</p>
             {% endif %}
-            <div>
+            <div class="playlist-description">
                 <p>Description:</p>
                 <div class="text-description shadow-white padding-20">
                     {{ playlist_post.playlist.description | linebreaks }}</div>
@@ -73,7 +73,7 @@
 
     <section class="playlist-items-container box-shadow back-dark padding-20">
         <h2>Songs or other Items in this Playlist:</h2>
-        <ul class="flex-column">
+        <ul class="flex-column-left">
             {% for item in playlist_items %}
             <li>
                 {{ item }} Performance Type: {{ item.get_performance_type_display }}
