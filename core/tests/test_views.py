@@ -188,11 +188,14 @@ class CommentDeleteViewTest(TestCase):
         self.assertEqual(str(messages[0]), 'Comment deleted!')
 
         # Check redirection
-        self.assertRedirects(response, reverse('playlist_post_detail', args=[self.playlist_post.slug]))
+        self.assertRedirects(
+            response, reverse(
+                'playlist_post_detail', args=[self.playlist_post.slug]))
 
     def test_comment_delete_by_non_author(self):
         self.client.login(username='otheruser', password='12345')
-        response = self.client.post(reverse('comment_delete', args=[self.playlist_post.slug, self.comment.id]))
+        response = self.client.post(reverse(
+            'comment_delete', args=[self.playlist_post.slug, self.comment.id]))
 
         # Check that the comment is not deleted
         self.assertTrue(Comment.objects.filter(id=self.comment.id).exists())

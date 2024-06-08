@@ -29,9 +29,6 @@ class PlaylistForm(forms.ModelForm):
             'reference_url',
             'status'
         ]
-        widgets = {
-            'description': forms.Textarea(attrs={'cols': 30, 'rows': 10}),
-        }
 
 
 class PlaylistItemForm(forms.ModelForm):

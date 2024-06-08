@@ -260,6 +260,9 @@
     p {
         margin-bottom: 20px;
     }
+    textarea {
+        width: clamp(200px, 80vw, 400px)
+    }
 }
 
 .likes {

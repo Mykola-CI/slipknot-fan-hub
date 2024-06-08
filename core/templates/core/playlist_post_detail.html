@@ -19,10 +19,15 @@
 <div class="grid-post-detail flex-evenly container flex-1-1">
 
     <section class="playlist-description flex-column-left">
-        <h1>Playlist Details:</h1>
-        <h2>"{{ playlist_post.playlist.title }}" shared by &nbsp; &nbsp;
+        <h2>Playlist Details:</h2>
+        <h3>"{{ playlist_post.playlist.title }}" shared by &nbsp; &nbsp;
             <span>
-                {% if author_profile.avatar.url %}
+                {% if "default_avatar" in author_profile.avatar.url %}
+                <a href="{% url 'user_profile_presentation'  author_profile.user.username %}"
+                    aria-label="link to the {{ author_profile.user.username }}'s page" id="playlist-author-avatar">
+                    <img src="{% static 'images/nobody.jpg' %}" alt="default avatar">
+                </a>
+                {% else %}
                 <a href="{% url 'user_profile_presentation'  author_profile.user.username %}"
                     aria-label="link to the {{ author_profile.user.username }}'s page" id="playlist-author-avatar">
                     <img src="{{ author_profile.avatar.url }}" alt="{{ author_profile.user.username }}'s avatar">
@@ -33,7 +38,7 @@
                 <a href="{% url 'user_profile_presentation'  author_profile.user.username %}"
                     aria-label="link to the {{ author_profile.user.username }}'s page">{{ author_profile.user.username }}</a>
             </span>
-        </h2>
+        </h3>
         <article class="flex-column-left">
             {% if playlist_post.playlist.featured_image %}
             <div class="featured-image">

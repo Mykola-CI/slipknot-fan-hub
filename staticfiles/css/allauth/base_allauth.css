@@ -9,8 +9,6 @@ html {
 body {
     color: antiquewhite;
     font-family: system-ui, sans-serif;
-    /* font-size: 130%;
-    line-height: 150%; */
 }
 
 .wrapper {
@@ -142,6 +140,10 @@ form {
 
 form li {
     padding: 6px 0;
+}
+
+p {
+    max-width: 80ch;
 }
 
 .hidden {
