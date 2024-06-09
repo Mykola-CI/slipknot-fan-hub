@@ -7,6 +7,10 @@ import os
 
 
 class ProfileViewTests(TestCase):
+    """
+    Checking if forms of the AJAX profile view are rendered correctly.
+    """
+
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user(
@@ -107,7 +111,7 @@ class ProfileViewTests(TestCase):
 
 class ProfileViewContextTests(TestCase):
     """
-    Here I check if contexts of the profile view are rendered correctly.
+    Here I check if contexts of the AJAX profile view are rendered correctly.
     """
 
     def setUp(self):
