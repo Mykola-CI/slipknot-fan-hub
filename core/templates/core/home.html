@@ -62,7 +62,7 @@
         {% if post.playlist.featured_image %}
         <img src="{{ post.playlist.featured_image.url }}" alt="{{ post.playlist.title }}'s featured image">
         {% else %}
-        <img src="{% static 'images/hero_banner_slipknot.png' %}" alt="default featured image">
+        <img src="{% static 'images/default_featured_image.png' %}" alt="default featured image">
         {% endif %}
         <div class="playlist-card--content">
             <a href="{% url 'playlist_post_detail' post.slug %}">{{ post.playlist.title }}</a>

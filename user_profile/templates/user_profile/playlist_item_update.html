@@ -39,9 +39,8 @@
                     aria-label="back to the playlist view"><strong>Back to the Playlist View</strong></a>
             </div>
             <div>
-                <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red"
-                    aria-label="back to the profile page"><strong>Back to Your Profile
-                        Page</strong></a>
+                <a href="{% url 'playlist_manage' %}" class="navigation-btn back-dark color-red"
+                    aria-label="back to the playlists"><strong>Back To Your Playlists</strong></a>
             </div>
             <div>
                 <a href="{% url 'delete_playlist_item' playlist_id=playlist.id pk=item.id %}"

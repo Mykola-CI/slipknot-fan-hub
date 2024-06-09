@@ -19,7 +19,6 @@
     <img src="{% static 'images/nobody.jpg' %}" alt="default avatar">
     {% else %}
     <img src="{{ user_profile.avatar.url }}" alt="{{ user_profile.user.username }}'s avatar">
-    <!-- {% cloudinary user_profile.avatar %} -->
     {% endif %}
 </div>
 

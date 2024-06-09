@@ -26,11 +26,11 @@
             {% if playlist.featured_image %}
             <img src="{{ playlist.featured_image.url }}" alt="'{{ playlist.title }}' featured image">
             {% else %}
-            <img src="{% static 'images/hero_banner_slipknot.png' %}" alt="default image for the playlist">
+            <img src="{% static 'images/default_featured_image.png' %}" alt="default image for the playlist">
         </div>
         <div class="caption">
             <p>No Custom Image Was Uploaded!</p>
-            <p>If you decide to share Your playlist this nice default banner will be attached.</p>
+            <p>If you decide to share Your playlist, this nice default banner will be attached.</p>
         </div>
         {% endif %}
     </section>
@@ -67,8 +67,8 @@
                 aria-label="create new playlist"><strong>Create New Playlist</strong></a>
         </div>
         <div>
-            <a href="{% url 'profile' %}" class="navigation-btn back-dark color-red width-100"
-                aria-label="back to the profile page"><strong>Back to Your Profile Page</strong></a>
+            <a href="{% url 'playlist_manage' %}" class="navigation-btn back-dark color-red width-100"
+                aria-label="back to the playlists"><strong>Back To Your Playlists</strong></a>
         </div>
         <div id="playlist-{{ playlist.id }}">
             <form method="post" action="{% url 'toggle_playlist_status' playlist.id %}">
