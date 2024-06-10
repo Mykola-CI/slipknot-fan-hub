@@ -21,7 +21,7 @@
 <div class="container flex-column-stretch flex-1-1">
     <section class="flex-around">
         <div class="flex-column">
-            <h1>{{ profile_user.username }}'s Profile</h1>
+            <h2>{{ profile_user.username }}'s Profile</h2>
             <div class="avatar-profile-page">
                 {% if "default_avatar" in user_profile.avatar.url %}
                 <img src="{% static 'images/nobody.jpg' %}" alt="default avatar">
@@ -48,26 +48,28 @@
         </div>
         <div id="about-myself-presentation" class="profile-section">
             <h3>About Myself</h3>
-            <p>{{ user_profile.about_myself | safe }}</p>
+            {{ user_profile.about_myself | safe }}
         </div>
     </section>
 
     <section class="playlist-card flex-column-left padding-20">
         <h2><span>{{ profile_user.username }}'s</span> Playlists&#8287;&#8202;&#8287;&#8202;&#127928;</h2>
-        <ul id="author-playlist-presentation">
+        <div id="author-playlist-presentation">
             {% for item in playlist_with_posts %}
-            <li>
+            <article class="article-playlist-presentation">
+                <h3 class="hidden">Playlist info</h3>
                 <a href="{% url 'playlist_post_detail' item.playlist_post_slug %}"
                     aria-label="go to {{ item.playlist.title }}">
+                    <span>&#119070;</span>&#8287;&#8287;
                     {{ item.playlist.title }}
                 </a>
-            </li>
-            <p>{{ item.playlist.description | linebreaks }}</p>
-            <p><b>♪</b> Last update: {{ item.playlist.updated_on }}</p>
+                {{ item.playlist.description | linebreaks }}
+                <p><b>♪</b> Last update: {{ item.playlist.updated_on }}</p>
+            </article>
             {% empty %}
-            <li>No playlists found.</li>
+            <p>No playlists found.</p>
             {% endfor %}
-        </ul>
+        </div>
     </section>
 </div>
 {% endblock main_content %}

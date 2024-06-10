@@ -15,6 +15,7 @@
     <h2>Add Item to the playlist "<span class="playlist-title">{{ playlist.title }}</span>"</h2>
     <div>
         <section class="form-edit">
+            <h3 class="hidden">Add Item</h3>
             <form method="post" enctype="multipart/form-data" class="form-control">
                 {% csrf_token %}
                 <div class="flex">
@@ -34,6 +35,7 @@
             </form>
         </section>
         <section class="navigation flex-column">
+            <h3 class="hidden">Navigation</h3>
             <div>
                 <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red"
                     aria-label="back to the playlist page"><strong>Back to the Playlist View</strong></a>

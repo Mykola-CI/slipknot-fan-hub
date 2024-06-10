@@ -26,7 +26,8 @@
                 <a href="{% url 'playlist_post_detail' post.slug %}"
                     aria-label="go to {{ post.playlist.title }}">{{ post.playlist.title }}</a>
                 <p>Created by: {{ post.playlist.author }}</p>
-                <p>Description: {{ post.playlist.description | linebreaks }}</p>
+                <p>Description:</p>
+                {{ post.playlist.description | linebreaks }}
                 <p>Total Likes: {{ post.total_likes }}</p>
             </li>
             {% endfor %}

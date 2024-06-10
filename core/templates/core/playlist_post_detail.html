@@ -2,6 +2,7 @@
 {% load static %}
 {% load cloudinary %}
 
+{% block title %}Playlist presentation{% endblock %}
 {% block extra_head %}
 <!-- Custom CSS for core application playlist_post_detail.html -->
 <link rel="stylesheet" href="{% static 'core/css/core_styles.css' %}" />
@@ -40,6 +41,7 @@
             </span>
         </h3>
         <article class="flex-column-left">
+            <h3 class="hidden">Playlist presentation</h3>
             {% if playlist_post.playlist.featured_image %}
             <div class="featured-image">
                 <img src="{{ playlist_post.playlist.featured_image.url }}" alt="'{{playlist_post.playlist.title }}' featured image">
@@ -87,6 +89,7 @@
                 <label for="nav-toggle-{{ forloop.counter }}" class="nav-toggle--label"><i
                         class="fa-solid fa-bars"></i></label>
                 <article class="playlist-item pop-down flex-column-left">
+                    <h3 class="hidden">Song/Item presentation</h3>
                     <div>
                         <p>Artist/Author:</p>
                         <p>{{ item.artist }}</p>
@@ -134,7 +137,7 @@
                     <div>
                         {% if item.song_comments %}
                         <p>The Playlist's Author comments on the song:</p>
-                        <p>{{ item.song_comments | linebreaks }}</p>
+                        {{ item.song_comments | linebreaks }}
                         {% endif %}
                     </div>
                 </article>

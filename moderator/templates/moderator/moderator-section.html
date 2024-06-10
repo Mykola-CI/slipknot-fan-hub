@@ -2,7 +2,7 @@
 {% load static %}
 {% load cloudinary %}
 
-{% block title %}Slipknot Fan Profile{% endblock %}
+{% block title %}About FanHub{% endblock %}
 {% block extra_head %}
 <!-- Custom CSS for user_profile application profile.html -->
 <link rel="stylesheet" href="{% static 'core/css/core_styles.css' %}" />
@@ -26,7 +26,7 @@
                 {% if "placeholder" in moderator.profile_image.url %}
                 <img src="{% static 'images/slipknot-logo-transparent.png' %}" alt="default fanhub image">
                 {% else %}
-                {% cloudinary moderator.profile_image %}
+                <img src="{{ moderator.profile_image.url }}" alt="FanHub featured weekly image">
                 {% endif %}
             </div>
         </div>

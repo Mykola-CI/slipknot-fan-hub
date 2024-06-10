@@ -226,10 +226,10 @@ html {
 
 @counter-style treble-clef {
     system: cyclic;
-    symbols: "\1D11E";
     /* Unicode for the treble clef symbol */
-    suffix: "  ";
+    symbols: "\1D11E";
     /* Add a space after the symbol */
+    suffix: "  ";
 }
 
 .playlist-card {
@@ -333,7 +333,7 @@ header {
     font-size: var(--fs-500);
 }
 
-#username {
+.username {
     font-size: 120%;
     color: whitesmoke;
     text-shadow: 3px 1px 0px rgba(0, 0, 0, 1);

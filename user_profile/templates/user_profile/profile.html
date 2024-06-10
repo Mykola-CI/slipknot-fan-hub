@@ -91,7 +91,7 @@
 
         <div id="about-myself" class="profile-section">
             <h3>About Myself</h3>
-            <p>{{ user_profile.about_myself | safe }}</p>
+            {{ user_profile.about_myself | safe }}
             <button class="edit-btn" data-form="about">Update</button>
         </div>
 
@@ -102,7 +102,7 @@
 {% endblock main_content %}
 
 {% block bottom %}
-<script type="text/javascript">
+<script>
     var profileUrl = '{% url "profile" %}';
 </script>
 <script src="{% static 'js/user-profile.js' %}"></script>

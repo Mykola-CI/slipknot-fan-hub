@@ -43,7 +43,8 @@
         <p>No Playlist Items Yet</p>
         {% endif %}
     </section>
-    <section class="navigation flex-column-left">
+    <section class="navigation navigation-update flex-column-left">
+        <h2 class="hidden">Navigation</h2>
         <div>
             <a href="{% url 'playlist_created' playlist.id %}" class="navigation-btn back-dark color-red"
                 aria-label="back to the playlist view"><strong>Back to the Playlist View</strong></a>
