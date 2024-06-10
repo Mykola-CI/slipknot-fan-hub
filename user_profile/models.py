@@ -15,7 +15,11 @@ class UserProfile(models.Model):
         on_delete=models.CASCADE,
         related_name='profile'
     )
-    about_myself = models.TextField(_("about myself"), blank=True)
+    about_myself = models.CharField(
+        _("about myself"),
+        max_length=500,
+        blank=True
+    )
 
     # Store avatars in the update UserAdmin model Cloudinary cloud
     avatar = CloudinaryField(
@@ -47,7 +51,7 @@ class Playlist(models.Model):
         'image',
         folder='fanhub/playlist_images',
         blank=True)
-    description = models.TextField(max_length=500, blank=True)
+    description = models.CharField(max_length=500, blank=True)
     reference_url = models.URLField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -106,7 +110,7 @@ class PlaylistItem(models.Model):
         resource_type='raw',
         folder='fanhub/song_tabs',
         blank=True)
-    song_comments = models.TextField(max_length=250, blank=True)
+    song_comments = models.CharField(max_length=250, blank=True)
     performance_year = models.IntegerField(
         verbose_name="Year of Performance", blank=True, null=True)
     performance_type = models.IntegerField(choices=TYPE, default=0)

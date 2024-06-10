@@ -2,6 +2,66 @@
 ## Validator Testing
 ### W3C HTML
 
+Technique used for validating html in production site (heroku): 
+
+Navigate to a page in Chrome / Chrome Inspect mode / View Page Source / Copy html / Paste to W3C html validator - direct input.
+
+- Home page
+
+![Home page validation](documentation/validator_slides/w3c-html/w3c-html-home.png)
+
+- Round And About page
+
+![Round And About page](documentation/validator_slides/w3c-html/w3c-html-about-page.png)
+
+- All Shared Playlists page
+
+![All Shared Playlists page](documentation/validator_slides/w3c-html/w3c-html-playlist-preview-full-list.png)
+
+- Playlist Detail Presentation page  
+
+![Playlist Detail Presentation page](documentation/validator_slides/w3c-html/w3c-html-playlist-presentation.png)
+
+- Playlist Author Presentation page
+
+![Playlist Author Presentation page](documentation/validator_slides/w3c-html/w3c-author-profile-present.png)
+
+- User Profile page
+
+![User Profile page](documentation/validator_slides/w3c-html/w3c-html-profile.png)
+
+- Manage Playlists page
+
+![Manage Playlists](documentation/validator_slides/w3c-html/w3c-html-playlist-manage.png)
+
+- User's Playlist Detail Review page
+
+![User's Playlist Detail Review page](documentation/validator_slides/w3c-html/w3c-html-playlist-profile.png)
+
+- Playlist Create page
+
+![Playlist Create page](documentation/validator_slides/w3c-html/w3c-html-create-playlist.png)
+
+- Playlist Update page
+
+![Playlist Update page](documentation/validator_slides/w3c-html/w3c-html-playlist-update-form.png)
+
+- Playlist Delete page
+
+![Playlist Delete page](documentation/validator_slides/w3c-html/w3c-html-delete-playlist.png)
+
+- Add Playlist Item
+
+![Add Playlist Item](documentation/validator_slides/w3c-html/w3c-html-add-song.png)
+
+- Update Playlist Item page
+
+![Update Playlist Item page](documentation/validator_slides/w3c-html/w3c-html-item-update.png)
+
+- Delete Playlist Item page
+
+![Delete Playlist Item page](documentation/validator_slides/w3c-html/w3c-html-delete-item.png)
+
 
 ### W3C CSS
 I use 5 CSS files to serve web-pages in all applications. 

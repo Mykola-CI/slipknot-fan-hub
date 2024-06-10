@@ -35,10 +35,11 @@ class Comment(models.Model):
                                       related_name="comments")
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="commenter")
-    content = models.TextField()
+    content = models.CharField(max_length=500)
     likes_comment = models.ManyToManyField(
         User, related_name="playlist_comments", blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def total_likes_comment(self):
         return self.likes_comment.count()
