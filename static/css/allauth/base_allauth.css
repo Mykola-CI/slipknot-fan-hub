@@ -86,7 +86,7 @@ header {
 
 #logo-block {
     justify-self: start;
-    a {
+    & a {
         display: flex;
         justify-content: flex-start;
         align-items: flex-end;
@@ -113,25 +113,25 @@ header {
 }
 
 form {
-    label {
+    & label {
         display: block;
     }
-    label[for="id_remember"] {
+    & label[for="id_remember"] {
         display: inline;
     }
-    input {
+    & input {
         padding: 5px 10px 5px 10px;
         border-radius: 10px;
         width: 300px;
         font-size: large;
     }
-    #id_remember {
+    & #id_remember {
         width: 40px;
     }
-    p {
+    & p {
         padding-bottom: 10px;
     }
-    button {
+    & button {
         padding: 5px 10px 5px 10px;
         border-radius: 10px;
         font-size: large;

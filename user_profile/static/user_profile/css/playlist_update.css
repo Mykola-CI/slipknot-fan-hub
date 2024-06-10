@@ -27,10 +27,10 @@
 }
 
 .navigation-update {
-    div {
+    & div {
         width: 100%;
     }
-    a {
+    & a {
         width: 100%;
     }
 }
@@ -48,29 +48,29 @@
     box-shadow: 0px 0px 13px 3px #000000;
     text-align: left;
 
-    input,
-    textarea,
-    select,
-    button {
+    & input,
+    & textarea,
+    & select,
+    & button {
         padding: 10px;
         border-radius: 7px;
         font-size: var(--fs-400);
         margin-bottom: 10px;
     }
 
-    p {
+    & p {
         font-style: oblique;
         font-weight: var(--fw-500);
         margin-bottom: 5px;
         color: red;
     }
 
-    textarea {
+    & textarea {
         width: clamp(200px, 80vw, 440px);
         max-width: 100%;
     }
 
-    button {
+    & button {
         background-color: rgb(46, 53, 59);
         color: white;
         border: none;
@@ -79,11 +79,11 @@
         font-size: large;
     }
 
-    #id_featured_image {
+    & #id_featured_image {
         font-size: medium;
         padding: 0;
     }
-    h2 {
+    & h2 {
         text-align: center;
     }
 }

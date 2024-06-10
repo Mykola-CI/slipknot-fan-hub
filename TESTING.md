@@ -1,5 +1,62 @@
 # Testing
 ## Validator Testing
+### W3C HTML
+
+
+### W3C CSS
+I use 5 CSS files to serve web-pages in all applications. 
+
+- `style.css` - accessible across all applications
+- `profile.css` - serving User profile pages
+- `playlist_update.css` - serving User Playlist management pages
+- `core_styles` - serving Home page and Playlist Detail pages (accessible for non-logged in users)
+- `base_allauth.css` - custom restyling of django-allauth pages. 
+
+__Validation Results__
+
+- style.css
+![Validation report for style.css](documentation/validator_slides/w3c-css/style-css-w3c.png)
+
+- profile.css
+![Validation report for profile.css](documentation/validator_slides/w3c-css/profile-css-w3c.png)
+
+- playlist_update.css
+![Validation report for playlist_update.css](documentation/validator_slides/w3c-css/playlist-update-css-w3c.png)
+
+- core_styles.css
+![Validation report for core_styles.css](documentation/validator_slides/w3c-css/core-styles-css-w3c.png)
+
+- base_allauth.css
+![Validation report for style.css](documentation/validator_slides/w3c-css/base-allauth-css-w3c.png)
+
+__Errors Explanation:__
+
+All of the parse errors reported by W3C CSS validator are related to 'CSS nested rules', which the validator does not yet support, the 'nested CSS' syntax being a relatively new feature. The issue has been discussed in a number of places, particularly on GitHub issues , Reddit and some other less popular blogs.
+
+It is acknowledged that such approach as CSS nesting reduces redundancy and simplifies the management of complex styles, leading to cleaner and more organized code. Additionally, CSS nesting aligns with the principles of modular design, which is especially in demand for complex and large-scale projects.
+Moreover, CSS nesting is supported by all major modern browsers: 
+
+| Browser Name: | Full support from: | Version released in: |
+| ---- | ---- | ---- |
+| Chrome | version 120 | released in 2023 |
+| Edge | version 120 | released in 2023 |
+| Firefox | version 117 | released in 2023 |
+| Safari | version 17.2 | released in 2023 |
+| Opera | version 106 | released in 2023 |
+| Chrome for Android | version 125 | released in 2024 |
+| Safari on iOS | version 17.2 | released in 2023 |
+| Samsung Internet | version 25 | released in 2024 |
+| Opera Mobile | version 80 | released in 2023 |
+| Firefox for Android | version 126 | released in 2024 |
+
+[Link to 'Can I Use' reg Nesting Selector](https://caniuse.com/mdn-css_selectors_nesting)
+
+[Using CSS Nesting Selector MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting/Using_CSS_nesting)
+
+In order to avoid ambiguities and ensure that styles are applied as intended across different browsers I used `&` nesting selector. It is said that using the `&` nesting selector helps prevent issues with compound selectors and pseudo-classes, which can be sensitive to whitespace and other syntactical nuances
+
+[MDN '&' Nesting selector uses](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting/Nesting_at-rules)
+
 
 ## Manual Testing
 
