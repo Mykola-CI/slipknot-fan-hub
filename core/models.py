@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxLengthValidator
 from django.contrib.auth.models import User
 from user_profile.models import Playlist
 
@@ -35,7 +36,10 @@ class Comment(models.Model):
                                       related_name="comments")
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="commenter")
-    content = models.CharField(max_length=500)
+    content = models.TextField(
+        blank=True,
+        # Limit characters to 500 as max_length does not apply to TextField
+        validators=[MaxLengthValidator(500)])
     likes_comment = models.ManyToManyField(
         User, related_name="playlist_comments", blank=True)
     created_on = models.DateTimeField(auto_now_add=True)

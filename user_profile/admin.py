@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from .models import UserProfile
 from django.utils.html import format_html
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from .models import Playlist, PlaylistItem
 from django_summernote.admin import (
@@ -97,6 +98,26 @@ class PlaylistAdmin(SummernoteModelAdmin):
             )
         return "No image"
     display_featured_image.short_description = 'Featured Image'
+
+    # Overriding save_model to ensure unique slug generation
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:  # If the object is new
+            obj.slug = slugify(obj.title)
+            original_slug = obj.slug
+            num = 1
+            while Playlist.objects.filter(slug=obj.slug).exists():
+                obj.slug = f'{original_slug}-{num}'
+                num += 1
+        else:  # If the object already exists
+            original = Playlist.objects.get(pk=obj.pk)
+            if original.title != obj.title:  # If the title has changed
+                obj.slug = slugify(obj.title)
+                original_slug = obj.slug
+                num = 1
+                while Playlist.objects.filter(slug=obj.slug).exists():
+                    obj.slug = f'{original_slug}-{num}'
+                    num += 1
+        super().save_model(request, obj, form, change)
 
 
 admin.site.register(Playlist, PlaylistAdmin)

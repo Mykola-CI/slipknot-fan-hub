@@ -434,8 +434,14 @@ a:hover {
     padding: 20px 50px 20px 20px;
     background-color: black;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: space-around;
+    flex-wrap: wrap;
     align-items: center;
+    & p {
+        font-weight: var(--fw-300);
+        font-size: var(--fs-400);
+    }
 }
 
 .social-media {
@@ -449,6 +455,10 @@ a:hover {
 
     & a {
         color: antiquewhite;
+    }
+
+    & a:hover {
+        color: red;
     }
 }
 
@@ -538,6 +548,6 @@ a:hover {
     }
     .home-footer {
         justify-content: center;
-        gap: 10px;
+        gap: 20px;
     }
 }
