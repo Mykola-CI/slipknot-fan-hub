@@ -112,6 +112,12 @@ header {
     width: 100%;
 }
 
+.errorlist {
+    color: red;
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+    background-color: black;
+}
+
 form {
     & label {
         display: block;

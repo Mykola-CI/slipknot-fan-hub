@@ -29,6 +29,9 @@ class PlaylistForm(forms.ModelForm):
             'reference_url',
             'status'
         ]
+        labels = {
+            'title': 'Playlist Title*:'
+        }
 
 
 class PlaylistItemForm(forms.ModelForm):
@@ -63,3 +66,13 @@ class PlaylistItemForm(forms.ModelForm):
             'performance_year',
             'performance_type'
         ]
+        labels = {
+            'song_title': 'Song Title*:',
+            'artist': 'Artist*:'
+        }
+
+    # Override the __init__ method to set custom labels for Cloudinary fields
+    def __init__(self, *args, **kwargs):
+        super(PlaylistItemForm, self).__init__(*args, **kwargs)
+        self.fields['song_tabs'].label = 'Song tabs, lyrics (pdf or txt only):'
+        self.fields['song_audio'].label = 'Song audio (mp3 or wav only):'

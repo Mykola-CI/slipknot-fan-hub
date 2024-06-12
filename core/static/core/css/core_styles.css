@@ -207,6 +207,11 @@
     }
 }
 
+.playlist-item--field-title {
+    color: red;
+    text-decoration: underline dashed red 1px;
+}
+
 .pop-down {
     position: absolute;
     max-width: 80dvw;

@@ -91,12 +91,12 @@
                 <article class="playlist-item pop-down flex-column-left">
                     <h3 class="hidden">Song/Item presentation</h3>
                     <div>
-                        <p>Artist/Author:</p>
+                        <p class="playlist-item--field-title">Artist/Author:</p>
                         <p>{{ item.artist }}</p>
                     </div>
                     <div>
                         {% if item.album %}
-                        <p>Album:</p>
+                        <p class="playlist-item--field-title">Album:</p>
                         <p>{{ item.album }}</p>
                         {% endif %}
                     </div>
@@ -109,7 +109,7 @@
                     </div>
                     <div>
                         {% if item.song_audio %}
-                        <p>Song Audio:</p>
+                        <p class="playlist-item--field-title">Song Audio:</p>
                         <audio id="audio-example" controls>
                             <source src="{{ item.song_audio.url }}" type="audio/mpeg">
                             Your browser does not support the audio element.
@@ -118,7 +118,7 @@
                     </div>
                     <div>
                         {% if item.song_tabs %}
-                        <p>Song Docs (song tabs/notation or other useful stuff):</p>
+                        <p class="playlist-item--field-title">Song Docs (song tabs, lyrics or other useful stuff):</p>
                         <a href="{{ item.song_tabs.url }}" download target="_blank" rel="noopener noreferrer"
                             aria-label="link to the song docs file">🔗 Preview doc file here and download if you
                             need</a>
@@ -126,17 +126,17 @@
                     </div>
                     <div>
                         {% if item.performance_year %}
-                        <p>Performed in:</p>
+                        <p class="playlist-item--field-title">Performed in:</p>
                         <p>{{ item.performance_year }}</p>
                         {% endif %}
                     </div>
                     <div>
-                        <p>The song category:</p>
+                        <p class="playlist-item--field-title">The song category:</p>
                         <p>{{ item.get_performance_type_display }}</p>
                     </div>
                     <div>
                         {% if item.song_comments %}
-                        <p>The Playlist's Author comments on the song:</p>
+                        <p class="playlist-item--field-title">The Playlist's Author comments on the song:</p>
                         {{ item.song_comments | linebreaks }}
                         {% endif %}
                     </div>
