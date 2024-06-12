@@ -20,7 +20,7 @@ class UserProfile(models.Model):
         _("about myself"),
         blank=True,
         # Limit characters to 500 as max_length does not apply to TextField
-        validators=[MaxLengthValidator(500)]
+        validators=[MaxLengthValidator(800)]
     )
 
     # Store avatars in the update UserAdmin model Cloudinary cloud
@@ -56,7 +56,7 @@ class Playlist(models.Model):
     description = models.TextField(
         blank=True,
         # Limit characters to 500 as max_length does not apply to TextField
-        validators=[MaxLengthValidator(500)])
+        validators=[MaxLengthValidator(800)])
     reference_url = models.URLField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
