@@ -20,7 +20,7 @@ class UserProfile(models.Model):
         _("about myself"),
         blank=True,
         # Limit characters to 500 as max_length does not apply to TextField
-        validators=[MaxLengthValidator(800)]
+        validators=[MaxLengthValidator(1000)]
     )
 
     # Store avatars in the update UserAdmin model Cloudinary cloud
