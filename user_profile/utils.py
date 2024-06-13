@@ -36,7 +36,8 @@ class AuthorRequiredMixin:
             if not playlist_item_id:
                 raise PermissionDenied("Playlist Item ID not provided")
 
-            playlist_item = get_object_or_404(PlaylistItem, pk=playlist_item_id)
+            playlist_item = get_object_or_404(
+                PlaylistItem, pk=playlist_item_id)
             playlist = playlist_item.playlist
         else:
             playlist_id = kwargs.get('pk')
@@ -46,6 +47,7 @@ class AuthorRequiredMixin:
             playlist = get_object_or_404(Playlist, pk=playlist_id)
 
         if not playlist.is_author(request.user):
-            raise PermissionDenied("You are not authorised to access this page")
+            raise PermissionDenied(
+                "You are not authorised to access this page")
 
         return super().dispatch(request, *args, **kwargs)

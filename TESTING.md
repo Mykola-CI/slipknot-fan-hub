@@ -6,6 +6,12 @@ Technique used for validating html in production site (heroku):
 
 Navigate to a page in Chrome / Chrome Inspect mode / View Page Source / Copy html / Paste to W3C html validator - direct input.
 
+* __Info Messages__
+
+There are html validator messages regarding trailing slash endings as  self-closing tags for the void elements. These are neither errors nor warnings. This issue has been widely covered throughout developer communities. It is said that trailing slashes may cause issues with unquoted attribute values, whereas self-closing tags are required in XHTML ([Mdn reference](https://developer.mozilla.org/en-US/docs/Glossary/Void_element)). 
+
+I do not use unquoted attribute values, and I confirmed that these kinds of tags do not cause any bugs.
+
 - Home page
 
 ![Home page validation](documentation/validator_slides/w3c-html/w3c-html-home.png)
@@ -72,24 +78,7 @@ I use 5 CSS files to serve web-pages in all applications.
 - `core_styles` - serving Home page and Playlist Detail pages (accessible for non-logged in users)
 - `base_allauth.css` - custom restyling of django-allauth pages. 
 
-__Validation Results__
-
-- style.css
-![Validation report for style.css](documentation/validator_slides/w3c-css/style-css-w3c.png)
-
-- profile.css
-![Validation report for profile.css](documentation/validator_slides/w3c-css/profile-css-w3c.png)
-
-- playlist_update.css
-![Validation report for playlist_update.css](documentation/validator_slides/w3c-css/playlist-update-css-w3c.png)
-
-- core_styles.css
-![Validation report for core_styles.css](documentation/validator_slides/w3c-css/core-styles-css-w3c.png)
-
-- base_allauth.css
-![Validation report for style.css](documentation/validator_slides/w3c-css/base-allauth-css-w3c.png)
-
-__Errors Explanation:__
+__Explanation of Errors Revealed in Validator Results:__
 
 All of the parse errors reported by W3C CSS validator are related to 'CSS nested rules', which the validator does not yet support, the 'nested CSS' syntax being a relatively new feature. The issue has been discussed in a number of places, particularly on GitHub issues , Reddit and some other less popular blogs.
 
@@ -118,7 +107,82 @@ In order to avoid ambiguities and ensure that styles are applied as intended acr
 [MDN '&' Nesting selector uses](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting/Nesting_at-rules)
 
 
+__Validation Results__
+
+- style.css
+![Validation report for style.css](documentation/validator_slides/w3c-css/style-css-w3c.png)
+
+- profile.css
+![Validation report for profile.css](documentation/validator_slides/w3c-css/profile-css-w3c.png)
+
+- playlist_update.css
+![Validation report for playlist_update.css](documentation/validator_slides/w3c-css/playlist-update-css-w3c.png)
+
+- core_styles.css
+![Validation report for core_styles.css](documentation/validator_slides/w3c-css/core-styles-css-w3c.png)
+
+- base_allauth.css
+![Validation report for style.css](documentation/validator_slides/w3c-css/base-allauth-css-w3c.png)
+
+
+### JSHint Validator
+- comments.js
+![Validator screen comments.js](documentation/validator_slides/jshint-comments.png)
+
+- item-detail-toggle.js
+![Validator screen item-detail-toggle.js](documentation/validator_slides/jshint-item-detail-toggle.png)
+
+- user-profile.js
+![Validator screen user-profile.js](documentation/validator_slides/jshint-user-profile.png)
+
+__A note on "undefined variable" warning in user_profile.js__
+
+In fact, it is dynamically defined inside a template because external .js files do not support Django template language.
+
+This is the snippet from `profile.html`:
+
+~~~
+{% endblock main_content %}
+
+{% block bottom %}
+<script>
+    var profileUrl = '{% url "profile" %}';
+</script>
+<script src="{% static 'js/user-profile.js' %}"></script>
+{% endblock %}
+~~~
+
+### Python Linter
+I used the validator provided by the Code Institute [here](https://pep8ci.herokuapp.com/).
+
+
+I have checked all python-based files on PEP8 integrity and can guarantee that there are no errors found, with one exception. These are commonly known lines in Django settings:
+~~~
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
+]
+~~~
+
+I left them unscathed for better readability. After all, according to [PEP 8 – Style Guide for Python Code](https://peps.python.org/pep-0008/) "A Foolish Consistency is the Hobgoblin of Little Minds".
+
+As far as there are too many python files in the project I do not deliver screenshots of successful tests here.
+
+
 ## Manual Testing
+### SignUp and Login.
+
+
 
 ## Django Unit Testing
 

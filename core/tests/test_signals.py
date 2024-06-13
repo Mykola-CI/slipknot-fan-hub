@@ -38,17 +38,18 @@ class PlaylistSignalTests(TestCase):
         playlist = Playlist.objects.create(
             slug='slipknot-slug', author=self.user)
 
-        # Manually set the previous_status as required by the signal logic
+        # Manually setting the previous_status as required by the signal logic
         previous_status = {}
         previous_status[playlist.pk] = playlist.status
 
-        # Update the Playlist instance to "Published" status
+        # Updating the Playlist instance to "Published" status
         playlist.status = 1
         playlist.slug = 'slipknot-slug'
         playlist.save()
 
         # Ensure the PlaylistPost is created
-        self.assertTrue(PlaylistPost.objects.filter(playlist=playlist).exists())
+        self.assertTrue(
+            PlaylistPost.objects.filter(playlist=playlist).exists())
 
         playlist_post = PlaylistPost.objects.get(playlist=playlist)
 

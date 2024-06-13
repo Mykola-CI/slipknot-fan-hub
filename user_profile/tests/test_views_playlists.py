@@ -129,8 +129,10 @@ class PlaylistUpdateViewTests(TestCase):
 class PlaylistDeleteViewTests(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='12345')
-        self.playlist = Playlist.objects.create(author=self.user, title='Test Playlist')
+        self.user = User.objects.create_user(
+            username='testuser', password='12345')
+        self.playlist = Playlist.objects.create(
+            author=self.user, title='Test Playlist')
         self.url = reverse('playlist_delete', args=[self.playlist.id])
 
     # Ensure that only authenticated users can access the view.

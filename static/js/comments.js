@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const editButtons = document.querySelectorAll(".btn-edit");
     const commentText = document.querySelector("#id_content");
     const commentForm = document.querySelector("#commentForm");
@@ -12,7 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
     editButtons.forEach(button => {
         button.addEventListener("click", (e) => {
             let commentId = e.target.getAttribute("data-comment_id");
-            let commentContent = document.querySelector(`#comment${commentId}`).innerText;
+            let commentContent = document.querySelector(
+                `#comment${commentId}`
+            ).innerText;
             let formTitle = document.querySelector("#formTitle");
             commentText.value = commentContent;
             submitButton.innerText = "Save Changes";

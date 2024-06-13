@@ -56,7 +56,7 @@ class Playlist(models.Model):
     description = models.TextField(
         blank=True,
         # Limit characters to 500 as max_length does not apply to TextField
-        validators=[MaxLengthValidator(800)])
+        validators=[MaxLengthValidator(1000)])
     reference_url = models.URLField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -118,7 +118,7 @@ class PlaylistItem(models.Model):
     song_comments = models.TextField(
         blank=True,
         # Limit characters to 500 as max_length does not apply to TextField
-        validators=[MaxLengthValidator(500)])
+        validators=[MaxLengthValidator(800)])
     performance_year = models.IntegerField(
         verbose_name="Year of Performance", blank=True, null=True)
     performance_type = models.IntegerField(choices=TYPE, default=0)

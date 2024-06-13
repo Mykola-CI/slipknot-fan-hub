@@ -83,7 +83,7 @@ class PlaylistItemDeleteView(
     def get_success_url(self):
         messages.success(
             self.request, "You have successfully deleted the playlist item.")
-        
+
         # Redirect to the 'playlist_created' page for the specific playlist
         return reverse_lazy(
             'playlist_created', kwargs={'pk': self.object.playlist.pk}
