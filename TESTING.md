@@ -70,7 +70,7 @@ I do not use unquoted attribute values, and I confirmed that these kinds of tags
 
 
 ### W3C CSS
-I use 5 CSS files to serve web-pages in all applications. 
+I use 5 CSS files to serve web-pages in my applications. 
 
 - `style.css` - accessible across all applications
 - `profile.css` - serving User profile pages
@@ -180,7 +180,21 @@ As far as there are too many python files in the project I do not deliver screen
 
 
 ## Manual Testing
-### SignUp and Login.
+
+### SignUp and Login. User Authentication.
+All references to User Stories are numbered as per my [GitHub Issues](https://github.com/Mykola-CI/slipknot-fan-hub/issues) for the project. 
+
+| num. | Test Name | Purpose | User Story | Findings
+| ---- | ---- | ---- | ---- | ---- |
+| 1 | Valid Entries/signup | Check if User is created | #1 | User created, confirmed through 'admin' console | 
+| 2 | No email/signup | Check if User is created | #1, #58 | User not created, form does not submit, popup message 'please fill in this field' |
+| 3 | Invalid email/signup | Check if User is created | #1, #58 | User not created, form does not submit, popup 'please enter an email address' |
+| 4 | non-existent email/signup | Check if User is created | #1, #58 | Form submitted, 'Verify Your Email Address' page opens, Trying to signin without verification fails |
+| 5 | Existing username at signup | Check if form submits and messages | #5 |  form does not submit, message: A user with that username already exists. |
+| 6 | 1-4 tests for login page | Check if User can login, check messages | #6, #10 | User can login only when valid credentials are filled in, other scenarios raise appropriate messages or popups |
+| 7 | Password reset | Check if User can reset password | #8 | Click on 'forget your password' link, email sent with a reset link, clicking reset link opens a password reset page, upon submit password changes successfully, User login with new password confirmed |  
+| 8 | Error: "Ensure this value has at most 800 characters (it has 1986)."
+
 
 
 

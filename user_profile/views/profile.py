@@ -57,12 +57,16 @@ def profile(request):
         if form.is_valid():
             form.save()
             return JsonResponse({'status': 'success'})
-        elif form:
-            return JsonResponse(
-                {'status': 'error', 'errors': form.errors.as_json()})
         else:
+            # Extract and format errors into a single string
+            # this is to ensure that errors are in readable format
+            errors = []
+            for field, error_list in form.errors.items():
+                for error in error_list:
+                    errors.append(error)
+            error_message = " ".join(errors)
             return JsonResponse(
-                {'status': 'error', 'errors': form.errors.as_json()})
+                {'status': 'error', 'errors': error_message})
 
     # Context for initial page load
     context = {
