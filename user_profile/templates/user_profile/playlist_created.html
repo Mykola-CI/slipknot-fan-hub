@@ -102,7 +102,7 @@
             {% for item in playlist_items %}
             <li>
                 <a href="{% url 'playlist_item_update' playlist_id=playlist.id pk=item.id %}"
-                    aria-label="edit or delete playlist items">{{ item }}</a>
+                    aria-label="edit or delete playlist items">{{ item }} {{ item.get_performance_type_display }}</a>
             </li>
             {% endfor %}
         </ul>

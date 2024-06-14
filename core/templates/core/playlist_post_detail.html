@@ -83,7 +83,7 @@
         <ul class="flex-column-left">
             {% for item in playlist_items %}
             <li>
-                {{ item }} Performance Type: {{ item.get_performance_type_display }}
+                {{ item }} {{ item.get_performance_type_display }}
                 <input type="checkbox" id="nav-toggle-{{ forloop.counter }}" class="nav-toggle hidden"
                     name="nav-toggle">
                 <label for="nav-toggle-{{ forloop.counter }}" class="nav-toggle--label"><i
