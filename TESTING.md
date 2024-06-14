@@ -181,7 +181,6 @@ As far as there are too many python files in the project I do not deliver screen
 
 ## Manual Testing
 
-### SignUp and Login. User Authentication.
 All references to User Stories are numbered as per my [GitHub Issues](https://github.com/Mykola-CI/slipknot-fan-hub/issues) for the project. 
 
 | num. | Test Name | Purpose | User Story | Findings
@@ -196,9 +195,24 @@ All references to User Stories are numbered as per my [GitHub Issues](https://gi
 | 8 | Add About Myself - invalid | Check more than 1000 char | #15 | Error: "Ensure this value has at most 1000 characters (it has 1986)." |
 | 9 | Add About Myself - valid | Check if about info is saved to the database | #15 | Info is stored and displayed in appropriate views |
 | 10 | Playlist CRUD | Check if all CRUD changes are saved to the database | #17 | All changes are saved successfully, checked all available fields including image and ref. url |
-| 11 | Playlist Item CRUD | Check if all CRUD changes are saved to the database | #18 | All changes are saved successfully, checked all available fields including file uploads and ref. url |
-| 12 | 
-
+| 11 | Playlist Item CRUD | Check if all CRUD changes are saved to the database | #18, 19, 20 | All changes are saved successfully, checked all available fields including file uploads and ref. url |
+| 12 | Upload of audio file | Check if the form has tools for upload and a file is saved to the database | #19 | Form contains a 'browse' tool to select and upload file, checkbox to clear file, 'change' button to change file, file is saved to the database |
+| 13 | Share a Playlist | Check if hitting the button 'Share Playlist' displays the Playlist on home page and on Shared Playlists page | #21 | Button text turn to 'Remove playlist from FanHub', Playlist and its details appear on relevant pages for presentation |
+| 14 | Share a Playlist | Check if hitting the button 'Remove Playlist' removes a Playlist from the home page and from the Shared Playlists page | #22 | Button text turn to 'Share playlist to FanHub', Playlist is removed from all pages for presentation but remain seen form user profile pages, status changes to 'Draft' from 'Published' |
+| 15 | Create Comment | Check if an appropriate form is available for logged-in users | #24, #56 | Comment Form is available for logged users only on Playlist Post Detail page, and to the contrary, it is not available for those who is not logged |
+| 16 | Create and save Comment | Check if a new comment is saved to the database | #24 | Comment is saved upon submission of the form, comment content is displayed in Playlist Post Detail view  |
+| 17 | Edit comment | Comment can be edited and changes saved | #25 |  button 'edit' appears only next to user's own comments, existing content of a comment populates editable textarea, content can be edited, changes are saved successfully upon submission, updated comment appears on the Post Detail View page |
+| 18 | Delete a comment | Comment can be deleted and record is removed from the database | #48 | button 'delete' along with 'edit' appear only next to user's own comments, pop up modal with a request to confirm delete appears when delete is clicked, when confirmed a comment is no longer seen in the comment section |
+| 19 | Like shared playlist | Check highlight of like button, saving into the database, increase of like count | #50 | Button highlighted red, liked status is saved - checked through admin console, like count display increases by 1 |
+| 20 | Unlike shared playlist | Check if highlight of like button removed, saving into the database, decrease of like count | #49 | Red highlight removed, liked status is cancelled - checked through admin console, like count display decreases by 1 |
+| 21 | Like and unlike comment | similar to 19 and 20 for playlists | #51, 52 | all tests here successful |
+| 22 | Total likes count | Check if total count counts and displays for both Playlist posts and comments | #53, 54 | Displayed as expected on home page inside playlist cards, and on Playlist Detail view, count increases by 1 when liked and decreases when unliked |
+| 23 | Moderator to control content | Superuser and moderator if any are enabled with CRUD for database items | #39 | Content can be changed via admin console successfully, currently there is only one account with all discretion rights - superuser | 
+| 24 | Upload and save avatar | Check if avatar image can be uploaded and saved | #44, 45, 46 | Form is rendered, file uploads successfully to Cloudinary, avatar is displayed in user profile and in playlist detail views |
+| 25 | Upload and save doc file | Check if file uploads and saved in database | #47 | Form allows to upload doc file, file saved successfully, if .txt or .pdf file uplaoded preview is allowed by Cloudinary, other types of files download to local user's computer |
+| 26 | Moderator to update about section | Check if updates made to about page via admin console saves correctly | #55 | Round and About page can be edited via admin console in rich text format, saves successfully |
+| 27 | Authorised users only can edit their playlists | Check if a user can access somebody else's playlist to edit | #57 | Non-logged user gets to signin page first, if a logged-in user explicitly dials url specific to somebody else's playlist or a playlist item such user hits a 403 page "access denied" |
+| 28 | Email required at signup | Check if a user can register an account without filling in user's email and without verification | #58 | If email is not filled in form does not submit; if email is faked and never verified, superuser receives notification that email does not exists, if it exists but not verified, account is not registered and user cannot login | 
 
 
 

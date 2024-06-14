@@ -29,6 +29,7 @@
                 <img src="{{ moderator.profile_image.url }}" alt="FanHub featured weekly image">
                 {% endif %}
             </div>
+            <div class="policy-quidelines">{{ moderator.about | safe }}</div>
         </div>
         <div>{{ moderator.content | safe }}</div>
     </Section>

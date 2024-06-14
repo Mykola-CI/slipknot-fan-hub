@@ -354,7 +354,10 @@
 }
 
 #fanhub-presentation:last-child {
-    max-width: 180ch;
+    max-width: 220ch;
+    & div {
+        padding: 10px;
+    }
 }
 
 #playlist-full-list {
@@ -370,6 +373,12 @@
     & p {
         padding-bottom: 5px;
     }
+}
+
+/* moderator section */
+
+.policy-quidelines {
+    padding-top: 30px;
 }
 
 
