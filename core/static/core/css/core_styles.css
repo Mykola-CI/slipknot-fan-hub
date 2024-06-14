@@ -199,7 +199,7 @@
     & li {
         list-style-type: treble-clef;
         padding-bottom: 10px;
-        position: relative
+        position: relative;
     }
 
     & li::marker {
@@ -221,10 +221,13 @@
     right: -30px;
     background-color: black;
     border-radius: 5px;
-    opacity: 0;
-    max-height: 0;
+    display: none;
     z-index: 99;
     transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
+}
+
+.pop-down.show {
+    display: block;
 }
 
 .nav-toggle--label {
