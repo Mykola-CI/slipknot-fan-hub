@@ -1,5 +1,5 @@
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     // Setting volume reduced at loading of the page 
     var audioElement = document.getElementById('audio-example');
@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Handling playlist items modals
-    const toggles = document.querySelectorAll('.nav-toggle');
 
+    const toggles = document.querySelectorAll('.nav-toggle');
     toggles.forEach(toggle => {
-        toggle.addEventListener('change', function() {
+        toggle.addEventListener('change', function () {
             // Unchecking all other checkboxes
             toggles.forEach(otherToggle => {
                 if (otherToggle !== this) {
@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const otherLabel = otherToggle.nextElementSibling;
                     const otherArticle = otherLabel.nextElementSibling;
                     otherLabel.style.color = 'antiquewhite';
-                    otherArticle.style.opacity = '0';
-                    otherArticle.style.maxHeight = '0';
+                    otherArticle.classList.remove('show');
                 }
             });
 
@@ -29,12 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const article = label.nextElementSibling;
             if (this.checked) {
                 label.style.color = 'red';
-                article.style.opacity = '1';
-                article.style.maxHeight = '100dvh';
+                article.classList.add('show');
             } else {
                 label.style.color = 'antiquewhite';
-                article.style.opacity = '0';
-                article.style.maxHeight = '0';
+                article.classList.remove('show');
             }
         });
     });
