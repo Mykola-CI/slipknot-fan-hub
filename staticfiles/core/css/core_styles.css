@@ -210,6 +210,13 @@
 .playlist-item--field-title {
     color: red;
     text-decoration: underline dashed red 1px;
+    padding-bottom: 7px;
+}
+
+.playlist-item {
+    & div {
+        padding-bottom: 20px;
+    }
 }
 
 .pop-down {
@@ -257,7 +264,8 @@
 }
 
 .comment-content {
-    padding: 10px;
+    max-width: 60ch;
+    padding: 10px 20px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.7);
 }

@@ -2,16 +2,25 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     // Setting volume reduced at loading of the page 
-    var audioElement = document.getElementById('audio-example');
-    if (audioElement) {
-        audioElement.volume = 0.2;
-    }
+    const allAudios = document.querySelectorAll('audio');
+    allAudios.forEach(audio => {
+        audio.volume = 0.2;
+    });
 
     // Handling playlist items modals
 
     const toggles = document.querySelectorAll('.nav-toggle');
+    
+
     toggles.forEach(toggle => {
         toggle.addEventListener('change', function () {
+
+            // Stop all audio elements when playlist item is closed or new item opened
+            allAudios.forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+
             // Unchecking all other checkboxes
             toggles.forEach(otherToggle => {
                 if (otherToggle !== this) {

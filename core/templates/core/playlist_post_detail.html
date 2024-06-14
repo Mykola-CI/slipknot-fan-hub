@@ -102,9 +102,8 @@
                     </div>
                     <div>
                         {% if item.song_url %}
-                        <a href="{{ item.song_url }}" aria-label="link reference to the song" target="_blank">🔗 Follow
-                            this
-                            link provided by the Playlist's Author</a>
+                        <a href="{{ item.song_url }}" aria-label="link reference to the song" target="_blank">🔗 Reference
+                            link provided by {{ playlist_post.playlist.author }}</a>
                         {% endif %}
                     </div>
                     <div>

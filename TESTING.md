@@ -193,7 +193,11 @@ All references to User Stories are numbered as per my [GitHub Issues](https://gi
 | 5 | Existing username at signup | Check if form submits and messages | #5 |  form does not submit, message: A user with that username already exists. |
 | 6 | 1-4 tests for login page | Check if User can login, check messages | #6, #10 | User can login only when valid credentials are filled in, other scenarios raise appropriate messages or popups |
 | 7 | Password reset | Check if User can reset password | #8 | Click on 'forget your password' link, email sent with a reset link, clicking reset link opens a password reset page, upon submit password changes successfully, User login with new password confirmed |  
-| 8 | Error: "Ensure this value has at most 800 characters (it has 1986)."
+| 8 | Add About Myself - invalid | Check more than 1000 char | #15 | Error: "Ensure this value has at most 1000 characters (it has 1986)." |
+| 9 | Add About Myself - valid | Check if about info is saved to the database | #15 | Info is stored and displayed in appropriate views |
+| 10 | Playlist CRUD | Check if all CRUD changes are saved to the database | #17 | All changes are saved successfully, checked all available fields including image and ref. url |
+| 11 | Playlist Item CRUD | Check if all CRUD changes are saved to the database | #18 | All changes are saved successfully, checked all available fields including file uploads and ref. url |
+| 12 | 
 
 
 
