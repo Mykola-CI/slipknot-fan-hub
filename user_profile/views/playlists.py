@@ -33,7 +33,7 @@ class PlaylistCreateView(LoginRequiredMixin, CreateView):
     def form_invalid(self, form):
         messages.error(
             self.request,
-            'Only image files (jpg, jpeg, png) are allowed.')
+            'Sorry. Upload failed. Try again with a different image.')
         return super().form_invalid(form)
 
     # Redirect to the playlist_created page for the new playlist
@@ -93,7 +93,7 @@ class PlaylistUpdateView(
     def form_invalid(self, form):
         messages.error(
             self.request,
-            'Only image files (jpg, jpeg, png) are allowed.')
+            'Sorry. Upload failed. Try again with a different image.')
         return super().form_invalid(form)
 
     # Get the playlist items context for the playlist_update_form.html template

@@ -4,6 +4,26 @@ from django.core.exceptions import ValidationError
 from cloudinary.uploader import upload_resource
 from cloudinary.models import CloudinaryResource
 from user_profile.models import Playlist, PlaylistItem
+from user_profile.utils import validate_file_size
+
+
+# When file size exceeds 10MB Cloudinary validator forces its messages
+# before the file is cropped and resized. So this custom validator is added
+# to prevent forced messages from Cloudinary. The maximum size of the
+# image is cropped afterwords anyway to 600 x 600 and hardly can reach even 2MB
+def validate_featured_image_size(value):
+    max_size = 10400000  # slightly less than 10MB
+    validate_file_size(value, max_size)
+
+
+def validate_song_audio_size(value):
+    max_size = 8388608  # 8MB
+    validate_file_size(value, max_size)
+
+
+def validate_song_tabs_size(value):
+    max_size = 5242880  # 5MB
+    validate_file_size(value, max_size)
 
 
 class PlaylistForm(forms.ModelForm):
@@ -21,6 +41,8 @@ class PlaylistForm(forms.ModelForm):
             },
             'allowed_formats': ['jpg', 'jpeg', 'png', 'webp']
         },
+        # Call custom validator to prevent from forced messages from Cloudinary
+        validators=[validate_featured_image_size],
         autosave=False,
         required=False
     )
@@ -37,6 +59,12 @@ class PlaylistForm(forms.ModelForm):
         labels = {
             'title': 'Playlist Title*:'
         }
+
+    # Override the __init__ method to set custom labels for Cloudinary fields
+    def __init__(self, *args, **kwargs):
+        super(PlaylistForm, self).__init__(*args, **kwargs)
+        self.fields['featured_image'].label = (
+            'Choose Banner (jpg, webp, png, 10MB max):')
 
     def save(self, commit=True):
         instance = super(PlaylistForm, self).save(commit=False)
@@ -67,8 +95,10 @@ class PlaylistItemForm(forms.ModelForm):
         options={
             'resource_type': 'raw',
             'folder': 'fanhub/song_audios',
-            'allowed_formats': ['mp3', 'wav']
+            'allowed_formats': ['mp3', 'wav', 'aac']
         },
+        # Call custom validator to restrict the file size
+        validators=[validate_song_audio_size],
         autosave=False,
         required=False
     )
@@ -78,6 +108,8 @@ class PlaylistItemForm(forms.ModelForm):
             'folder': 'fanhub/song_tabs',
             'allowed_formats': ['pdf', 'txt']
         },
+        # Call custom validator to restrict the file size
+        validators=[validate_song_tabs_size],
         autosave=False,
         required=False
     )
@@ -103,8 +135,10 @@ class PlaylistItemForm(forms.ModelForm):
     # Override the __init__ method to set custom labels for Cloudinary fields
     def __init__(self, *args, **kwargs):
         super(PlaylistItemForm, self).__init__(*args, **kwargs)
-        self.fields['song_tabs'].label = 'Song tabs, lyrics (pdf or txt only):'
-        self.fields['song_audio'].label = 'Song audio (mp3 or wav only):'
+        self.fields['song_tabs'].label = (
+            'Song info (pdf or txt files only, 5MB max):')
+        self.fields['song_audio'].label = (
+            'Audio file (mp3, wav, aac only, 8MB max):')
 
     def save(self, commit=True):
         instance = super(PlaylistItemForm, self).save(commit=False)

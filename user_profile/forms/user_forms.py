@@ -7,6 +7,7 @@ from cloudinary.uploader import upload_resource
 from cloudinary.models import CloudinaryResource
 from django.core.exceptions import ValidationError
 from django_summernote.widgets import SummernoteWidget
+from user_profile.utils import validate_file_size
 
 
 class UserEmailForm(forms.ModelForm):
@@ -44,8 +45,21 @@ class UserAboutForm(forms.ModelForm):
         }
 
 
+# When file size exceeds 10MB Cloudinary validator forces its messages
+# before the file is cropped and resized by widgets. The maximum size of the
+# image is cropped afterwords anyway to 600 x 600 and hardly can reach 2MB.
+# This custom validator overrides Cloudinary to prevent odd messages.
+def validate_featured_image_size(value):
+    max_size = 10400000  # slightly less than 10MB
+    validate_file_size(value, max_size)
+
+
 class UploadAvatarForm(forms.ModelForm):
-    avatar = CloudinaryFileField(autosave=False)
+    avatar = CloudinaryFileField(
+        autosave=False,
+        validators=[validate_featured_image_size],
+        required=False
+    )
 
     class Meta:
         model = UserProfile
@@ -82,7 +96,7 @@ class UploadAvatarForm(forms.ModelForm):
                         **self.fields['avatar'].options)
                 except Exception as e:
                     raise ValidationError(
-                        f"{e} | try allowed formats: jpg, jpeg, png or webp")
+                        f"{e} | try allowed formats: jpg, png or webp")
 
         if commit:
             instance.save()

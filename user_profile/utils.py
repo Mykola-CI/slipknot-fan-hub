@@ -1,8 +1,19 @@
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
 from .models import Playlist, PlaylistItem
+
+
+# Custom validator to prevent from forced messages from Cloudinary
+# even before the image gets cropped and resized
+def validate_file_size(value, max_size):
+    if value.size > max_size:
+        raise ValidationError(
+            f"Your file size {value.size} bytes is too large. "
+            f"Max allowed size is {max_size} bytes."
+        )
 
 
 # Custom override of the form_valid method to ensure the author field remains

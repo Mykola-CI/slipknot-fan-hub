@@ -90,11 +90,11 @@
 
 .form-control {
     margin-inline: auto;
-    /* max-width: 500px; */
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow: hidden;
 }
 
 .delete-case button {
