@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.core.exceptions import ValidationError
 from ..forms.user_forms import (
     UserEmailForm,
     UserPasswordForm,
@@ -55,8 +56,14 @@ def profile(request):
                 request.POST, request.FILES, instance=user_profile)
 
         if form.is_valid():
-            form.save()
-            return JsonResponse({'status': 'success'})
+            try:
+                form.save()
+                return JsonResponse({'status': 'success'})
+            except ValidationError as e:
+                error_message = str(e).strip('[]').replace('"', '')
+                return JsonResponse(
+                    {'status': 'error', 'errors': error_message})
+
         else:
             # Extract and format errors into a single string
             # this is to ensure that errors are in readable format

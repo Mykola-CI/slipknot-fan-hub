@@ -1,6 +1,9 @@
 from django import forms
-from user_profile.models import Playlist, PlaylistItem
 from cloudinary.forms import CloudinaryFileField
+from django.core.exceptions import ValidationError
+from cloudinary.uploader import upload_resource
+from cloudinary.models import CloudinaryResource
+from user_profile.models import Playlist, PlaylistItem
 
 
 class PlaylistForm(forms.ModelForm):
@@ -15,8 +18,10 @@ class PlaylistForm(forms.ModelForm):
                 'crop': 'limit',
                 'width': 600,
                 'height': 600
-            }
+            },
+            'allowed_formats': ['jpg', 'jpeg', 'png', 'webp']
         },
+        autosave=False,
         required=False
     )
 
@@ -33,6 +38,26 @@ class PlaylistForm(forms.ModelForm):
             'title': 'Playlist Title*:'
         }
 
+    def save(self, commit=True):
+        instance = super(PlaylistForm, self).save(commit=False)
+        featured_image = self.cleaned_data.get('featured_image')
+
+        if featured_image:
+            if isinstance(featured_image, CloudinaryResource):
+                instance.featured_image = featured_image
+            else:
+                try:
+                    instance.featured_image = upload_resource(
+                        featured_image,
+                        **self.fields['featured_image'].options)
+                except Exception as e:
+                    raise ValidationError(
+                        f"Error uploading featured image: {e}")
+
+        if commit:
+            instance.save()
+        return instance
+
 
 class PlaylistItemForm(forms.ModelForm):
     """
@@ -41,15 +66,19 @@ class PlaylistItemForm(forms.ModelForm):
     song_audio = CloudinaryFileField(
         options={
             'resource_type': 'raw',
-            'folder': 'fanhub/song_audios'
+            'folder': 'fanhub/song_audios',
+            'allowed_formats': ['mp3', 'wav']
         },
+        autosave=False,
         required=False
     )
     song_tabs = CloudinaryFileField(
         options={
             'resource_type': 'raw',
-            'folder': 'fanhub/song_tabs'
+            'folder': 'fanhub/song_tabs',
+            'allowed_formats': ['pdf', 'txt']
         },
+        autosave=False,
         required=False
     )
 
@@ -76,3 +105,32 @@ class PlaylistItemForm(forms.ModelForm):
         super(PlaylistItemForm, self).__init__(*args, **kwargs)
         self.fields['song_tabs'].label = 'Song tabs, lyrics (pdf or txt only):'
         self.fields['song_audio'].label = 'Song audio (mp3 or wav only):'
+
+    def save(self, commit=True):
+        instance = super(PlaylistItemForm, self).save(commit=False)
+        song_audio = self.cleaned_data.get('song_audio')
+        song_tabs = self.cleaned_data.get('song_tabs')
+
+        if song_audio:
+            if isinstance(song_audio, CloudinaryResource):
+                instance.song_audio = song_audio
+            else:
+                try:
+                    instance.song_audio = upload_resource(
+                        song_audio, **self.fields['song_audio'].options)
+                except Exception as e:
+                    raise ValidationError(f"Error uploading song audio: {e}")
+
+        if song_tabs:
+            if isinstance(song_tabs, CloudinaryResource):
+                instance.song_tabs = song_tabs
+            else:
+                try:
+                    instance.song_tabs = upload_resource(
+                        song_tabs, **self.fields['song_tabs'].options)
+                except Exception as e:
+                    raise ValidationError(f"Error uploading song tabs: {e}")
+
+        if commit:
+            instance.save()
+        return instance

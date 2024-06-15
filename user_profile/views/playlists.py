@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 from django.views.generic import (
     TemplateView,
     CreateView,
@@ -21,9 +22,19 @@ class PlaylistCreateView(LoginRequiredMixin, CreateView):
 
     # Set the author of the playlist to the current user and validates the form
     def form_valid(self, form):
-        # call the handle_form_valid function from utils.py
-        return handle_form_valid(
-            self, form, "You have successfully created a new playlist!")
+        try:
+            # call the handle_form_valid function from utils.py
+            return handle_form_valid(
+                self, form, "You have successfully created new playlist!")
+        except ValidationError as e:
+            form.add_error(None, e)
+            return self.form_invalid(form)
+
+    def form_invalid(self, form):
+        messages.error(
+            self.request,
+            'Only image files (jpg, jpeg, png) are allowed.')
+        return super().form_invalid(form)
 
     # Redirect to the playlist_created page for the new playlist
     def get_success_url(self):
@@ -79,6 +90,12 @@ class PlaylistUpdateView(
     form_class = PlaylistForm
     template_name = 'user_profile/playlist_update_form.html'
 
+    def form_invalid(self, form):
+        messages.error(
+            self.request,
+            'Only image files (jpg, jpeg, png) are allowed.')
+        return super().form_invalid(form)
+
     # Get the playlist items context for the playlist_update_form.html template
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -89,9 +106,13 @@ class PlaylistUpdateView(
 
     # Set the author of the playlist to the current user and validates the form
     def form_valid(self, form):
-        # call the handle_form_valid function from utils.py
-        return handle_form_valid(
-            self, form, "You have successfully saved the changes!")
+        try:
+            # call the handle_form_valid function from utils.py
+            return handle_form_valid(
+                self, form, "You have successfully saved the changes!")
+        except ValidationError as e:
+            form.add_error(None, e)
+            return self.form_invalid(form)
 
     # Redirect to the playlist_updated page for the updated playlist
     def get_success_url(self):

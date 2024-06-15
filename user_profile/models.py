@@ -109,12 +109,14 @@ class PlaylistItem(models.Model):
         'audios',
         resource_type='raw',
         folder='fanhub/song_audios',
-        blank=True)
+        blank=True,
+    )
     song_tabs = CloudinaryField(
         'docs',
         resource_type='raw',
         folder='fanhub/song_tabs',
-        blank=True)
+        blank=True,
+    )
     song_comments = models.TextField(
         blank=True,
         # Limit characters to 500 as max_length does not apply to TextField

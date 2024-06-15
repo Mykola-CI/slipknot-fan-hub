@@ -33,6 +33,20 @@
 <!-- Modal -->
 <div class="flex-1-1">
     <div id="modal" class="modal">
+        {% if form.errors %}
+        <div class="message-error">
+            <ul>
+                {% for field in form %}
+                {% for error in field.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
         <div class="modal-content">
             <span class="close">&times;</span>
             <form id="modal-form" method="post" enctype="multipart/form-data">
@@ -62,6 +76,7 @@
 
         <div class="profile-section">
             <h3> Avatar</h3>
+            <p>(jpg, jpeg, png, or webp formats only)</p>
             <button class="edit-btn" data-form="avatar">Update</button>
         </div>
 

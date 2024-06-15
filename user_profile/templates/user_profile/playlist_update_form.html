@@ -12,6 +12,20 @@
 <div class="container-form-edit flex-1-1 container grid">
     <section class="form-edit">
         <h2>Edit Playlist</h2>
+        {% if form.errors %}
+        <div class="message-error">
+            <ul>
+                {% for field in form %}
+                {% for error in field.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
         <form method="post" enctype="multipart/form-data" class="form-control">
             {% csrf_token %}
             {% for field in form %}

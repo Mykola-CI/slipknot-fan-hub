@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -21,12 +22,23 @@ class PlaylistItemCreateView(LoginRequiredMixin, CreateView):
         # Set the playlist attribute from the URL
         form.instance.playlist = Playlist.objects.get(
             pk=self.kwargs['playlist_id'])
-        response = super().form_valid(form)
-        messages.success(
+        try:
+            response = super().form_valid(form)
+            messages.success(
+                self.request,
+                "You have successfully added song to your playlist!",
+            )
+            return response
+        except ValidationError as e:
+            form.add_error(None, e)
+            return self.form_invalid(form)
+
+    def form_invalid(self, form):
+        # Add a message to indicate form submission failure
+        messages.error(
             self.request,
-            "You have successfully added song to your playlist!",
-        )
-        return response
+            "There was an error with your submission. Please try again.")
+        return super().form_invalid(form)
 
     def get_success_url(self):
         # Redirect to the 'playlist_created' page for the specific playlist
@@ -50,12 +62,23 @@ class PlaylistItemUpdateView(
     template_name = 'user_profile/playlist_item_update.html'
 
     def form_valid(self, form):
-        self.object = form.save()
-        messages.success(
+        try:
+            response = super().form_valid(form)
+            messages.success(
+                self.request,
+                "You have successfully saved changes to your song!",
+            )
+            return response
+        except ValidationError as e:
+            form.add_error(None, e)
+            return self.form_invalid(form)
+
+    def form_invalid(self, form):
+        # Add a message to indicate form submission failure
+        messages.error(
             self.request,
-            "You have successfully saved changes to your playlist item!",
-        )
-        return super().form_valid(form)
+            "There was an error with your submission. Please try again.")
+        return super().form_invalid(form)
 
     def get_success_url(self):
         return reverse_lazy(

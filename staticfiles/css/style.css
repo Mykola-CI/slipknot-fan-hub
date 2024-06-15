@@ -492,6 +492,18 @@ a:hover {
     -moz-box-shadow: -2px 5px 21px 18px rgba(0, 0, 0, 0.78);
 }
 
+.message-error {
+    color: red;
+    font-size: var(--fs-400);
+    font-weight: var(--fw-600);
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    & li {
+        list-style: none;
+    }
+}
+
 /* Media Queries */
 @media (max-width: 1020px) {
     .menu-icon {
