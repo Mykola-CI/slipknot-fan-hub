@@ -127,7 +127,17 @@ The project User Stories can be reviewed on my GitHub Repository [here](https://
 
 ### Database Schema
 
+This schema shows relations between models. 
+
+
 ![Database Schema](documentation/fanhub-data-schema.jpg)
 
+
+### Agile Project Planning 
+
+My Kanban Board can be found on my GitHub [here](https://github.com/users/Mykola-CI/projects/5)
+
+
+## Credits
 
 

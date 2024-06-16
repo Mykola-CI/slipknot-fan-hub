@@ -243,8 +243,32 @@ All references to User Stories are numbered as per my [GitHub Issues](https://gi
 | 41 | Playlist Item Update | test file of type .aac load to song_tabs | The form page stays on. Error displayed: Error uploading song tabs: Image file format aac not allowed | 
 | 42-46 | Add Playlist Item (new) | the same test cases | the same results as expected |
 
+### JavaScript segments testing
+| num. | View | Test Case | Findings |
+| ---- | ---- | ---- | ---- |
+|  | | |**comments.js** |
+| 47 | Playlist Detail View Comments Section | Edit button responses | Form title changes to Edit Comment, Button text changes to 'Save Changes', 'Discard Changes' appear underneath save changes button, TextArea is populated with the existing comment content |
+| 48 | Playlist Detail View Comments Section | Delete button responses | Modal shows with the question 'Are You Sure?' and 'confirm delete' button, clicking outside or 'X' sign closes the modal without deleting comment |
+|  | | | **item-detail-toggle.js** |
+| 49 | Playlist Detail View Songs Section | Toggle Burger Icon responses | Modal Article shows with song details, and hides when Burger Icon is hit repeatedly, if other song is opened the other song closes, if audio playing from other song it stops playing |
+| 50 | Playlist Detail View Songs Section | Play audio volume levels | Set at 0.2 whenever it opens for the first time during user session |
+| | | | user-profile.js |
+| 51 | user_profile view | tested manually in Basics and in Django unittesting of relevant view | this captures form data type correctly and sends ajax GET request to render relevant form, and ajax POST request to submit it |
+
+.\
+.
 
 
+_**Testing JavaScript serving Edit Comment**_
+
+![Giff showing Edit Comment performance](documentation/unit_testing/js-edit.gif)
+
+_**Testing JavaScript serving Delete Comment**_
+
+![Giff showing Delete Comment performance](documentation/unit_testing/js-delete.gif)
+
+.\
+.
 ## Django Unit Testing
 
 Due to the pressing deadline and the substantial number of files, I focused on the most complex test cases. This approach aimed to augment and enhance the outcomes of manual testing rather than duplicate the more obvious scenarios.

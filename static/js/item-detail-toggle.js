@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Handling playlist items modals
 
     const toggles = document.querySelectorAll('.nav-toggle');
-    
+    const articles = document.querySelectorAll('.playlist-item');
 
     toggles.forEach(toggle => {
         toggle.addEventListener('change', function () {
