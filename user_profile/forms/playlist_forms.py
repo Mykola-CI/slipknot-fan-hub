@@ -7,10 +7,8 @@ from user_profile.models import Playlist, PlaylistItem
 from user_profile.utils import validate_file_size
 
 
-# When file size exceeds 10MB Cloudinary validator forces its messages
-# before the file is cropped and resized. So this custom validator is added
-# to prevent forced messages from Cloudinary. The maximum size of the
-# image is cropped afterwords anyway to 600 x 600 and hardly can reach even 2MB
+# This custom validator overrides Cloudinary validator and
+# prevents from forced embarrassing messages.
 def validate_featured_image_size(value):
     max_size = 10400000  # slightly less than 10MB
     validate_file_size(value, max_size)
@@ -66,6 +64,7 @@ class PlaylistForm(forms.ModelForm):
         self.fields['featured_image'].label = (
             'Choose Banner (jpg, webp, png, 10MB max):')
 
+    # Override save method to handle banner image upload and invalid file types
     def save(self, commit=True):
         instance = super(PlaylistForm, self).save(commit=False)
         featured_image = self.cleaned_data.get('featured_image')

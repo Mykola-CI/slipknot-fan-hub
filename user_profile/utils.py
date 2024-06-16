@@ -6,8 +6,8 @@ from django.shortcuts import get_object_or_404
 from .models import Playlist, PlaylistItem
 
 
-# Custom validator to prevent from forced messages from Cloudinary
-# even before the image gets cropped and resized
+# Custom validator to prevent forced messages from Cloudinary
+# even before image or other files handled by widgets
 def validate_file_size(value, max_size):
     if value.size > max_size:
         raise ValidationError(

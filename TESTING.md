@@ -178,9 +178,21 @@ I left them unscathed for better readability. After all, according to [PEP 8 –
 
 As far as there are too many python files in the project I do not deliver screenshots of successful tests here.
 
+## Lighthouse
+
+![Landing Page - the largest one](documentation/validator_slides/lighthouse-largest-page.png)
+
+- Performance 85% is not so good because of the 'Largest Contentful Paint' which takes most of time delay. I do not dare to reduce quality to the worse anymore.
+- Best practices ranked 78% due to cookies coming from images imposed by Cloudinary.  
+
+However, in comparison to Slipknot original home site it is much better.
+
+![Slipknot original site performance](documentation/validator_slides/slipknot-original-site.png)
+
 
 ## Manual Testing
 
+### Basics
 All references to User Stories are numbered as per my [GitHub Issues](https://github.com/Mykola-CI/slipknot-fan-hub/issues) for the project. 
 
 | num. | Test Name | Purpose | User Story | Findings
@@ -213,6 +225,23 @@ All references to User Stories are numbered as per my [GitHub Issues](https://gi
 | 26 | Moderator to update about section | Check if updates made to about page via admin console saves correctly | #55 | Round and About page can be edited via admin console in rich text format, saves successfully |
 | 27 | Authorised users only can edit their playlists | Check if a user can access somebody else's playlist to edit | #57 | Non-logged user gets to signin page first, if a logged-in user explicitly dials url specific to somebody else's playlist or a playlist item such user hits a 403 page "access denied" |
 | 28 | Email required at signup | Check if a user can register an account without filling in user's email and without verification | #58 | If email is not filled in form does not submit; if email is faked and never verified, superuser receives notification that email does not exists, if it exists but not verified, account is not registered and user cannot login | 
+
+### User File Uploads validation and crash testing
+
+| num. | Form | Test Case | Findings |
+| ---- | ---- | ---- | ---- |
+| 29 | Upload Avatar image | File type .txt | Error pop-up, message: Raw file format txt not allowed / try allowed formats: jpg, png or webp |
+| 30 | Upload Avatar image | file type .jpg size over 20MB | Error pop-up: "Your file size 24396919 bytes is too large. Max allowed size is 10400000 bytes." |
+| 31 | Update Playlist | uploading featured banner file type .mp3 | Form does not submit. Error message displayed on the form page: Error uploading featured image: Image file format mp3 not allowed |
+| 32 | Update Playlist | uploading featured banner file .jpg size 24.4MB | Form does not submit. Error message displayed on the form page: Your file size 24396919 bytes is too large. Max allowed size is 10400000 bytes. |
+| 33 | Update Playlist | featured banner .png 8.4MB | Saves successfully. resized by Cloudinary widgets to 108.4KB - confirmed on Cloudinary Media Library |
+| 34 - 36 | Create Playlist | the same test cases as 31-33 | the same errors and messages, no crashes | 
+| 37 | Playlist Item Update | audio file of large size 32MB | The form page stays on. Error displayed:  Your file size 13933485 bytes is too large. Max allowed size is 8388608 bytes. |
+| 38 | Playlist Item Update | audio file of size less than 10MB (Cloudinary server limit) but larger than max allowed 8MB | The form page stays on. Error displayed:  Your file size 9289965 bytes is too large. Max allowed size is 8388608 bytes. | 
+| 39 | Playlist Item Update | test file of type .webp upload to song_audio | The form page stays on. Error displayed: Error uploading song audio: Image file format webp not allowed | 
+| 40 | Playlist Item Update | test file of type .pdf of size 6MB load to song_tabs | The form page stays on. Error displayed: Your file size 6352205 bytes is too large. Max allowed size is 5242880 bytes. | 
+| 41 | Playlist Item Update | test file of type .aac load to song_tabs | The form page stays on. Error displayed: Error uploading song tabs: Image file format aac not allowed | 
+| 42-46 | Add Playlist Item (new) | the same test cases | the same results as expected |
 
 
 
@@ -359,3 +388,57 @@ test_playlist_post_slug_set_correctly | Test if PlaylistPost instance created an
 | test_playlist_post_created_when_published_from_draft | The method name is self-explaining. If user changes `status` variable from 0 (stands for "Draft") to 1 ("Published") an appropriate `slug` value must be assigned to PlaylistPost instance `slug` field |
 
 ![Core Blog Playlist Post Signal testing](documentation/unit_testing/core-blog-signal-test.png)
+
+## BUGS
+
+In fact, there were so many bugs in this project to overcome that I am not sure how to filter them through. Mostly they were not so much bugs but rather attributes of taming and mastering this complex framework. 
+
+1. APPLICATION CRASH AFTER INSTALLING DJANGO-ALLAUTH. SITE_ID PROBLEM.
+
+After installation and configuring Django-allauth and setting localhost and heroku domains in admin console the server crashed without even usual Django debug error notifications. I could not start server and could not get access to admin console. Long plunge into the problem hinted that something was wrong with SITE_ID setting. 
+
+In the result of try and error method I change the setting for SIT_ID to 2. It worked suddenly for me.
+Then after a while I tested e-mail verifications and noticed that django-allauth sent messages on behalf of localhost. So I revisited the issue with SITE_ID value.
+
+It appeared that when I manipulated with domains I unintentionally deleted the default domain and thus leaving ID=1 empty, NULL. I checked through Django shell IDs of existing domains. They appeared to be id=2 for localhost and id=3 for Heroku.
+
+**Solution.** SITE_ID for production environment is set to 3 associated with production domain on Heroku.
+
+2. CONTEXT CONFUSION BETWEEN USER 1 WATCHING PROFILE PRESENTATION OF USER 2
+
+- User navigation flow. Problem description.
+
+
+Suppose User 1 is watching the site. User 1 picks up a playlist shared by User 2 defined by context and by the database schema as `author` of that Playlist.
+
+User 1 decides to have a look to the User's 2 profile and playlists. User 1 clicks on User's 2 avatar and gets to User profile presentation page. URL is not flawed and reveals the page of User 2.
+
+However, on the header User 1 can see the greeting 'Hello, User 2', which is not good enough.
+
+- Understanding the problem
+
+I have set 2 navigation bars: for authenticated user and for non-authenticated user
+~~~
+{% if not user.is_authenticated %}
+{% include 'core/navbar-signup.html' %}
+{% else %}
+{% include 'core/navbar-signed.html' %}
+{% endif %}
+~~~
+
+`navbar-signed.html` displays a greeting to an authenticated user calling a name from the variable `{{ user.username }}`. That is the problem. 
+
+When User 1 initiates URL leading to the profile of User 2, i.e. `'/presentation/user2/'` my navbar logic captures `user2` from url and greets User 2 that might confuse User 1.
+
+**Solution** 
+
+a) Set an explicit and robust context for user2 as an `author` of a playlist in contrast to User 1 as a current user.
+~~~
+user_profile = get_object_or_404(UserProfile.objects.select_related('user')user__username=username)
+profile_user = user_profile.user
+~~~
+`user_profile` is an instance of the UserProfile model\
+`profile_user` is a value of `username` field of User model One-to-One related to UserProfile model)\
+In our case study `profile_user` is User 2.
+
+b) set a variable calling a name of active and authenticated site User in navbar : `{{ request.user.username }}` as opposed to `user.username` using context processors `django.contrib.auth.context_processors.auth`. Thus we separate contexts entirely to avoid confusions. 

@@ -45,7 +45,7 @@ SUMMERNOTE_CONFIG = {
     'iframe': True,
     'summernote': {
         'width': '100%',
-        'height': '300',
+        'height': 300,
         'toolbar': [
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['font', ['strikethrough', 'superscript', 'subscript']],

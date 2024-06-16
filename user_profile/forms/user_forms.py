@@ -11,23 +11,35 @@ from user_profile.utils import validate_file_size
 
 
 class UserEmailForm(forms.ModelForm):
+    """
+    Form for updating the email of the user profile
+    """
     class Meta:
         model = User
         fields = ['email']
 
 
 class UserPasswordForm(PasswordChangeForm):
+    """
+    Form for updating the password of the user profile
+    """
     class Meta:
         fields = ['old_password', 'new_password1', 'new_password2']
 
 
 class UserNameForm(forms.ModelForm):
+    """
+    Form for updating the 1st and last names of the user profile
+    """
     class Meta:
         model = User
         fields = ['first_name', 'last_name']
 
 
 class UserDOBForm(forms.ModelForm):
+    """
+    Form for updating the date of birth of the user profile with widget
+    """
     class Meta:
         model = UserProfile
         fields = ['date_of_birth']
@@ -37,6 +49,10 @@ class UserDOBForm(forms.ModelForm):
 
 
 class UserAboutForm(forms.ModelForm):
+    """
+    Form for updating the about myself section of the user profile with
+    Summernote widget giving rich text editing capabilities
+    """
     class Meta:
         model = UserProfile
         fields = ['about_myself']
@@ -45,16 +61,18 @@ class UserAboutForm(forms.ModelForm):
         }
 
 
-# When file size exceeds 10MB Cloudinary validator forces its messages
-# before the file is cropped and resized by widgets. The maximum size of the
-# image is cropped afterwords anyway to 600 x 600 and hardly can reach 2MB.
-# This custom validator overrides Cloudinary to prevent odd messages.
+# This custom validator overrides Cloudinary validator to prevent odd messages.
 def validate_featured_image_size(value):
     max_size = 10400000  # slightly less than 10MB
+    # The function itself is placed in utils.py as serving multiple forms
     validate_file_size(value, max_size)
 
 
 class UploadAvatarForm(forms.ModelForm):
+    """
+    Form for updating the avatar image of the user profile
+    """
+
     avatar = CloudinaryFileField(
         autosave=False,
         validators=[validate_featured_image_size],
@@ -82,6 +100,7 @@ class UploadAvatarForm(forms.ModelForm):
             }
         }
 
+    # Override save method to handle the avatar upload and invalid file types
     def save(self, commit=True):
         instance = super(UploadAvatarForm, self).save(commit=False)
         avatar = self.cleaned_data.get('avatar')
