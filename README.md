@@ -20,6 +20,12 @@ Slipknot FanHub is a platform where fans can create and share personalized playl
 
 The platform allows fans through their Playlist and Playlist Items to share their impressions, emotions, and personal experiences related to Slipknot. Whether it's a memory from a live show, a deep dive into the lyrics, or a tutorial on how to play their favorite riff, Slipknot FanHub is the place to express their devotion.
 
+## Targets
+- Heavy metal fans
+- Slipknot fans
+- Hard Rock and Heavy Metal musicians 
+- Guitarists, drummers, vocals
+
 
 ## FEATURES
 
@@ -258,6 +264,16 @@ My Kanban Board can be found on my GitHub [here](https://github.com/users/Mykola
 
 For the testing documentation and descriptions please refer to [TESTING.md](TESTING.md)
 
+## Deployment
+
+- The application was deployed to [Heroku](https://heroku.com).
+- The database was deployed to [ElephantSQL](https://www.elephantsql.com/).
+- Media files are served from [Cloudinary](https://cloudinary.com/).
+- Source files for production servers are served from my [GitHub project repository](https://github.com/Mykola-CI/slipknot-fan-hub)  
+
+Instructions how to deploy may be found at [DEPLOYMENT.md](DEPLOYMENT.md)
+
+
 ## Technologies used
 
 - ### Languages:
@@ -303,6 +319,11 @@ For the testing documentation and descriptions please refer to [TESTING.md](TEST
 
 ## Credits
 
-
-
-
+- [Iuliia Konovalova](https://github.com/IuliiaKonovalova/) - for overall mentorship and documentation sample structures,
+- Alex Kuievda - my son, guitarist and a Slipknot lover, for creating such brilliant themed Playlist collections,
+- [Code Institute](https://codeinstitute.net/) - for the programme but if specifically - for the idea on comment functionality, taken from the Blog walkthrough project, particularly for the following:
+   - design structure and layout ideas for user comment form (taken from Blog walkthrough project)
+   - JavaScript code idea for manipulating DOM and pre-populating Comment form,
+- [Very Academy](https://www.youtube.com/c/veryacademy) - probably one of the best on-line Django teachers, particularly for their testing series, fragments on Django signals  and their [github](https://github.com/veryacademy) samples, 
+- [Codemy](https://codemy.com/) - for their amazing tutorials and for ideas for [like/unlike functionality](https://www.youtube.com/playlist?list=PLCC34OHNcOtr025c1kHSPrnP18YPB-NFi) in particular,
+- [CodingEntrepreneurs](https://www.youtube.com/watch?v=rEX50LJrFuU) - for their help in understanding signals in Django.

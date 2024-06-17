@@ -1,4 +1,33 @@
 # Testing
+## Responsive design testing
+I tested the application in the following browsers: Chrome, Firefox and Safari.
+
+I tested the application on real devices such as: Desktop, MacBook Pro, iPad Mini, iPad Pro, Iphone 13, Iphone 12 Pro Max, Samsung Galaxy M33. 
+
+I confirmed that 
+
+* the titles, messages, content texts are all readable and easy to comprehend;
+* the layouts are not broken and convenient for user experience.
+
+
+__Mobiles Tablets Laptop__\
+![Mobiles Tablets Laptop](documentation/mobiles-tablets-laptop.png)
+
+__Desktop__\
+![Large Desktop Screen](documentation/screens/home-desktop.png)
+ 
+
+## Lighthouse
+
+![Landing Page - the largest one](documentation/validator_slides/lighthouse-largest-page.png)
+
+- Performance 85% is not so good because of the 'Largest Contentful Paint' which takes most of time delay. I do not dare to reduce quality to the worse anymore.
+- Best practices ranked 78% due to cookies coming from images imposed by Cloudinary.  
+
+However, in comparison to Slipknot original home site it is much better.
+
+![Slipknot original site performance](documentation/validator_slides/slipknot-original-site.png)
+
 ## Validator Testing
 ### W3C HTML
 
@@ -177,17 +206,6 @@ AUTH_PASSWORD_VALIDATORS = [
 I left them unscathed for better readability. After all, according to [PEP 8 – Style Guide for Python Code](https://peps.python.org/pep-0008/) "A Foolish Consistency is the Hobgoblin of Little Minds".
 
 As far as there are too many python files in the project I do not deliver screenshots of successful tests here.
-
-## Lighthouse
-
-![Landing Page - the largest one](documentation/validator_slides/lighthouse-largest-page.png)
-
-- Performance 85% is not so good because of the 'Largest Contentful Paint' which takes most of time delay. I do not dare to reduce quality to the worse anymore.
-- Best practices ranked 78% due to cookies coming from images imposed by Cloudinary.  
-
-However, in comparison to Slipknot original home site it is much better.
-
-![Slipknot original site performance](documentation/validator_slides/slipknot-original-site.png)
 
 
 ## Manual Testing
@@ -466,3 +484,100 @@ profile_user = user_profile.user
 In our case study `profile_user` is User 2.
 
 b) set a variable calling a name of active and authenticated site User in navbar : `{{ request.user.username }}` as opposed to `user.username` using context processors `django.contrib.auth.context_processors.auth`. Thus we separate contexts entirely to avoid confusions. 
+
+3. IntegrityError BUG.
+
+_Case description:_\ 
+Setting `post_save` signal to create, update, delete an appropriate PlaylistPost instance when an associated Playlist 
+- is set to Published 
+- is updated while its status is 'Published' 
+- is reset from 'Published' to 'Draft' status
+
+During development I encountered with the error `IntegrityError: duplicate key value violates unique constraint "core_playlistpost_playlist_id_key"`
+
+_Understanding the problem:_\
+Error indicated that there was an attempt to create a PlaylistPost instance with a playlist_id that already existed in the database. This happened because the signal handler tried to create a new PlaylistPost instance for a Playlist that already had an associated PlaylistPost.
+
+_Solution:_\
+Modify the signal handler to check if a PlaylistPost instance already exists for the given Playlist before attempting to create a new one. If it exists, I was supposed to update it instead of creating a new one.
+
+Initial version:\
+
+```
+previous_status = {}
+
+@receiver(pre_save, sender=Playlist)
+def store_previous_status(sender, instance, **kwargs):
+    if instance.pk:
+        previous_status[instance.pk] = Playlist.objects.get(pk=instance.pk).status
+
+@receiver(post_save, sender=Playlist)
+def create_or_update_or_delete_playlist_post(sender, instance, created, **kwargs):
+    if created:
+        if instance.status == 1:
+            PlaylistPost.objects.create(playlist=instance)
+    else:
+        prev_status = previous_status.get(instance.pk)
+        if prev_status is not None:
+            if prev_status == 1 and instance.status == 0:
+                PlaylistPost.objects.filter(playlist=instance).delete()
+            elif prev_status == 0 and instance.status == 1:
+                PlaylistPost.objects.create(playlist=instance)
+            elif instance.status == 1: 
+                playlist_post, created = PlaylistPost.objects.get_or_create(playlist=instance)
+                playlist_post.save()
+
+        previous_status.pop(instance.pk, None)
+```
+
+Modified version:\
+```
+@receiver(pre_save, sender=Playlist)
+def store_previous_status(sender, instance, **kwargs):
+    if instance.pk:
+        previous_status[instance.pk] = (
+            Playlist.objects.get(pk=instance.pk).status)
+
+
+@receiver(post_save, sender=Playlist)
+def create_or_update_or_delete_playlist_post(
+        sender, instance, created, **kwargs):
+    if created:
+        if instance.status == 1:  # 1 corresponds to "Published"
+            PlaylistPost.objects.create(playlist=instance, slug=instance.slug)
+    else:
+        prev_status = previous_status.get(instance.pk)
+        if prev_status is not None:
+            # From "Published" to "Draft"
+            if prev_status == 1 and instance.status == 0:
+                PlaylistPost.objects.filter(playlist=instance).delete()
+            # From "Draft" to "Published"
+            elif prev_status == 0 and instance.status == 1:
+
+                # Check if a PlaylistPost already exists
+                # (might be created through admin console):
+
+                playlist_post, created = PlaylistPost.objects.get_or_create(
+                    playlist=instance,
+                    defaults={'slug': instance.slug}
+                )
+                if not created:
+
+                    # If it already exists, update the slug field
+
+                    playlist_post.slug = instance.slug
+                    playlist_post.save()
+            elif instance.status == 1:  # Still "Published"
+                playlist_post, created = PlaylistPost.objects.get_or_create(
+                    playlist=instance,
+                    defaults={'slug': instance.slug}
+                )
+                if not created:
+
+                    # If it already exists, update the slug field
+
+                    playlist_post.slug = instance.slug
+                    playlist_post.save()
+        # Clean up the previous status dictionary
+        previous_status.pop(instance.pk, None)
+```
