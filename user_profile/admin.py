@@ -13,6 +13,11 @@ from django_summernote.admin import (
 
 
 class UserProfileInline(SummernoteInlineModelAdmin, admin.StackedInline):
+    """
+    Makes the user profile editable in the Django admin
+    within the User model admin console.
+    """
+
     model = UserProfile
     can_delete = False
     verbose_name_plural = 'profile'
@@ -20,6 +25,11 @@ class UserProfileInline(SummernoteInlineModelAdmin, admin.StackedInline):
 
 
 class UserAdmin(BaseUserAdmin):
+    """
+    User Admin class to manage the User model in the Django admin console.
+    Includes the UserProfileInline
+    """
+
     inlines = (UserProfileInline,)
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
@@ -29,7 +39,7 @@ class UserAdmin(BaseUserAdmin):
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff',
-                    'is_active', 'get_about_myself', 'get_avatar')
+                    'is_active', 'get_avatar')
     search_fields = ('username', 'first_name', 'last_name', 'email',
                      'profile__about_myself')
 
@@ -53,12 +63,20 @@ admin.site.register(User, UserAdmin)
 
 
 class PlaylistItemInline(SummernoteInlineModelAdmin, admin.StackedInline):
+    """
+    Inline form to add PlaylistItem to the Playlist model in the Django admin.
+    """
+
     model = PlaylistItem
     extra = 1  # The number of extra forms in the inline formset.
     summernote_fields = ('description',)
 
 
 class PlaylistItemAdmin(SummernoteModelAdmin):
+    """
+    PlaylistItem model in the Django admin console.
+    """
+
     list_display = (
         'song_title', 'artist', 'album', 'playlist', 'performance_year')
     list_filter = ('artist', 'album', 'playlist')
@@ -71,6 +89,11 @@ admin.site.register(PlaylistItem, PlaylistItemAdmin)
 
 
 class PlaylistAdmin(SummernoteModelAdmin):
+    """
+    Playlist form in the Django admin console.
+    Includes the PlaylistItemInline form
+    """
+
     list_display = (
         'title',
         'id',

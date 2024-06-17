@@ -10,7 +10,7 @@ from django.utils import timezone
 
 class HomeViewTest(TestCase):
     """
-    Testing home  page view
+    Testing home page view
     """
 
     def setUp(self):
@@ -151,7 +151,7 @@ class PlaylistPostDetailViewTest(TestCase):
 
 class CommentDeleteViewTest(TestCase):
     """
-    Testing playlist post detail view
+    Testing Comment delete view
     """
 
     def setUp(self):

@@ -38,7 +38,8 @@ def get_success_url(view, reverse_path):
 
 class AuthorRequiredMixin:
     """
-    Mixin to check if the user is the author of the playlist or playlist item.
+    Mixin to ensure that the user is 
+    the author of the playlist or playlist item.
     """
     def dispatch(self, request, *args, **kwargs):
         # Determine if the view is for a Playlist or PlaylistItem

@@ -1,7 +1,7 @@
 """
 Django settings for project_fandom project.
 
-Used as a base file for further modularisation of local.py and production.py
+Used as a base file with common settings for both local.py and production.py
 """
 
 from pathlib import Path
@@ -82,6 +82,7 @@ LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_NOTIFICATIONS = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 

@@ -15,9 +15,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ModeratorSection',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
                 ('title', models.CharField(max_length=200)),
-                ('profile_image', cloudinary.models.CloudinaryField(default='placeholder', max_length=255, verbose_name='image')),
+                ('profile_image', cloudinary.models.CloudinaryField(
+                    default='placeholder',
+                    max_length=255,
+                    verbose_name='image')
+                 ),
                 ('updated_on', models.DateTimeField(auto_now=True)),
                 ('content', models.TextField(blank=True)),
                 ('about', models.TextField(blank=True)),

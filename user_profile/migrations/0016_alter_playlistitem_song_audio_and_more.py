@@ -14,11 +14,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='playlistitem',
             name='song_audio',
-            field=cloudinary.models.CloudinaryField(blank=True, max_length=255, verbose_name='audios'),
+            field=cloudinary.models.CloudinaryField(
+                blank=True, max_length=255, verbose_name='audios'),
         ),
         migrations.AlterField(
             model_name='playlistitem',
             name='song_tabs',
-            field=cloudinary.models.CloudinaryField(blank=True, max_length=255, verbose_name='docs'),
+            field=cloudinary.models.CloudinaryField(
+                blank=True,
+                max_length=255,
+                verbose_name='docs'),
         ),
     ]

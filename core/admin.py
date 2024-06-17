@@ -3,6 +3,10 @@ from .models import PlaylistPost, Comment
 
 
 class PlaylistPostAdmin(admin.ModelAdmin):
+    """
+    Shapes the form for PlaylistPost model in the admin panel.
+    """
+
     list_display = (
         'playlist',
         'slug',
@@ -20,6 +24,10 @@ class PlaylistPostAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
+    """
+    Shapes the form for Comment model in the admin panel.
+    """
+
     list_display = (
         'playlist_post', 'author', 'created_on', 'total_likes_comment')
     list_filter = ('created_on', 'author')

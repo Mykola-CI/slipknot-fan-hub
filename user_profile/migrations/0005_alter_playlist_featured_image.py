@@ -14,6 +14,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='playlist',
             name='featured_image',
-            field=cloudinary.models.CloudinaryField(blank=True, max_length=255, verbose_name='image'),
+            field=cloudinary.models.CloudinaryField(
+                blank=True, max_length=255,
+                verbose_name='image'),
         ),
     ]

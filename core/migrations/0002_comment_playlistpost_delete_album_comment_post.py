@@ -17,12 +17,25 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Comment',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
                 ('body', models.TextField()),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('approved', models.BooleanField(default=False)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='commenter', to=settings.AUTH_USER_MODEL)),
-                ('likes', models.ManyToManyField(blank=True, related_name='playlist_comments', to=settings.AUTH_USER_MODEL)),
+                ('author', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='commenter',
+                    to=settings.AUTH_USER_MODEL)
+                 ),
+                ('likes', models.ManyToManyField(
+                    blank=True,
+                    related_name='playlist_comments',
+                    to=settings.AUTH_USER_MODEL)
+                 ),
             ],
             options={
                 'ordering': ['created_on'],
@@ -31,11 +44,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PlaylistPost',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('updated_on', models.DateTimeField(auto_now=True)),
-                ('likes', models.ManyToManyField(blank=True, related_name='playlist_likes', to=settings.AUTH_USER_MODEL)),
-                ('playlist', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='playlists', to='user_profile.playlist')),
+                ('likes', models.ManyToManyField(
+                    blank=True, 
+                    related_name='playlist_likes', 
+                    to=settings.AUTH_USER_MODEL)
+                 ),
+                ('playlist', models.OneToOneField(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='playlists',
+                    to='user_profile.playlist')
+                 ),
             ],
             options={
                 'ordering': ['-created_on'],
@@ -47,6 +73,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='comment',
             name='post',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='core.playlistpost'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='comments',
+                to='core.playlistpost'),
         ),
     ]

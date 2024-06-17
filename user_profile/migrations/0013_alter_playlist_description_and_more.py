@@ -14,11 +14,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='playlist',
             name='description',
-            field=models.TextField(blank=True, validators=[django.core.validators.MaxLengthValidator(1000)]),
+            field=models.TextField(
+                blank=True,
+                validators=[django.core.validators.MaxLengthValidator(1000)]),
         ),
         migrations.AlterField(
             model_name='playlistitem',
             name='song_comments',
-            field=models.TextField(blank=True, validators=[django.core.validators.MaxLengthValidator(800)]),
+            field=models.TextField(
+                blank=True, 
+                validators=[django.core.validators.MaxLengthValidator(800)]),
         ),
     ]

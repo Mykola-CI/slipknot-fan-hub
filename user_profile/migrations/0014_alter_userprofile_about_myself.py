@@ -14,6 +14,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='userprofile',
             name='about_myself',
-            field=models.TextField(blank=True, validators=[django.core.validators.MaxLengthValidator(1000)], verbose_name='about myself'),
+            field=models.TextField(
+                blank=True,
+                validators=[django.core.validators.MaxLengthValidator(1000)],
+                verbose_name='about myself'),
         ),
     ]

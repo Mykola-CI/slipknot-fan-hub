@@ -8,7 +8,7 @@ from user_profile.utils import validate_file_size
 
 
 # This custom validator overrides Cloudinary validator and
-# prevents from forced embarrassing messages.
+# prevents from forced embarrassing messages about pay plans.
 def validate_featured_image_size(value):
     max_size = 10400000  # slightly less than 10MB
     validate_file_size(value, max_size)

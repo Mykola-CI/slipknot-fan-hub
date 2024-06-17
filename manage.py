@@ -1,12 +1,13 @@
-#!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
 import os
 import sys
 from project_fandom.settings import base
 
 
 def main():
-    """Run administrative tasks."""
+    """Run administrative tasks.
+    DEBUG is set to True by default in .env file.
+    In production DEBUG must be added to Heroku Config Vars and set to False.
+    """
 
     if base.DEBUG:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE",

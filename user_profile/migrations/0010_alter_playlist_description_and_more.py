@@ -23,6 +23,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='userprofile',
             name='about_myself',
-            field=models.CharField(blank=True, max_length=500, verbose_name='about myself'),
+            field=models.CharField(
+                blank=True,
+                max_length=500,
+                verbose_name='about myself'),
         ),
     ]

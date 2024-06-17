@@ -78,6 +78,18 @@ Turns pages 5 playlist cards per page.
 
 ### Exploring flows of Authenticated User
 
+- Sign Up requirements
+
+__Important Notes:__ 
+
+- e-mail is required at sign up procedure,
+- username is required,
+- e-mail verification is required. 
+
+User receives an e-mail for verification with a verification link. Once User follows the link and e-mail gets verified User is redirected to a Login page.
+
+- Login may be accomplished using either e-mail or username
+
 *__Header Navigation Block changes to Signed__*
 
 ![Header changes to 'Signed'](documentation/screens/authenticated/navbar-signed-change.png)

@@ -17,16 +17,38 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Playlist',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200, unique=True)),
-                ('slug', models.SlugField(max_length=200, unique=True)),
-                ('featured_image', cloudinary.models.CloudinaryField(default='placeholder', max_length=255, verbose_name='image')),
+                ('id', models.BigAutoField(
+                    auto_created=True, primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
+                ('title',
+                 models.CharField(max_length=200, unique=True)
+                 ),
+                ('slug', 
+                 models.SlugField(max_length=200, unique=True)
+                 ),
+                ('featured_image',
+                 cloudinary.models.CloudinaryField(
+                     default='placeholder',
+                     max_length=255, 
+                     verbose_name='image')
+                 ),
                 ('description', models.TextField()),
                 ('reference_url', models.URLField(blank=True)),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
-                ('status', models.IntegerField(choices=[(0, 'Draft'), (1, 'Published')], default=0)),
-                ('updated_on', models.DateTimeField(auto_now=True)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='playlists', to=settings.AUTH_USER_MODEL)),
+                ('status', models.IntegerField(
+                    choices=[(0, 'Draft'), (1, 'Published')], default=0)
+                 ),
+                ('updated_on', 
+                 models.DateTimeField(auto_now=True)
+                 ),
+                ('author', 
+                 models.ForeignKey(
+                     on_delete=django.db.models.deletion.CASCADE,
+                     related_name='playlists',
+                     to=settings.AUTH_USER_MODEL)
+                 ),
             ],
             options={
                 'ordering': ['-created_on'],
@@ -35,20 +57,54 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PlaylistItem',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
                 ('song_title', models.CharField(max_length=200)),
                 ('artist', models.CharField(max_length=200)),
                 ('album', models.CharField(blank=True, max_length=200)),
                 ('song_url', models.URLField(blank=True)),
-                ('song_video', cloudinary.models.CloudinaryField(blank=True, max_length=255, verbose_name='video')),
-                ('song_audio', cloudinary.models.CloudinaryField(blank=True, max_length=255, verbose_name='file')),
-                ('song_tabs', cloudinary.models.CloudinaryField(blank=True, max_length=255, verbose_name='file')),
+                (
+                    'song_video',
+                    cloudinary.models.CloudinaryField(
+                        blank=True,
+                        max_length=255,
+                        verbose_name='video')
+                 ),
+                (
+                    'song_audio',
+                    cloudinary.models.CloudinaryField(
+                        blank=True,
+                        max_length=255,
+                        verbose_name='file')
+                ),
+                ('song_tabs',
+                 cloudinary.models.CloudinaryField(
+                     blank=True,
+                     max_length=255,
+                     verbose_name='file')
+                 ),
                 ('song_comments', models.TextField(blank=True)),
-                ('performance_year', models.IntegerField(verbose_name='Year of Performance')),
-                ('performance_type', models.IntegerField(choices=[(0, 'Original'), (1, 'Cover'), (2, 'Tutorial'), (3, 'Inspired')], default=0)),
+                ('performance_year', models.IntegerField(
+                    verbose_name='Year of Performance')
+                 ),
+                (
+                    'performance_type',
+                    models.IntegerField(
+                        choices=[(0, 'Original'), (1, 'Cover'), (2, 'Tutorial'), (3, 'Inspired')],
+                        default=0
+                        )
+                ),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
                 ('updated_on', models.DateTimeField(auto_now=True)),
-                ('playlist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='playlist_items', to='user_profile.playlist')),
+                ('playlist', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='playlist_items',
+                    to='user_profile.playlist'
+                )),
             ],
         ),
     ]

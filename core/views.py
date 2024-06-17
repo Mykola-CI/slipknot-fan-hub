@@ -69,7 +69,7 @@ def user_profile_presentation(request, username):
     playlists = Playlist.objects.filter(author=profile_user, status=1)
 
     # Create a list comprehension to hold playlists with their associated
-    # PlaylistPost pk. The goal is to avoid creation of extra views and
+    # PlaylistPost slugs. The goal is to avoid creation of extra views and
     # templates and enable user to access the existing PlaylistPost detail view
     playlist_with_posts = [
         {
@@ -94,8 +94,8 @@ class PlaylistPostDetailView(DetailView):
     Display a Playlist Detail view selected on the home page.
     Creating contexts: playlists, playlist items, author's profile,
     comments, comment count and comment form
-
     """
+
     model = PlaylistPost
     template_name = 'core/playlist_post_detail.html'
     context_object_name = 'playlist_post'
@@ -151,8 +151,9 @@ class PlaylistPostDetailView(DetailView):
 def comment_edit(request, slug, comment_id):
     """
     Display an individual comment for edit.
-
+    Template is equipped with JavaScript to populate comment form with content.
     """
+
     post = get_object_or_404(PlaylistPost, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
 
@@ -174,8 +175,9 @@ def comment_edit(request, slug, comment_id):
 
 def comment_delete(request, slug, comment_id):
     """
-    view to delete comments
+    view to delete comments and redirect to the PlaylistPost detail page.
     """
+
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author == request.user:

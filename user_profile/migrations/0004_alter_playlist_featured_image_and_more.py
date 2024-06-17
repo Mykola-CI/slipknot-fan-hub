@@ -14,21 +14,33 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='playlist',
             name='featured_image',
-            field=cloudinary.models.CloudinaryField(blank=True, default='placeholder', max_length=255, verbose_name='image'),
+            field=cloudinary.models.CloudinaryField(
+                blank=True,
+                default='placeholder',
+                max_length=255,
+                verbose_name='image'),
         ),
         migrations.AlterField(
             model_name='playlistitem',
             name='performance_year',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Year of Performance'),
+            field=models.IntegerField(
+                blank=True, null=True,
+                verbose_name='Year of Performance'),
         ),
         migrations.AlterField(
             model_name='playlistitem',
             name='song_audio',
-            field=cloudinary.models.CloudinaryField(blank=True, max_length=255, verbose_name='audios'),
+            field=cloudinary.models.CloudinaryField(
+                blank=True,
+                max_length=255,
+                verbose_name='audios'),
         ),
         migrations.AlterField(
             model_name='playlistitem',
             name='song_tabs',
-            field=cloudinary.models.CloudinaryField(blank=True, max_length=255, verbose_name='docs'),
+            field=cloudinary.models.CloudinaryField(
+                blank=True,
+                max_length=255,
+                verbose_name='docs'),
         ),
     ]

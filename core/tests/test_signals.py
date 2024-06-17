@@ -8,6 +8,9 @@ from core.signals import (store_previous_status,
 
 
 class PlaylistSignalTests(TestCase):
+    """
+    Testing signal received from Playlist model to create, update or delete
+    """
 
     def setUp(self):
         # Connect the signals

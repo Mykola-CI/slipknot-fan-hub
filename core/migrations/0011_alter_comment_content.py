@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='comment',
             name='content',
-            field=models.TextField(validators=[django.core.validators.MaxLengthValidator(500)]),
+            field=models.TextField(
+                validators=[django.core.validators.MaxLengthValidator(500)]),
         ),
     ]
