@@ -37,7 +37,6 @@ class Comment(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="commenter")
     content = models.TextField(
-        blank=True,
         # Limit characters to 500 as max_length does not apply to TextField
         validators=[MaxLengthValidator(500)])
     likes_comment = models.ManyToManyField(

@@ -55,7 +55,7 @@ class Playlist(models.Model):
         blank=True)
     description = models.TextField(
         blank=True,
-        # Limit characters to 500 as max_length does not apply to TextField
+        # Limit characters to 1000 as max_length does not apply to TextField
         validators=[MaxLengthValidator(1000)])
     reference_url = models.URLField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
