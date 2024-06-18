@@ -140,8 +140,24 @@ When signed in, User is granted more options:
 
 ### User Stories
 
-The buildup of basic functionalities for this project was based on User Stories. 
-The project User Stories can be reviewed on my GitHub Repository [here](https://github.com/Mykola-CI/slipknot-fan-hub/issues)
+The buildup of basic functionalities for this project was based on User Stories.
+
+The project User Stories can be reviewed on my GitHub Repository [here](https://github.com/Mykola-CI/slipknot-fan-hub/issues). 
+ All User Stories are recorded on GitHub as "issues" and have appropriate markings: epic, user story.
+
+- List of Issues - GitHub Screenshot
+
+![Screenshot of Issues List on GitHub](documentation/list-github-issues.png)
+
+- Example of Epic and its descendant User Stories - GitHub Screenshot. Labels indicate User Story or Epic and MoSCoW category
+
+![Example of Epic](documentation/epic-transormation.png)
+
+- Example of User Story Details - GitHub Screenshot
+
+![Example of User Story Details](documentation/user-story-detail.png)
+
+
 
 ### ERD - Database Schema
 
