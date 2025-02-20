@@ -108,14 +108,18 @@ handler403 = 'user_profile.views.my_custom_permission_denied_view'
 
 WSGI_APPLICATION = "project_fandom.wsgi.application"
 
-DATABASES = {
-    'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
-}
-
-if 'test' in sys.argv:
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',  # Using in-memory database for tests
+DATABASE_URL = os.getenv('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.parse(
+            DATABASE_URL, conn_max_age=600)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
 
 CSRF_TRUSTED_ORIGINS = [
