@@ -42,7 +42,7 @@
     max-width: 100px;
     margin-inline: auto;
     box-shadow: -2px 5px 21px 18px rgba(0, 0, 0, 0.78);
-    -webkit-box-shadow: -2px 5px 21px 18px rgba(64, 38, 38, 0.78);
+    -webkit-box-shadow: -2px 5px 21px 18px rgba(0, 0, 0, 0.78);
     -moz-box-shadow: -2px 5px 21px 18px rgba(0, 0, 0, 0.78);
 }
 
