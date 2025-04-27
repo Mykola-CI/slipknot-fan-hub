@@ -18,10 +18,11 @@ def profile(request):
     user_profile = UserProfile.objects.get(user=request.user)
     playlists = Playlist.objects.filter(author=request.user)
 
-    # Handling AJAX requests for loading forms
+    # Handling AJAX requests for loading formsI wonder why whenever I save 
     if (request.method == 'GET' and
             request.headers.get('x-requested-with') == 'XMLHttpRequest'):
         form_type = request.GET.get('form_type', '')
+        form = None
         if form_type == 'email':
             form = UserEmailForm(instance=request.user)
         elif form_type == 'password':
@@ -34,7 +35,11 @@ def profile(request):
             form = UserAboutForm(instance=user_profile)
         elif form_type == 'avatar':
             form = UploadAvatarForm(instance=user_profile)
-        return HttpResponse(form.as_p())
+        if form is not None:
+            return HttpResponse(form.as_p())
+    # If form is None, just return an empty response to avoid error
+        return HttpResponse("")
+
 
     # Handling AJAX requests for form submission
     if (request.method == 'POST' and
