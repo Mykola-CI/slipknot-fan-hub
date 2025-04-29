@@ -100,6 +100,18 @@ class UploadAvatarForm(forms.ModelForm):
             }
         }
 
+    # Custom validator to ensure that invalid formats are caught during 
+    # form validation, and errors are attached to the form’s `errors` dictionary
+    def clean_avatar(self):
+        avatar = self.cleaned_data.get('avatar')
+        if avatar:
+            allowed = ['image/jpeg', 'image/png', 'image/webp']
+            if hasattr(avatar, 'content_type') and avatar.content_type not in allowed:
+                raise forms.ValidationError(
+                    "Unsupported file type. Allowed formats: jpg, jpeg, png, webp."
+                )
+        return avatar
+
     # Override save method to handle the avatar upload and invalid file types
     def save(self, commit=True):
         instance = super(UploadAvatarForm, self).save(commit=False)
@@ -109,13 +121,9 @@ class UploadAvatarForm(forms.ModelForm):
             if isinstance(avatar, CloudinaryResource):
                 instance.avatar = avatar
             else:
-                try:
-                    instance.avatar = upload_resource(
-                        avatar,
-                        **self.fields['avatar'].options)
-                except Exception as e:
-                    raise ValidationError(
-                        f"{e} | try allowed formats: jpg, png or webp")
+                instance.avatar = upload_resource(
+                    avatar,
+                    **self.fields['avatar'].options)
 
         if commit:
             instance.save()

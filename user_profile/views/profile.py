@@ -40,7 +40,6 @@ def profile(request):
     # If form is None, just return an empty response to avoid error
         return HttpResponse("")
 
-
     # Handling AJAX requests for form submission
     if (request.method == 'POST' and
             request.headers.get('x-requested-with') == 'XMLHttpRequest'):
